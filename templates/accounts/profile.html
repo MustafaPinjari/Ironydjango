@@ -1,0 +1,460 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans 'My Profile' %} | {{ block.super }}{% endblock %}
+
+{% block page_title %}{% trans 'My Profile' %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" 
+                             alt="{{ user.get_full_name }}" 
+                             class="rounded-circle img-thumbnail" 
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center bg-light rounded-circle mx-auto" 
+                             style="width: 150px; height: 150px;">
+                            <i class="bi bi-person" style="font-size: 4rem; color: #6c757d;"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <h4 class="mb-1">{{ user.get_full_name|default:user.email }}</h4>
+                <p class="text-muted mb-3">
+                    <span class="badge bg-primary">{{ user.get_role_display }}</span>
+                </p>
+                
+                <div class="d-flex justify-content-center gap-2 mb-3">
+                    <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i> {% trans 'Edit Profile' %}
+                    </a>
+                    <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-key"></i> {% trans 'Change Password' %}
+                    </a>
+                </div>
+                
+                <hr>
+                
+                <div class="text-start">
+                    <p class="mb-2">
+                        <i class="bi bi-envelope me-2"></i> 
+                        <a href="mailto:{{ user.email }}" class="text-decoration-none">
+                            {{ user.email }}
+                        </a>
+                    </p>
+                    
+                    {% if user.phone_number %}
+                        <p class="mb-2">
+                            <i class="bi bi-telephone me-2"></i> 
+                            <a href="tel:{{ user.phone_number }}" class="text-decoration-none">
+                                {{ user.phone_number }}
+                            </a>
+                        </p>
+                    {% endif %}
+                    
+                    {% if user.address %}
+                        <p class="mb-0">
+                            <i class="bi bi-geo-alt me-2"></i> 
+                            <span class="text-muted">{{ user.address|linebreaksbr }}</span>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="card-footer text-center">
+                <small class="text-muted">
+                    {% trans 'Member since' %} {{ user.date_joined|date:"M d, Y" }}
+                </small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="activity-tab" data-bs-toggle="tab" 
+                                data-bs-target="#activity" type="button" role="tab" 
+                                aria-controls="activity" aria-selected="true">
+                            <i class="bi bi-activity"></i> {% trans 'Activity' %}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="orders-tab" data-bs-toggle="tab" 
+                                data-bs-target="#orders" type="button" role="tab" 
+                                aria-controls="orders" aria-selected="false">
+                            <i class="bi bi-cart"></i> {% trans 'My Orders' %}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" 
+                                data-bs-target="#notifications" type="button" role="tab" 
+                                aria-controls="notifications" aria-selected="false">
+                            <i class="bi bi-bell"></i> {% trans 'Notifications' %}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card-body">
+                <div class="tab-content" id="profileTabsContent">
+                    <!-- Activity Tab -->
+                    <div class="tab-pane fade show active" id="activity" role="tabpanel" 
+                         aria-labelledby="activity-tab">
+                        <h5 class="mb-4">{% trans 'Recent Activity' %}</h5>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-badge bg-primary">
+                                    <i class="bi bi-check2-circle"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h6>{% trans 'Account Created' %}</h6>
+                                    <p class="text-muted small mb-0">
+                                        {% trans 'You joined Ironyy on' %} {{ user.date_joined|date:"F d, Y" }}
+                                    </p>
+                                    <span class="small text-muted">
+                                        <i class="bi bi-clock"></i> {{ user.date_joined|timesince }} {% trans 'ago' %}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            {% if user.last_login %}
+                                <div class="timeline-item">
+                                    <div class="timeline-badge bg-success">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h6>{% trans 'Last Login' %}</h6>
+                                        <p class="text-muted small mb-0">
+                                            {% trans 'You last logged in on' %} {{ user.last_login|date:"F d, Y \a\t H:i" }}
+                                        </p>
+                                        <span class="small text-muted">
+                                            <i class="bi bi-clock"></i> {{ user.last_login|timesince }} {% trans 'ago' %}
+                                        </span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Placeholder for user activities -->
+                            <div class="timeline-item">
+                                <div class="timeline-badge bg-info">
+                                    <i class="bi bi-info-circle"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h6>{% trans 'Getting Started' %}</h6>
+                                    <p class="text-muted small mb-0">
+                                        {% trans 'Complete your profile to get the most out of Ironyy.' %}
+                                    </p>
+                                    <a href="{% url 'accounts:profile_edit' %}" class="btn btn-sm btn-outline-primary mt-2">
+                                        <i class="bi bi-pencil-square"></i> {% trans 'Complete Profile' %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Tab -->
+                    <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">{% trans 'My Orders' %}</h5>
+                            <a href="{% url 'orders:create' %}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-plus-lg"></i> {% trans 'New Order' %}
+                            </a>
+                        </div>
+                        
+                        {% if orders %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>{% trans 'Order #' %}</th>
+                                            <th>{% trans 'Date' %}</th>
+                                            <th>{% trans 'Status' %}</th>
+                                            <th class="text-end">{% trans 'Total' %}</th>
+                                            <th class="text-end">{% trans 'Actions' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>#{{ order.id }}</td>
+                                                <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                                <td>
+                                                    <span class="badge bg-{{ order.get_status_color }}">
+                                                        {{ order.get_status_display }}
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">${{ order.total_amount|floatformat:2 }}</td>
+                                                <td class="text-end">
+                                                    <a href="{% url 'orders:detail' order.id %}" 
+                                                       class="btn btn-sm btn-outline-primary"
+                                                       data-bs-toggle="tooltip" 
+                                                       title="{% trans 'View Details' %}">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="text-muted small">
+                                    {% blocktrans count counter=orders|length %}
+                                        Showing 1 order
+                                    {% plural %}
+                                        Showing {{ counter }} orders
+                                    {% endblocktrans %}
+                                </div>
+                                <a href="{% url 'orders:list' %}" class="btn btn-sm btn-outline-primary">
+                                    {% trans 'View All Orders' %} <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="text-center py-5">
+                                <div class="mb-3">
+                                    <i class="bi bi-cart-x text-muted" style="font-size: 3rem;"></i>
+                                </div>
+                                <h5>{% trans 'No orders yet' %}</h5>
+                                <p class="text-muted">
+                                    {% trans 'You haven\'t placed any orders yet.' %}
+                                </p>
+                                <a href="{% url 'orders:create' %}" class="btn btn-primary mt-2">
+                                    <i class="bi bi-plus-lg"></i> {% trans 'Place Your First Order' %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Notifications Tab -->
+                    <div class="tab-pane fade" id="notifications" role="tabpanel" 
+                         aria-labelledby="notifications-tab">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">{% trans 'Notifications' %}</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                        type="button" id="notificationSettings" 
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" 
+                                    aria-labelledby="notificationSettings">
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="bi bi-envelope me-2"></i> {% trans 'Email Notifications' %}
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="bi bi-bell me-2"></i> {% trans 'Push Notifications' %}
+                                    </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="#">
+                                        <i class="bi bi-bell-slash me-2"></i> {% trans 'Mute All Notifications' %}
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-sm bg-light rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-info-circle text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="mb-0">
+                                            <strong>{% trans 'Welcome to Ironyy!' %}</strong><br>
+                                            <small class="text-muted">
+                                                {% trans 'Thank you for joining our platform. Start by completing your profile.' %}
+                                            </small>
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="bi bi-clock"></i> {{ user.date_joined|timesince }} {% trans 'ago' %}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-sm bg-light rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-truck text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="mb-0">
+                                            <strong>{% trans 'Free Delivery This Week' %}</strong><br>
+                                            <small class="text-muted">
+                                                {% trans 'Enjoy free delivery on all orders this week. Use code: FREEDELIVERY' %}
+                                            </small>
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="bi bi-clock"></i> 2 days ago
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-sm bg-light rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-percent text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="mb-0">
+                                            <strong>{% trans 'Special Offer' %}</strong><br>
+                                            <small class="text-muted">
+                                                {% trans 'Get 15% off on your first order. Use code: WELCOME15' %}
+                                            </small>
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="bi bi-clock"></i> 1 week ago
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-arrow-clockwise"></i> {% trans 'Load More' %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1.5rem;
+        width: 2px;
+        background-color: #e9ecef;
+    }
+    
+    .timeline-item {
+        position: relative;
+        padding-bottom: 1.5rem;
+    }
+    
+    .timeline-badge {
+        position: absolute;
+        left: -2.5rem;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 1;
+    }
+    
+    .timeline-content {
+        background: #f8f9fa;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .timeline-content::before {
+        content: '';
+        position: absolute;
+        top: 1rem;
+        left: -0.5rem;
+        width: 1rem;
+        height: 1rem;
+        background: #f8f9fa;
+        transform: rotate(45deg);
+    }
+    
+    .avatar-sm {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+        color: #6c757d;
+        font-weight: 500;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        background: transparent;
+        border-bottom: 2px solid #0d6efd;
+    }
+    
+    .nav-tabs .nav-link:hover:not(.active) {
+        border-color: transparent;
+        color: #0d6efd;
+    }
+    
+    .table th, .table td {
+        vertical-align: middle;
+    }
+    
+    .status-badge {
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 500;
+        border-radius: 50rem;
+        text-transform: capitalize;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Activate tab from URL hash
+        if (window.location.hash) {
+            const triggerTab = document.querySelector(`[data-bs-target="${window.location.hash}"]`);
+            if (triggerTab) {
+                const tab = new bootstrap.Tab(triggerTab);
+                tab.show();
+            }
+        }
+        
+        // Update URL hash when tab changes
+        const tabElms = document.querySelectorAll('button[data-bs-toggle="tab"]');
+        tabElms.forEach(tabElm => {
+            tabElm.addEventListener('shown.bs.tab', function (e) {
+                window.location.hash = e.target.getAttribute('data-bs-target').substring(1);
+            });
+        });
+    });
+</script>
+{% endblock %}

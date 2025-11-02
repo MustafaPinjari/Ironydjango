@@ -1,0 +1,333 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans 'Edit Profile' %} | {{ block.super }}{% endblock %}
+
+{% block page_title %}{% trans 'Edit Profile' %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">{% trans 'Email' %}</label>
+                                <input type="email" 
+                                       class="form-control" 
+                                       value="{{ user.email }}" 
+                                       disabled>
+                                <small class="form-text text-muted">
+                                    {% trans 'Contact support to change your email address.' %}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{ form.address|as_crispy_field }}
+                    
+                    <div class="form-group">
+                        <label class="form-label">{% trans 'Profile Picture' %}</label>
+                        <div class="d-flex align-items-center">
+                            <div class="position-relative me-3">
+                                {% if user.profile_picture %}
+                                    <img src="{{ user.profile_picture.url }}" 
+                                         alt="{{ user.get_full_name }}" 
+                                         class="rounded-circle" 
+                                         style="width: 80px; height: 80px; object-fit: cover;">
+                                    {% if form.profile_picture.value %}
+                                        <div class="position-absolute top-0 end-0">
+                                            <span class="badge bg-danger">
+                                                <i class="bi bi-check"></i>
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" 
+                                         style="width: 80px; height: 80px;">
+                                        <i class="bi bi-person" style="font-size: 2rem; color: #6c757d;"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="mb-2">
+                                    {{ form.profile_picture|as_crispy_field }}
+                                </div>
+                                {% if user.profile_picture %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               name="profile_picture-clear" 
+                                               id="profile_picture-clear_id">
+                                        <label class="form-check-label text-danger" for="profile_picture-clear_id">
+                                            <i class="bi bi-trash"></i> {% trans 'Remove current photo' %}
+                                        </label>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> {% trans 'Cancel' %}
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg"></i> {% trans 'Save Changes' %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{% trans 'Account Security' %}</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-shield-lock fs-2 text-primary"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h6 class="mb-0">{% trans 'Password' %}</h6>
+                        <p class="text-muted small mb-0">
+                            {% trans 'Last changed' %}: 
+                            {% if user.last_password_change %}
+                                {{ user.last_password_change|timesince }} {% trans 'ago' %}
+                            {% else %}
+                                {% trans 'Never' %}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-primary w-100">
+                    <i class="bi bi-key"></i> {% trans 'Change Password' %}
+                </a>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{% trans 'Account Actions' %}</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                        <i class="bi bi-trash"></i> {% trans 'Delete Account' %}
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deactivateAccountModal">
+                        <i class="bi bi-slash-circle"></i> {% trans 'Deactivate Account' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel">{% trans 'Delete Your Account' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>{% trans 'Warning' %}:</strong> 
+                    {% trans 'This action cannot be undone. All your data will be permanently deleted.' %}
+                </div>
+                <p>{% trans 'Are you sure you want to delete your account? This will permanently remove all your data from our servers.' %}</p>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="confirmDelete">
+                    <label class="form-check-label" for="confirmDelete">
+                        {% trans 'Yes, I want to delete my account and all associated data.' %}
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn" disabled>
+                    <i class="bi bi-trash"></i> {% trans 'Delete My Account' %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deactivate Account Modal -->
+<div class="modal fade" id="deactivateAccountModal" tabindex="-1" aria-labelledby="deactivateAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deactivateAccountModalLabel">{% trans 'Deactivate Your Account' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>{% trans 'Note' %}:</strong> 
+                    {% trans 'Your account will be deactivated but not deleted. You can reactivate it by logging in again.' %}
+                </div>
+                <p>{% trans 'Are you sure you want to deactivate your account? You can sign back in anytime to reactivate your account.' %}</p>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="confirmDeactivate">
+                    <label class="form-check-label" for="confirmDeactivate">
+                        {% trans 'Yes, I want to deactivate my account.' %}
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
+                <button type="button" class="btn btn-warning" id="confirmDeactivateBtn" disabled>
+                    <i class="bi bi-slash-circle"></i> {% trans 'Deactivate My Account' %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-label {
+        font-weight: 500;
+    }
+    
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #f8f9fa;
+        opacity: 1;
+    }
+    
+    .custom-file-upload {
+        border: 1px solid #ced4da;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: #f8f9fa;
+    }
+    
+    .custom-file-upload:hover {
+        background-color: #e9ecef;
+    }
+    
+    .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    
+    .modal .alert {
+        margin-bottom: 1.5rem;
+    }
+    
+    .modal .alert i {
+        margin-right: 0.5rem;
+    }
+    
+    .btn-outline-danger, .btn-outline-warning {
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+    
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: #212529;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Enable/disable delete account button based on checkbox
+    document.addEventListener('DOMContentLoaded', function() {
+        const confirmDeleteCheckbox = document.getElementById('confirmDelete');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        
+        if (confirmDeleteCheckbox && confirmDeleteBtn) {
+            confirmDeleteCheckbox.addEventListener('change', function() {
+                confirmDeleteBtn.disabled = !this.checked;
+            });
+            
+            confirmDeleteBtn.addEventListener('click', function() {
+                // Here you would typically make an AJAX call to delete the account
+                alert('Account deletion functionality would be implemented here.');
+                // window.location.href = '{% url "accounts:delete_account" %}';
+            });
+        }
+        
+        // Enable/disable deactivate account button based on checkbox
+        const confirmDeactivateCheckbox = document.getElementById('confirmDeactivate');
+        const confirmDeactivateBtn = document.getElementById('confirmDeactivateBtn');
+        
+        if (confirmDeactivateCheckbox && confirmDeactivateBtn) {
+            confirmDeactivateCheckbox.addEventListener('change', function() {
+                confirmDeactivateBtn.disabled = !this.checked;
+            });
+            
+            confirmDeactivateBtn.addEventListener('click', function() {
+                // Here you would typically make an AJAX call to deactivate the account
+                alert('Account deactivation functionality would be implemented here.');
+                // window.location.href = '{% url "accounts:deactivate_account" %}';
+            });
+        }
+        
+        // Image preview for profile picture
+        const profilePictureInput = document.getElementById('id_profile_picture');
+        const profileImage = document.querySelector('.profile-image-preview');
+        
+        if (profilePictureInput && profileImage) {
+            profilePictureInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // Form validation
+        (function() {
+            'use strict';
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ironyy - Premium Laundry Service{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Premium Laundry & Dry Cleaning Service</h1>
+                <p class="lead mb-4">Get your clothes cleaned, pressed, and delivered right to your doorstep. Fast, reliable, and eco-friendly service.</p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'account_signup' %}" class="btn btn-light btn-lg px-4">Get Started</a>
+                    <a href="#how-it-works" class="btn btn-outline-light btn-lg px-4">How It Works</a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <img src="{% static 'images/hero-image.jpg' %}" alt="Laundry Service" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose Ironyy?</h2>
+            <p class="text-muted">Experience the best in laundry care with our premium services</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-truck-fast fa-2x text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Free Pickup & Delivery</h5>
+                        <p class="card-text text-muted">We pick up and deliver your laundry right to your doorstep at your convenience.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-shield-alt fa-2x text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Quality Guaranteed</h5>
+                        <p class="card-text text-muted">Professional cleaning with attention to detail and quality assurance.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-leaf fa-2x text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Eco-Friendly</h5>
+                        <p class="card-text text-muted">We use environmentally friendly detergents and processes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">How It Works</h2>
+            <p class="text-muted">Get your laundry done in just a few simple steps</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <h4 class="mb-0">1</h4>
+                    </div>
+                    <h5 class="fw-bold">Schedule a Pickup</h5>
+                    <p class="text-muted">Book a pickup time that works best for you through our app or website.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <h4 class="mb-0">2</h4>
+                    </div>
+                    <h5 class="fw-bold">We Clean Your Clothes</h5>
+                    <p class="text-muted">Our professionals clean and carefully press your clothes.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <h4 class="mb-0">3</h4>
+                    </div>
+                    <h5 class="fw-bold">Delivery Back to You</h5>
+                    <p class="text-muted">Fresh, clean clothes delivered back to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Ready to experience premium laundry service?</h2>
+        <p class="lead mb-4">Sign up now and get 20% off your first order!</p>
+        <a href="{% url 'account_signup' %}" class="btn btn-light btn-lg px-5">Get Started</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+        padding: 6rem 0;
+    }
+    
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .btn-primary {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+    
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+    }
+    
+    .btn-outline-light:hover {
+        color: #4e73df;
+        background-color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}

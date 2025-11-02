@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Ironyy Laundry Management{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">Welcome to Ironyy Laundry Management System</h2>
+                </div>
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                        <p class="lead">Hello, {{ user.get_full_name|default:user.email }}!</p>
+                        <p>You are logged in as {{ user.get_role_display }}.</p>
+                        
+                        <div class="mt-4">
+                            <h4>Quick Actions:</h4>
+                            <div class="row mt-3">
+                                {% if user.is_customer %}
+                                    <div class="col-md-4 mb-3">
+                                        <a href="{% url 'orders:create' %}" class="btn btn-primary btn-lg btn-block">
+                                            <i class="fas fa-plus-circle me-2"></i>New Order
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="{% url 'orders:list' %}" class="btn btn-outline-primary btn-lg btn-block">
+                                            <i class="fas fa-list me-2"></i>My Orders
+                                        </a>
+                                    </div>
+                                {% elif user.is_press_person or user.is_delivery_partner %}
+                                    <div class="col-md-4 mb-3">
+                                        <a href="{% url 'orders:assigned' %}" class="btn btn-primary btn-lg btn-block">
+                                            <i class="fas fa-tasks me-2"></i>My Tasks
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="col-md-4 mb-3">
+                                    <a href="{% url 'accounts:profile' %}" class="btn btn-outline-secondary btn-lg btn-block">
+                                        <i class="fas fa-user me-2"></i>My Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <p class="lead">Please log in to access the dashboard.</p>
+                            <div class="mt-4">
+                                <a href="{% url 'account_login' %}" class="btn btn-primary btn-lg me-3">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Log In
+                                </a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-outline-primary btn-lg">
+                                    <i class="fas fa-user-plus me-2"></i>Sign Up
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

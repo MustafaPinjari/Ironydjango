@@ -1,0 +1,571 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ironyy - Premium Laundry Service{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <i class="fas fa-tshirt mr-2"></i>
+                <span>Ironyy</span>
+            </a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-actions">
+                    <a href="{% url 'account_login' %}" class="btn btn-outline">Sign In</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Get Started</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <span class="section-subtitle">Premium Laundry Service</span>
+                <h1 class="hero-title">Professional Laundry & Dry Cleaning Delivered to Your Door</h1>
+                <p class="hero-description">Experience the ultimate convenience with our premium laundry service. We pick up, clean, and deliver your clothes with care and precision.</p>
+                <div class="hero-buttons">
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Get Started <i class="fas fa-arrow-right ml-2"></i></a>
+                    <a href="#how-it-works" class="btn btn-outline">
+                        <i class="fas fa-play-circle mr-2"></i> How It Works
+                    </a>
+                </div>
+                <div class="hero-stats mt-12">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Orders Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">Rating (500+ Reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <img src="{% static 'images/iron.png' %}" alt="Laundry Service" class="hero-img">
+                    <div class="hero-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-title">Best in Town</span>
+                            <span class="badge-subtitle">2023 Winner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="services" class="section features-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">Our Services</span>
+            <h2 class="section-title">Premium Laundry Solutions</h2>
+            <p class="section-description">Experience the best in laundry care with our premium services designed for your convenience</p>
+        </div>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Free Pickup & Delivery</h3>
+                    <p class="feature-description">We pick up and deliver your laundry right to your doorstep at your convenience. Schedule a pickup that fits your busy life.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Quality Guaranteed</h3>
+                    <p class="feature-description">Professional cleaning with attention to detail and quality assurance. Your clothes are treated with the utmost care.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Eco-Friendly</h3>
+                    <p class="feature-description">We use environmentally friendly detergents and processes to protect both your clothes and the planet.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Fast Turnaround</h3>
+                    <p class="feature-description">Get your laundry back fresh and clean in as little as 24 hours with our express service option.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Specialty Fabric Care</h3>
+                    <p class="feature-description">Expert care for all fabric types, from delicate silks to heavy comforters and everything in between.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Hygienic Processing</h3>
+                    <p class="feature-description">Strict hygiene protocols ensure your clothes are not just clean, but also safe and sanitized.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="section how-it-works bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">Process</span>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-description">Getting your laundry done has never been easier. Just follow these simple steps</p>
+        </div>
+        
+        <div class="process-steps">
+            <!-- Step 1 -->
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="step-title">Schedule a Pickup</h3>
+                    <p class="step-description">Book a pickup time that works best for you through our app or website. We offer flexible scheduling to fit your busy life.</p>
+                </div>
+                <div class="step-connector">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-icon">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <h3 class="step-title">We Clean Your Clothes</h3>
+                    <p class="step-description">Our professionals clean and carefully press your clothes with attention to detail, using eco-friendly detergents.</p>
+                </div>
+                <div class="step-connector">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="step-title">Delivery Back to You</h3>
+                    <p class="step-description">Fresh, clean clothes are delivered back to your doorstep, ready to wear. We'll notify you when we're on the way!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-box mt-16 text-center">
+            <h3 class="cta-title">Ready to experience the easiest way to do laundry?</h3>
+            <p class="cta-description">Join thousands of satisfied customers who save hours every week with our service.</p>
+            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg mt-6">Get Started Now <i class="fas fa-arrow-right ml-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-xl-8 py-6 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column gap-4 text-center mb-xl-7 mb-5">
+                    <div class="d-flex flex-column gap-2">
+                        <h2 class="h1 mb-0">The reviews speak for themselves</h2>
+                        <p class="mb-0">From laundry to dry cleaning, our customers love our reliable and professional service.</p>
+                    </div>
+
+                    <div class="lh-1 d-flex flex-row gap-3 align-items-center justify-content-center">
+                        <span>4.8/5</span>
+                        <span class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-half text-warning" viewBox="0 0 16 16">
+                                <path d="M5.354 5.119L7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
+                            </svg>
+                        </span>
+                        <span class="text-primary">1,200+ reviews</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <button class="testimonial-prev" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonial-dots">
+                    <button class="dot active" aria-label="Go to testimonial 1"></button>
+                    <button class="dot" aria-label="Go to testimonial 2"></button>
+                    <button class="dot" aria-label="Go to testimonial 3"></button>
+                    <button class="dot" aria-label="Go to testimonial 4"></button>
+                </div>
+                <button class="testimonial-next" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="trust-badges mt-16 text-center">
+            <p class="trusted-by">Trusted by leading companies and thousands of happy customers</p>
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>100% Satisfaction</span>
+                </div>
+                <div class="badge-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Payment</span>
+                </div>
+                <div class="badge-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>Eco-Friendly</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 md:py-24 bg-gradient-to-r from-primary to-primary-dark text-white">
+    <div class="container">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to experience premium laundry service?</h2>
+            <p class="text-xl text-white/90 mb-8">Sign up now and get <span class="font-bold">20% off</span> your first order!</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{% url 'account_signup' %}" class="btn btn-white">Get Started</a>
+                <a href="#how-it-works" class="btn btn-outline-white">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="container">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQs</span>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p class="text-lg text-gray-600">Find answers to common questions about our laundry services</p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-gray-900">How does the pickup and delivery work?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">We offer convenient pickup and delivery services to make your life easier. Simply schedule a pickup time through our app or website, and our team will collect your laundry from your doorstep. Once cleaned and pressed, we'll return it to you at your preferred time.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-gray-900">What types of fabrics can you clean?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">We handle a wide range of fabrics including cotton, linen, wool, silk, and synthetic blends. Our team is trained in specialty fabric care to ensure your delicate items receive the attention they need. If you have specific instructions for any items, just let us know!</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-gray-900">How long does the cleaning process take?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">Our standard service has a 48-hour turnaround time. However, we also offer express service for an additional fee that guarantees your laundry will be returned within 24 hours. Rush services may be available upon request for urgent needs.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-gray-900">Do you offer dry cleaning services?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">Yes, we offer professional dry cleaning services for items that require special care. Our state-of-the-art facilities and eco-friendly solvents ensure your garments are cleaned safely and effectively while maintaining their quality and longevity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section contact-section bg-white">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">Get In Touch</span>
+            <h2 class="section-title">Contact Our Team</h2>
+            <p class="section-description">Have questions or special requests? Our team is here to help you with all your laundry needs.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Our Location</h3>
+                        <p>123 Laundry Street, Suite 100<br>New York, NY 10001</p>
+                        <a href="#" class="map-link">View on map <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Phone Number</h3>
+                        <p>+1 (555) 123-4567</p>
+                        <p class="hours">Monday - Friday: 8:00 AM - 8:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email Address</h3>
+                        <p>info@ironyy.com</p>
+                        <p>support@ironyy.com</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <div class="form-header">
+                    <h3>Send us a Message</h3>
+                    <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+                </div>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name <span class="required">*</span></label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <div class="input-group">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <div class="input-group">
+                            <i class="fas fa-tag"></i>
+                            <select id="subject" name="subject">
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="service">Service Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message <span class="required">*</span></label>
+                        <div class="input-group">
+                            <i class="fas fa-comment-dots"></i>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Map -->
+    <div class="contact-map">
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215209179042!2d-73.9878446845938!3d40.74844047932881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                aria-hidden="false"
+                tabindex="0">
+            </iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+        padding: 6rem 0;
+    }
+    
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .btn-primary {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+    
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+    }
+    
+    .btn-outline-light:hover {
+        color: #4e73df;
+        background-color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
