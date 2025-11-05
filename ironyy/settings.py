@@ -71,12 +71,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    
+    'django.contrib.humanize',  # For human-readable formatting in templates
     # Local apps
     'accounts.apps.AccountsConfig',
     'orders.apps.OrdersConfig',
     'dashboard.apps.DashboardConfig',
-    
     # Third-party apps
     'crispy_forms',
     'crispy_bootstrap5',

@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Sign Out' %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0">
+                        <i class="bi bi-box-arrow-right me-2"></i>{% trans 'Sign Out' %}
+                    </h3>
+                </div>
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+                            <i class="bi bi-door-open" style="font-size: 4rem; color: #6c757d;"></i>
+                        </div>
+                        <h4>{% trans 'Are you sure you want to sign out?' %}</h4>
+                    </div>
+                    
+                    <form method="post" action="{% url 'account_logout' %}" class="text-center">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="bi bi-box-arrow-right me-2"></i>{% trans 'Sign Out' %}
+                            </button>
+                            <a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-x-circle me-2"></i>{% trans 'Cancel' %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <p class="text-muted mb-0">
+                        {% trans 'Not ready to leave?' %} 
+                        <a href="{% url 'dashboard:home' %}" class="text-decoration-none">
+                            {% trans 'Return to home' %}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any additional JavaScript here if needed
+    document.addEventListener('DOMContentLoaded', function() {
+        // Prevent accidental back navigation after logout
+        if (performance.navigation.type === 2) {
+            window.location.href = '{% url 'dashboard:home' %}';
+        }
+    });
+</script>
+{% endblock %}

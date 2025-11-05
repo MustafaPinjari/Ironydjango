@@ -1,599 +1,13 @@
-INFO 2025-11-01 17:08:06,392 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-01 17:08:12,879 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/ironyy/views.py", line 64, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
-    template = get_template(template_name, using=using)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
-    raise TemplateDoesNotExist(template_name, chain=chain)
-django.template.exceptions.TemplateDoesNotExist: dashboard/home.html
-ERROR 2025-11-01 17:08:12,944 basehttp "GET / HTTP/1.1" 500 122524
-INFO 2025-11-01 17:08:12,995 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-01 17:08:12,995 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-01 17:08:13,145 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-01 17:08:13,231 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-01 17:08:13,436 log Not Found: /favicon.ico
-WARNING 2025-11-01 17:08:13,437 basehttp "GET /favicon.ico HTTP/1.1" 404 17262
-ERROR 2025-11-01 17:11:44,816 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/ironyy/views.py", line 64, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
-    template = get_template(template_name, using=using)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
-    raise TemplateDoesNotExist(template_name, chain=chain)
-django.template.exceptions.TemplateDoesNotExist: dashboard/home.html
-ERROR 2025-11-01 17:11:44,868 basehttp "GET / HTTP/1.1" 500 122789
-INFO 2025-11-01 17:11:44,916 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-01 17:11:44,918 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-01 17:11:44,931 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-01 17:11:45,010 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-01 17:11:45,175 log Not Found: /favicon.ico
-WARNING 2025-11-01 17:11:45,175 basehttp "GET /favicon.ico HTTP/1.1" 404 17262
-ERROR 2025-11-01 17:11:45,461 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/ironyy/views.py", line 64, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
-    template = get_template(template_name, using=using)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
-    raise TemplateDoesNotExist(template_name, chain=chain)
-django.template.exceptions.TemplateDoesNotExist: dashboard/home.html
-ERROR 2025-11-01 17:11:45,515 basehttp "GET / HTTP/1.1" 500 122789
-INFO 2025-11-01 17:11:45,543 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-01 17:11:45,544 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-01 17:11:45,589 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-01 17:11:45,658 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-01 17:11:45,777 log Not Found: /favicon.ico
-WARNING 2025-11-01 17:11:45,777 basehttp "GET /favicon.ico HTTP/1.1" 404 17262
-INFO 2025-11-01 17:15:57,493 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-01 17:16:06,575 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/ironyy/views.py", line 64, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
-ERROR 2025-11-01 17:16:06,658 basehttp "GET / HTTP/1.1" 500 176940
-INFO 2025-11-01 17:16:06,728 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
-INFO 2025-11-01 17:16:06,728 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
-INFO 2025-11-01 17:16:06,869 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
-INFO 2025-11-01 17:16:06,964 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
-INFO 2025-11-01 17:17:25,310 autoreload /home/mustafa/Desktop/zealProject/dashboard/urls.py changed, reloading.
-INFO 2025-11-01 17:17:25,897 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:21:09,211 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:23:16,925 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:26:41,825 autoreload /home/mustafa/Desktop/zealProject/dashboard/views.py changed, reloading.
-INFO 2025-11-01 17:26:42,120 autoreload /home/mustafa/Desktop/zealProject/dashboard/views.py changed, reloading.
-INFO 2025-11-01 17:26:42,591 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:26:42,836 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:27:13,144 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:27:39,352 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-01 17:27:39,426 basehttp "GET /static/css/style.css HTTP/1.1" 200 4727
-INFO 2025-11-01 17:27:39,430 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-01 17:27:39,436 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
-INFO 2025-11-01 17:27:39,439 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
-INFO 2025-11-01 17:27:41,684 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
-INFO 2025-11-01 17:27:41,688 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
-WARNING 2025-11-01 17:27:42,949 log Not Found: /favicon.ico
-WARNING 2025-11-01 17:27:42,949 basehttp "GET /favicon.ico HTTP/1.1" 404 17309
-INFO 2025-11-01 17:32:12,875 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:34:27,366 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:34:44,726 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:35:41,446 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:35:46,561 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-01 17:35:46,652 basehttp "GET /static/css/style.css HTTP/1.1" 200 4727
-INFO 2025-11-01 17:35:46,672 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-01 17:35:46,673 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-01 17:35:46,673 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-01 17:35:46,896 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-01 17:35:46,907 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-01 17:35:47,176 log Not Found: /favicon.ico
-WARNING 2025-11-01 17:35:47,177 basehttp "GET /favicon.ico HTTP/1.1" 404 17309
-INFO 2025-11-01 17:35:49,767 basehttp "GET /accounts/login/ HTTP/1.1" 200 16326
-INFO 2025-11-01 17:35:58,552 basehttp "GET /accounts/signup/ HTTP/1.1" 200 16684
-INFO 2025-11-01 17:39:35,380 autoreload Watching for file changes with StatReloader
-INFO 2025-11-01 17:39:38,121 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-01 17:39:41,956 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-01 17:39:42,971 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-01 17:39:43,781 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-02 03:10:02,822 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:10:06,290 basehttp "GET / HTTP/1.1" 200 17824
-INFO 2025-11-02 03:10:06,364 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 03:10:06,364 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 03:10:06,365 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
-INFO 2025-11-02 03:10:06,365 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
-INFO 2025-11-02 03:10:07,659 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
-INFO 2025-11-02 03:10:07,675 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
-WARNING 2025-11-02 03:10:07,832 log Not Found: /favicon.ico
-WARNING 2025-11-02 03:10:07,832 basehttp "GET /favicon.ico HTTP/1.1" 404 17309
-INFO 2025-11-02 03:10:12,123 basehttp "GET /accounts/login/ HTTP/1.1" 200 16324
-INFO 2025-11-02 03:12:04,069 basehttp "POST /accounts/login/ HTTP/1.1" 200 16474
-INFO 2025-11-02 03:12:06,904 basehttp "GET /accounts/signup/ HTTP/1.1" 200 16684
-INFO 2025-11-02 03:12:19,152 basehttp "POST /accounts/signup/ HTTP/1.1" 302 0
-ERROR 2025-11-02 03:12:19,185 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/dashboard/views.py", line 19, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
-    return nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'list' not found. 'list' is not a valid view function or pattern name.
-ERROR 2025-11-02 03:12:19,228 basehttp "GET / HTTP/1.1" 500 190584
-INFO 2025-11-02 03:13:11,468 autoreload /home/mustafa/Desktop/zealProject/orders/urls.py changed, reloading.
-INFO 2025-11-02 03:13:11,894 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:17:00,547 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-02 03:17:02,277 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/dashboard/views.py", line 19, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
-    return nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'account_profile' not found. 'account_profile' is not a valid view function or pattern name.
-ERROR 2025-11-02 03:17:02,320 basehttp "GET / HTTP/1.1" 500 191724
-WARNING 2025-11-02 03:17:02,590 log Not Found: /favicon.ico
-WARNING 2025-11-02 03:17:02,591 basehttp "GET /favicon.ico HTTP/1.1" 404 17307
-ERROR 2025-11-02 03:18:10,870 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/dashboard/views.py", line 19, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
-    result = block.nodelist.render(context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
-    return nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'account_profile' not found. 'account_profile' is not a valid view function or pattern name.
-ERROR 2025-11-02 03:18:10,929 basehttp "GET / HTTP/1.1" 500 204696
-ERROR 2025-11-02 03:18:11,950 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/dashboard/views.py", line 19, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
-    result = block.nodelist.render(context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
-    return nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'account_profile' not found. 'account_profile' is not a valid view function or pattern name.
-ERROR 2025-11-02 03:18:11,994 basehttp "GET / HTTP/1.1" 500 204365
-ERROR 2025-11-02 03:18:12,158 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/dashboard/views.py", line 19, in get
-    return render(request, self.template_name, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
-    return compiled_parent._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/test/utils.py", line 111, in instrumented_test_render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
-    result = block.nodelist.render(context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
-    return nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 478, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'account_profile' not found. 'account_profile' is not a valid view function or pattern name.
-ERROR 2025-11-02 03:18:12,198 basehttp "GET / HTTP/1.1" 500 204365
-INFO 2025-11-02 03:18:57,313 basehttp "GET / HTTP/1.1" 200 20125
-ERROR 2025-11-02 03:19:01,252 log Internal Server Error: /orders/create/
+INFO 2025-11-05 09:24:22,739 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:24:28,220 basehttp "GET / HTTP/1.1" 200 46522
+WARNING 2025-11-05 09:24:28,396 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:24:32,119 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-05 09:24:32,148 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-05 09:24:32,231 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22795
+WARNING 2025-11-05 09:24:32,317 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:24:34,616 basehttp "GET /orders/create/ HTTP/1.1" 200 73456
+WARNING 2025-11-05 09:24:34,653 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+ERROR 2025-11-05 09:24:45,525 log Internal Server Error: /orders/create/
 Traceback (most recent call last):
   File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
     response = get_response(request)
@@ -610,394 +24,43 @@ Traceback (most recent call last):
   File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
     return handler(request, *args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
-    return super().get(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
-    return self.render_to_response(self.get_context_data())
-                                   ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
-    kwargs["form"] = self.get_form()
-                     ^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 36, in get_form
-    form_class = self.get_form_class()
-                 ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 108, in get_form_class
-    return model_forms.modelform_factory(model, fields=self.fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 651, in modelform_factory
-    return type(form)(class_name, (form,), form_class_attrs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 331, in __new__
-    raise FieldError(message)
-django.core.exceptions.FieldError: Unknown field(s) (pickup_date, service_type, notes, delivery_date) specified for Order
-ERROR 2025-11-02 03:19:01,285 basehttp "GET /orders/create/ HTTP/1.1" 500 142498
-INFO 2025-11-02 03:19:47,657 basehttp "GET / HTTP/1.1" 200 20125
-INFO 2025-11-02 03:19:49,616 basehttp "GET / HTTP/1.1" 200 20125
-INFO 2025-11-02 03:19:49,797 basehttp "GET / HTTP/1.1" 200 20125
-INFO 2025-11-02 03:19:49,986 basehttp "GET / HTTP/1.1" 200 20125
-INFO 2025-11-02 03:19:52,276 basehttp "GET /accounts/logout/ HTTP/1.1" 200 16125
-INFO 2025-11-02 03:19:53,890 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
-INFO 2025-11-02 03:19:53,919 basehttp "GET /accounts/login/ HTTP/1.1" 200 16534
-INFO 2025-11-02 03:19:56,277 basehttp "GET /orders/create/ HTTP/1.1" 302 0
-INFO 2025-11-02 03:19:56,296 basehttp "GET /accounts/login/?next=/orders/create/ HTTP/1.1" 200 16427
-INFO 2025-11-02 03:19:56,941 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:58,545 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:58,748 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:58,921 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:59,125 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:59,292 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:59,498 basehttp "GET / HTTP/1.1" 200 18159
-INFO 2025-11-02 03:19:59,824 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
-INFO 2025-11-02 03:20:00,143 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:20:45,457 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
-INFO 2025-11-02 03:20:45,819 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:23:51,623 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:23:53,712 basehttp "GET / HTTP/1.1" 200 18161
-INFO 2025-11-02 03:39:09,079 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-02 03:39:10,958 log Internal Server Error: /
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
-    response = response.render()
-               ^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
-    self.content = self.rendered_content
-                   ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
-    template = self.resolve_template(self.template_name)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
-    return select_template(template, using=self.using)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/template/loader.py", line 47, in select_template
-    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
-django.template.exceptions.TemplateDoesNotExist: ironyy/landing.html
-ERROR 2025-11-02 03:39:10,997 basehttp "GET / HTTP/1.1" 500 113107
-INFO 2025-11-02 03:39:38,986 autoreload /home/mustafa/Desktop/zealProject/ironyy/settings.py changed, reloading.
-INFO 2025-11-02 03:39:39,361 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:43:41,422 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:44:05,752 basehttp "GET / HTTP/1.1" 200 23847
-WARNING 2025-11-02 03:44:05,838 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:44:10,551 basehttp "GET /accounts/signup/ HTTP/1.1" 200 16686
-INFO 2025-11-02 03:49:11,376 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:49:36,983 autoreload /home/mustafa/Desktop/zealProject/api/urls.py changed, reloading.
-INFO 2025-11-02 03:49:37,343 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 03:50:26,600 basehttp "GET / HTTP/1.1" 200 23847
-WARNING 2025-11-02 03:50:26,673 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:50:28,499 basehttp "GET /accounts/signup/ HTTP/1.1" 200 16686
-INFO 2025-11-02 03:50:39,949 basehttp "GET /accounts/login/ HTTP/1.1" 200 16322
-INFO 2025-11-02 03:51:15,928 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:51:16,007 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:51:56,996 basehttp "GET / HTTP/1.1" 200 23847
-WARNING 2025-11-02 03:51:57,047 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:51:59,604 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:51:59,629 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:00,138 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:52:00,161 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:11,934 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:52:11,959 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:12,100 basehttp "GET / HTTP/1.1" 200 23847
-WARNING 2025-11-02 03:52:12,123 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:12,323 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:52:12,346 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:13,003 basehttp "GET / HTTP/1.1" 200 23847
-INFO 2025-11-02 03:52:13,039 basehttp "GET /static/css/style.css HTTP/1.1" 200 5834
-INFO 2025-11-02 03:52:13,043 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:52:13,043 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:13,043 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:52:13,045 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:52:13,212 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:52:13,254 basehttp "GET /static/css/style.css HTTP/1.1" 200 5834
-WARNING 2025-11-02 03:52:13,254 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:13,254 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:52:13,256 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:52:13,264 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:52:13,373 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:52:13,399 basehttp "GET /static/css/style.css HTTP/1.1" 200 5834
-INFO 2025-11-02 03:52:13,402 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:52:13,402 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:52:13,411 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:52:13,412 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:01,475 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 03:53:01,475 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-WARNING 2025-11-02 03:53:01,575 log Not Found: /favicon.ico
-WARNING 2025-11-02 03:53:01,576 basehttp "GET /favicon.ico HTTP/1.1" 404 17375
-INFO 2025-11-02 03:53:10,032 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:10,072 basehttp "GET /static/css/style.css HTTP/1.1" 200 5852
-WARNING 2025-11-02 03:53:10,080 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:10,094 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 03:53:10,738 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:10,763 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:10,767 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:17,899 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:17,919 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:17,925 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:18,083 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:18,106 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:18,108 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:18,272 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:18,293 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:18,461 basehttp "GET / HTTP/1.1" 200 23846
-WARNING 2025-11-02 03:53:18,484 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:18,666 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:18,688 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:18,849 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:18,872 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,043 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:19,064 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,217 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:19,235 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:19,240 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,411 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:19,430 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,586 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:19,608 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,786 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:19,808 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:19,959 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:19,983 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:20,188 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:20,216 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:20,396 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:20,418 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:20,421 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:22,772 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:22,796 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:22,800 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:22,945 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:22,968 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:23,106 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:23,133 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:23,282 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:23,305 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:36,048 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:36,073 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:36,073 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:36,314 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:36,334 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:36,340 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:36,690 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:36,713 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:36,718 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:36,876 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:36,899 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:36,904 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:37,093 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:37,115 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:37,118 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:37,257 basehttp "GET / HTTP/1.1" 200 23845
-WARNING 2025-11-02 03:53:37,280 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:37,451 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:37,473 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:37,474 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:37,681 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:37,701 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:37,706 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:56,777 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:56,796 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:56,802 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:56,970 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:56,992 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-WARNING 2025-11-02 03:53:56,997 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:57,770 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:57,799 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:53:57,802 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:57,802 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:57,820 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:57,821 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:57,958 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:57,981 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:57,983 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:57,984 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:57,991 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:57,992 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,119 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,141 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:58,143 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:58,146 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:58,152 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:58,152 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,270 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,294 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:53:58,295 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:58,296 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:58,302 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,303 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:58,403 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 03:53:58,406 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 03:53:58,447 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,475 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:58,478 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:58,478 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:58,485 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:58,485 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,620 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,649 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:53:58,650 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:58,653 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:58,654 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:58,654 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,808 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,830 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:58,835 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:58,835 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:58,840 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:58,840 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:58,966 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:58,989 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:58,993 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:58,994 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,000 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:59,001 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:59,155 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:59,178 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:59,180 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:59,186 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-WARNING 2025-11-02 03:53:59,186 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,187 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:59,319 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:59,344 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:59,344 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:59,346 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,352 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:59,352 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:59,496 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:59,523 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:53:59,524 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,525 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:59,529 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:59,530 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:59,661 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:59,686 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-INFO 2025-11-02 03:53:59,689 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 03:53:59,691 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,696 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:59,696 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:53:59,859 basehttp "GET / HTTP/1.1" 200 23845
-INFO 2025-11-02 03:53:59,883 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:53:59,891 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:53:59,891 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:53:59,901 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:53:59,901 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:54:07,492 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 03:54:07,495 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 03:54:08,521 log Not Found: /favicon.ico
-WARNING 2025-11-02 03:54:08,522 basehttp "GET /favicon.ico HTTP/1.1" 404 17375
-INFO 2025-11-02 03:56:46,494 basehttp "GET / HTTP/1.1" 200 23846
-INFO 2025-11-02 03:56:46,527 basehttp "GET /static/css/style.css HTTP/1.1" 200 5861
-WARNING 2025-11-02 03:56:46,533 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 03:56:46,534 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 03:56:46,576 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 03:56:46,577 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 03:56:50,556 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 03:56:50,560 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 03:56:50,686 log Not Found: /favicon.ico
-WARNING 2025-11-02 03:56:50,686 basehttp "GET /favicon.ico HTTP/1.1" 404 17375
-INFO 2025-11-02 03:56:51,106 basehttp "GET /accounts/login/ HTTP/1.1" 200 19776
-INFO 2025-11-02 03:56:52,141 basehttp "GET /accounts/signup/ HTTP/1.1" 200 19423
-INFO 2025-11-02 03:56:56,451 basehttp "GET /accounts/signup/ HTTP/1.1" 200 19423
-INFO 2025-11-02 03:57:07,374 basehttp "POST /accounts/signup/ HTTP/1.1" 302 0
-INFO 2025-11-02 03:57:07,408 basehttp "GET /dashboard/ HTTP/1.1" 200 20843
-INFO 2025-11-02 03:57:07,469 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-ERROR 2025-11-02 03:57:09,079 log Internal Server Error: /orders/create/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
-    return super().get(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
-    return self.render_to_response(self.get_context_data())
-                                   ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 40, in get_context_data
-    context['items'] = OrderItemFormSet(prefix='items')
-                       ^^^^^^^^^^^^^^^^
-NameError: name 'OrderItemFormSet' is not defined. Did you mean: 'OrderItemForm'?
-ERROR 2025-11-02 03:57:09,108 basehttp "GET /orders/create/ HTTP/1.1" 500 120503
-INFO 2025-11-02 03:57:14,246 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
-INFO 2025-11-02 03:57:14,266 basehttp "GET /dashboard/ HTTP/1.1" 200 20155
-INFO 2025-11-02 03:59:06,369 basehttp "GET /orders/ HTTP/1.1" 200 19523
-INFO 2025-11-02 03:59:06,410 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 03:59:06,411 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-ERROR 2025-11-02 03:59:08,651 log Internal Server Error: /orders/create/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
-    return super().get(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
-    return self.render_to_response(self.get_context_data())
-                                   ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 40, in get_context_data
-    context['items'] = OrderItemFormSet(prefix='items')
-                       ^^^^^^^^^^^^^^^^
-NameError: name 'OrderItemFormSet' is not defined. Did you mean: 'OrderItemForm'?
-ERROR 2025-11-02 03:59:08,682 basehttp "GET /orders/create/ HTTP/1.1" 500 120500
-ERROR 2025-11-02 03:59:11,184 log Internal Server Error: /profile/profile/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
-    return view_func(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/detail.py", line 109, in get
-    context = self.get_context_data(object=self.object)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/accounts/views.py", line 88, in get_context_data
-    'profile': user.userprofile,
-               ^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
-    return func(_wrapped, *args)
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
+    return self.form_valid(form)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 524, in __get__
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
+    is_valid, errors = self.validate_forms(form, formset)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
+    if not formset.is_valid():
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
+    self.errors
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
+    form_errors = form.errors
+                  ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
+    self._post_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
+    self.instance.full_clean(exclude=exclude, validate_unique=False)
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
+    self.clean()
+  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 182, in clean
+    if not self.pk and self.cloth_type and not self.cloth_type.is_active:
+                       ^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 263, in __get__
     raise self.RelatedObjectDoesNotExist(
-accounts.models.User.userprofile.RelatedObjectDoesNotExist: User has no userprofile.
-ERROR 2025-11-02 03:59:11,216 basehttp "GET /profile/profile/ HTTP/1.1" 500 130328
-INFO 2025-11-02 03:59:14,540 basehttp "GET /orders/ HTTP/1.1" 200 19523
-ERROR 2025-11-02 03:59:15,194 log Internal Server Error: /orders/create/
+orders.models.OrderItem.cloth_type.RelatedObjectDoesNotExist: OrderItem has no cloth_type.. Did you mean: 'cloth_type_id'?
+ERROR 2025-11-05 09:24:45,601 basehttp "POST /orders/create/ HTTP/1.1" 500 167167
+INFO 2025-11-05 09:25:14,366 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
+INFO 2025-11-05 09:25:14,953 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-05 09:25:55,234 log Internal Server Error: /orders/create/
 Traceback (most recent call last):
   File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
     response = get_response(request)
@@ -1014,288 +77,173 @@ Traceback (most recent call last):
   File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
     return handler(request, *args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
-    return super().get(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
-    return self.render_to_response(self.get_context_data())
-                                   ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 40, in get_context_data
-    context['items'] = OrderItemFormSet(prefix='items')
-                       ^^^^^^^^^^^^^^^^
-NameError: name 'OrderItemFormSet' is not defined. Did you mean: 'OrderItemForm'?
-ERROR 2025-11-02 03:59:15,223 basehttp "GET /orders/create/ HTTP/1.1" 500 120500
-INFO 2025-11-02 03:59:16,998 basehttp "GET /dashboard/ HTTP/1.1" 200 20155
-INFO 2025-11-02 03:59:17,638 basehttp "GET /dashboard/ HTTP/1.1" 200 20155
-INFO 2025-11-02 03:59:18,269 basehttp "GET /dashboard/ HTTP/1.1" 200 20155
-INFO 2025-11-02 03:59:20,681 basehttp "GET /accounts/password/change/ HTTP/1.1" 200 17202
-INFO 2025-11-02 03:59:23,632 basehttp "GET /accounts/logout/ HTTP/1.1" 200 16125
-INFO 2025-11-02 03:59:27,336 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-02 03:59:28,069 basehttp "GET / HTTP/1.1" 200 24982
-INFO 2025-11-02 04:01:47,757 basehttp "GET / HTTP/1.1" 200 24976
-INFO 2025-11-02 04:01:47,789 basehttp "GET /static/css/style.css HTTP/1.1" 200 9707
-INFO 2025-11-02 04:01:47,792 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:01:47,845 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:01:48,121 basehttp "GET / HTTP/1.1" 200 24976
-INFO 2025-11-02 04:02:07,880 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:02:07,901 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 04:02:07,903 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:02:16,671 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:02:16,693 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 04:02:16,693 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:02:16,842 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:02:17,044 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:03:20,132 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:03:21,694 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:03:21,744 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:21,745 basehttp "GET /static/css/style.css HTTP/1.1" 200 14729
-INFO 2025-11-02 04:03:36,268 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:03:38,935 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:03:38,976 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:38,976 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:39,048 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:42,244 basehttp "GET / HTTP/1.1" 200 24961
-INFO 2025-11-02 04:03:42,268 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:42,270 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 04:03:42,270 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:11:28,226 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:11:31,233 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:11:31,295 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-WARNING 2025-11-02 04:11:31,295 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:11:31,348 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:13:19,530 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:13:19,564 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:13:19,565 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-INFO 2025-11-02 04:13:19,574 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:13:19,574 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-WARNING 2025-11-02 04:13:19,574 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:13:19,745 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:13:19,769 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-INFO 2025-11-02 04:13:19,771 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:13:19,771 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:13:19,777 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:13:19,778 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:13:19,940 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:13:19,966 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-INFO 2025-11-02 04:13:19,966 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:13:19,967 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:13:19,972 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:13:19,973 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:13:20,139 basehttp "GET / HTTP/1.1" 200 25560
-WARNING 2025-11-02 04:13:20,163 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:13:20,163 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-INFO 2025-11-02 04:13:20,164 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:13:20,172 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:13:20,172 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:13:20,361 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:13:20,382 basehttp "GET /static/css/style.css HTTP/1.1" 200 18775
-INFO 2025-11-02 04:13:20,382 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:13:20,383 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:13:20,391 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:13:20,391 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:13:21,434 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:13:21,435 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:13:21,485 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:13:21,486 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:13:32,653 basehttp "GET / HTTP/1.1" 200 25560
-WARNING 2025-11-02 04:13:32,675 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:03,025 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:03,068 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:03,075 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:17:03,075 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:03,081 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-WARNING 2025-11-02 04:17:03,081 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:03,390 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:03,394 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:17:03,503 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:17:03,503 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:17:03,913 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:03,933 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:03,936 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:17:03,936 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:03,941 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:03,941 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:04,090 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:04,090 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:17:04,560 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:17:04,560 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:17:04,878 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:04,901 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:17:04,902 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-WARNING 2025-11-02 04:17:04,902 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:04,922 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:04,923 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:05,055 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:05,059 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 04:17:05,261 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:05,285 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:05,285 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:17:05,288 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:05,293 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:05,293 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:05,430 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:05,433 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 04:17:05,559 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:05,578 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:05,582 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:17:05,583 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:05,589 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:05,589 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:05,721 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:05,724 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 04:17:05,894 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:05,915 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:05,918 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:17:05,918 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:05,923 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:05,923 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:06,047 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:06,051 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 04:17:06,188 basehttp "GET / HTTP/1.1" 200 25560
-INFO 2025-11-02 04:17:06,208 basehttp "GET /static/css/style.css HTTP/1.1" 200 19725
-INFO 2025-11-02 04:17:06,209 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-WARNING 2025-11-02 04:17:06,211 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:17:06,218 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:17:06,218 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:17:06,295 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:17:06,298 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:17:07,256 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:17:07,256 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:19:00,263 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:19:02,304 basehttp "GET / HTTP/1.1" 200 25560
-WARNING 2025-11-02 04:19:02,363 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:19:02,363 basehttp "GET /static/css/style.css HTTP/1.1" 200 20800
-INFO 2025-11-02 04:25:54,333 basehttp "GET / HTTP/1.1" 200 25944
-WARNING 2025-11-02 04:25:54,397 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:25:54,398 basehttp "GET /static/css/style.css HTTP/1.1" 200 20950
-INFO 2025-11-02 04:25:54,443 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:29:05,728 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:29:07,339 basehttp "GET / HTTP/1.1" 200 25944
-INFO 2025-11-02 04:29:07,393 basehttp "GET /static/css/style.css HTTP/1.1" 200 24262
-WARNING 2025-11-02 04:29:07,410 basehttp "GET /static/images/hero-image.jpg HTTP/1.1" 404 1923
-INFO 2025-11-02 04:29:41,652 basehttp "GET / HTTP/1.1" 200 25938
-INFO 2025-11-02 04:29:41,686 basehttp "GET /static/css/style.css HTTP/1.1" 200 24262
-INFO 2025-11-02 04:29:41,686 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:29:41,688 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:29:41,697 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:29:41,698 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:29:42,025 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:29:42,029 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:29:42,127 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:29:42,127 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:30:12,799 basehttp "GET / HTTP/1.1" 200 25938
-INFO 2025-11-02 04:30:12,840 basehttp "GET /static/css/style.css HTTP/1.1" 200 24268
-INFO 2025-11-02 04:30:21,662 basehttp "GET / HTTP/1.1" 200 25938
-INFO 2025-11-02 04:30:21,687 basehttp "GET /static/css/style.css HTTP/1.1" 200 24280
-INFO 2025-11-02 04:35:28,421 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:35:28,469 basehttp "GET /static/css/style.css HTTP/1.1" 200 25176
-INFO 2025-11-02 04:35:28,470 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:35:28,484 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:35:28,613 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:35:28,788 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:35:28,955 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:35:29,166 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:35:29,359 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:17,481 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:17,533 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:36:17,534 basehttp "GET /static/css/style.css HTTP/1.1" 200 35003
-INFO 2025-11-02 04:36:17,534 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:36:17,535 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:36:17,537 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:36:17,640 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:36:17,648 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:36:17,908 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:36:17,908 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:36:18,363 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:18,381 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:36:18,382 basehttp "GET /static/css/style.css HTTP/1.1" 200 35003
-INFO 2025-11-02 04:36:18,383 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:36:18,391 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:36:18,391 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:36:18,472 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:36:18,476 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:36:18,796 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:36:18,796 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:36:19,228 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:19,255 basehttp "GET /static/css/style.css HTTP/1.1" 200 35003
-INFO 2025-11-02 04:36:19,255 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:36:19,257 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:36:19,268 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:36:19,268 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:36:19,421 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:36:19,425 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-INFO 2025-11-02 04:36:19,524 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:19,585 basehttp "GET /static/css/style.css HTTP/1.1" 200 35003
-INFO 2025-11-02 04:36:19,586 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:36:19,587 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:36:19,595 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:36:19,595 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:36:19,733 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:36:19,737 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:36:20,955 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:36:20,955 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:36:49,776 autoreload Watching for file changes with StatReloader
-INFO 2025-11-02 04:36:52,296 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:52,325 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
-INFO 2025-11-02 04:36:52,696 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:36:52,892 basehttp "GET / HTTP/1.1" 200 42216
-INFO 2025-11-02 04:46:08,401 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:08,460 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:08,463 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
-INFO 2025-11-02 04:46:08,504 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
-INFO 2025-11-02 04:46:10,396 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:10,422 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:10,423 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:10,424 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:10,436 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:10,437 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:10,630 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:10,658 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:10,658 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:10,660 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:10,669 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:10,669 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:10,863 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:10,888 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:10,888 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:10,889 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:10,894 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:10,895 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:11,065 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:11,088 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:11,088 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:11,089 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:11,100 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:11,100 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:11,295 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:11,318 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:11,318 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:11,320 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:11,326 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:11,326 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:11,510 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:11,530 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:11,531 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:11,532 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:11,545 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:11,545 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:11,704 basehttp "GET / HTTP/1.1" 200 48590
-INFO 2025-11-02 04:46:11,725 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:46:11,725 basehttp "GET /static/css/style.css HTTP/1.1" 200 56345
-INFO 2025-11-02 04:46:11,727 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:46:11,735 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:46:11,735 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:46:12,381 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:46:12,390 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:46:13,731 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:46:13,731 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-02 04:50:52,871 basehttp "GET / HTTP/1.1" 200 46741
-INFO 2025-11-02 04:50:52,905 basehttp "GET /static/css/style.css HTTP/1.1" 200 57477
-INFO 2025-11-02 04:50:52,906 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-02 04:50:52,908 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
-INFO 2025-11-02 04:50:52,956 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
-INFO 2025-11-02 04:50:52,957 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-02 04:50:53,069 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-02 04:50:53,070 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-02 04:50:53,441 log Not Found: /favicon.ico
-WARNING 2025-11-02 04:50:53,441 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
+    is_valid, errors = self.validate_forms(form, formset)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
+    if not formset.is_valid():
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
+    self.errors
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
+    form_errors = form.errors
+                  ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
+    self._post_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
+    self.instance.full_clean(exclude=exclude, validate_unique=False)
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
+    self.clean()
+  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 183, in clean
+    if not self.cloth_type:
+           ^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 263, in __get__
+    raise self.RelatedObjectDoesNotExist(
+orders.models.OrderItem.cloth_type.RelatedObjectDoesNotExist: OrderItem has no cloth_type.. Did you mean: 'cloth_type_id'?
+ERROR 2025-11-05 09:25:55,331 basehttp "POST /orders/create/ HTTP/1.1" 500 167208
+INFO 2025-11-05 09:25:55,383 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-05 09:25:55,397 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:25:55,473 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:25:55,511 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:25:55,659 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:25:55,659 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:26:17,339 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
+INFO 2025-11-05 09:26:18,010 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-05 09:26:32,907 log Internal Server Error: /orders/create/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
+    is_valid, errors = self.validate_forms(form, formset)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
+    if not formset.is_valid():
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
+    self.errors
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
+    form_errors = form.errors
+                  ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
+    self.full_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
+    self._post_clean()
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
+    self.instance.full_clean(exclude=exclude, validate_unique=False)
+  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
+    self.clean()
+  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 184, in clean
+    raise ValidationError({
+          ^^^^^^^^^^^^^^^
+NameError: name 'ValidationError' is not defined
+ERROR 2025-11-05 09:26:32,987 basehttp "POST /orders/create/ HTTP/1.1" 500 162428
+INFO 2025-11-05 09:26:33,046 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-05 09:26:33,047 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:26:33,194 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:26:33,194 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:26:33,307 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:26:33,308 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:26:54,888 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:26:57,510 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
+INFO 2025-11-05 09:26:58,160 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:27:26,748 basehttp "POST /orders/create/ HTTP/1.1" 200 76954
+WARNING 2025-11-05 09:27:26,838 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:27:26,840 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-05 09:27:26,840 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:27:26,843 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-05 09:27:27,024 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:27:27,033 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:27:27,228 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:27:27,229 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:27:55,513 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:27:57,955 basehttp "POST /orders/create/ HTTP/1.1" 200 76954
+INFO 2025-11-05 09:27:58,023 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:27:58,025 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-05 09:27:58,026 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+WARNING 2025-11-05 09:27:58,026 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:27:58,122 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:27:58,129 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:27:58,283 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:27:58,283 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:28:14,381 basehttp "POST /orders/create/ HTTP/1.1" 200 80359
+WARNING 2025-11-05 09:28:14,421 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:30:29,688 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:30:33,239 basehttp "POST /orders/create/ HTTP/1.1" 200 80225
+INFO 2025-11-05 09:30:33,300 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+WARNING 2025-11-05 09:30:33,302 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:30:33,303 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-05 09:30:33,304 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:30:33,433 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:30:33,441 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:30:33,578 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:30:33,578 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:30:42,908 basehttp "POST /orders/create/ HTTP/1.1" 200 83606
+WARNING 2025-11-05 09:30:42,949 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:32:07,095 autoreload /home/mustafa/Desktop/zealProject/orders/forms.py changed, reloading.
+INFO 2025-11-05 09:32:07,782 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:32:37,408 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
+INFO 2025-11-05 09:32:38,108 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:33:34,878 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:34:09,346 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
+INFO 2025-11-05 09:34:09,995 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:34:35,873 basehttp "POST /orders/create/ HTTP/1.1" 200 87250
+INFO 2025-11-05 09:34:35,953 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+WARNING 2025-11-05 09:34:35,954 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:34:35,954 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-05 09:34:35,954 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:34:36,177 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:34:36,201 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:34:36,436 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:34:36,436 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:34:44,817 basehttp "POST /orders/create/ HTTP/1.1" 200 90674
+WARNING 2025-11-05 09:34:44,857 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:35:51,673 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:36:02,653 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
+INFO 2025-11-05 09:36:03,294 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:36:46,166 basehttp "POST /orders/create/ HTTP/1.1" 200 92231
+WARNING 2025-11-05 09:36:46,235 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:36:46,236 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-05 09:36:46,237 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-05 09:36:46,238 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-05 09:36:46,359 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-05 09:36:46,365 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-05 09:36:46,514 log Not Found: /favicon.ico
+WARNING 2025-11-05 09:36:46,514 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-05 09:37:04,543 basehttp "POST /orders/create/ HTTP/1.1" 200 95656
+WARNING 2025-11-05 09:37:04,584 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:39:03,739 autoreload Watching for file changes with StatReloader
+INFO 2025-11-05 09:39:11,561 basehttp "POST /orders/create/ HTTP/1.1" 200 96594
+WARNING 2025-11-05 09:39:11,629 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-05 09:39:23,146 basehttp "POST /orders/create/ HTTP/1.1" 200 100020
+WARNING 2025-11-05 09:39:23,180 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896

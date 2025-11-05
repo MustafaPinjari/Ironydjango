@@ -1,0 +1,406 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load widget_tweaks %}
+
+{% block dashboard_content %}
+<div class="dashboard-header">
+    <h2>Update Order Status</h2>
+    <p class="text-muted mb-0">Update the status of Order #{{ order.id }}</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="dashboard-card">
+            <div class="card-header">
+                <i class="fas fa-exchange-alt me-2"></i>Status Update
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <h5 class="mb-3">Current Status: 
+                            <span class="status-badge status-{{ order.status|lower|slugify }}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </h5>
+                        
+                        <div class="status-timeline mt-4">
+                            {% for status_choice in status_choices %}
+                            <div class="status-step {% if status_choice.0 == order.status %}active{% endif %}">
+                                <div class="status-indicator">
+                                    <div class="status-dot"></div>
+                                    {% if not forloop.last %}<div class="status-line"></div>{% endif %}
+                                </div>
+                                <div class="status-info">
+                                    <div class="status-title">{{ status_choice.1 }}</div>
+                                    {% if status_choice.0 == 'PENDING' and order.status == 'PENDING' %}
+                                    <div class="status-time">Order placed on {{ order.created_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'CONFIRMED' and order.status == 'CONFIRMED' %}
+                                    <div class="status-time">Confirmed on {{ order.confirmed_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'IN_PROGRESS' and order.status == 'IN_PROGRESS' %}
+                                    <div class="status-time">In progress since {{ order.in_progress_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'READY_FOR_PICKUP' and order.status == 'READY_FOR_PICKUP' %}
+                                    <div class="status-time">Ready for pickup since {{ order.ready_for_pickup_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'PICKED_UP' and order.status == 'PICKED_UP' %}
+                                    <div class="status-time">Picked up on {{ order.picked_up_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'DELIVERED' and order.status == 'DELIVERED' %}
+                                    <div class="status-time">Delivered on {{ order.delivered_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'CANCELLED' and order.status == 'CANCELLED' %}
+                                    <div class="status-time">Cancelled on {{ order.cancelled_at|date:"M d, Y" }}</div>
+                                    {% elif status_choice.0 == 'REJECTED' and order.status == 'REJECTED' %}
+                                    <div class="status-time">Rejected on {{ order.rejected_at|date:"M d, Y" }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.status.id_for_label }}" class="form-label">
+                            <strong>Update Status To</strong>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ form.status|add_class:"form-select"|attr:"required" }}
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Select the new status for this order.
+                        </div>
+                        {% if form.status.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.status.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-4" id="staff-assignment" style="display: none;">
+                        <label for="{{ form.assigned_to.id_for_label }}" class="form-label">
+                            <strong>Assign To Staff</strong>
+                        </label>
+                        {{ form.assigned_to|add_class:"form-select" }}
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Assign this order to a staff member (optional).
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4" id="delivery-assignment" style="display: none;">
+                        <label for="{{ form.delivery_partner.id_for_label }}" class="form-label">
+                            <strong>Assign Delivery Partner</strong>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ form.delivery_partner|add_class:"form-select" }}
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Select a delivery partner for this order.
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="pickup_date" class="form-label">
+                                    <strong>Pickup Date & Time</strong>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="datetime-local" class="form-control" id="pickup_date" 
+                                       name="pickup_date" value="{{ form.pickup_date.value|default:'' }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="delivery_date" class="form-label">
+                                    <strong>Expected Delivery</strong>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="datetime-local" class="form-control" id="delivery_date" 
+                                       name="delivery_date" value="{{ form.delivery_date.value|default:'' }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.notes.id_for_label }}" class="form-label">
+                            <strong>Notes</strong>
+                            <span class="text-muted">(Optional)</span>
+                        </label>
+                        {{ form.notes|add_class:"form-control"|attr:"rows:3"|attr:"placeholder:Add any internal notes about this status update..." }}
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            These notes will be visible to staff members.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="notify_customer" name="notify_customer" checked>
+                            <label class="form-check-label" for="notify_customer">
+                                <i class="fas fa-envelope me-1"></i>
+                                Notify customer about this update via email
+                            </label>
+                        </div>
+                        {% if user.is_admin %}
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="override_restrictions" name="override_restrictions">
+                            <label class="form-check-label" for="override_restrictions">
+                                <i class="fas fa-exclamation-triangle text-warning me-1"></i>
+                                Override status restrictions (Admin only)
+                            </label>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'dashboard:order_detail' order.pk %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-1"></i> Back to Order
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Update Status
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .status-timeline {
+        position: relative;
+        padding-left: 20px;
+        margin: 20px 0;
+    }
+    
+    .status-step {
+        position: relative;
+        padding-bottom: 30px;
+    }
+    
+    .status-step:last-child {
+        padding-bottom: 0;
+    }
+    
+    .status-step.active .status-dot {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
+    }
+    
+    .status-step.completed .status-dot {
+        background-color: #198754;
+        border-color: #198754;
+    }
+    
+    .status-dot {
+        position: absolute;
+        left: -30px;
+        top: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid #dee2e6;
+        background-color: #fff;
+        z-index: 2;
+    }
+    
+    .status-line {
+        position: absolute;
+        left: -23px;
+        top: 20px;
+        width: 2px;
+        height: 100%;
+        background-color: #dee2e6;
+        z-index: 1;
+    }
+    
+    .status-step.completed .status-line {
+        background-color: #198754;
+    }
+    
+    .status-info {
+        margin-left: -15px;
+    }
+    
+    .status-title {
+        font-weight: 500;
+        margin-bottom: 2px;
+    }
+    
+    .status-time {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+    
+    .form-label {
+        font-weight: 500;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+    }
+    
+    .status-pending {
+        color: #6c757d;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+    
+    .status-confirmed {
+        color: #0d6efd;
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+    
+    .status-in_progress {
+        color: #0dcaf0;
+        background-color: rgba(13, 202, 240, 0.1);
+    }
+    
+    .status-ready_for_pickup {
+        color: #ffc107;
+        background-color: rgba(255, 193, 7, 0.1);
+    }
+    
+    .status-picked_up {
+        color: #fd7e14;
+        background-color: rgba(253, 126, 20, 0.1);
+    }
+    
+    .status-delivered {
+        color: #198754;
+        background-color: rgba(25, 135, 84, 0.1);
+    }
+    
+    .status-cancelled, .status-rejected {
+        color: #dc3545;
+        background-color: rgba(220, 53, 69, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const statusSelect = document.getElementById('{{ form.status.id_for_label }}');
+        const staffAssignment = document.getElementById('staff-assignment');
+        const deliveryAssignment = document.getElementById('delivery-assignment');
+        
+        function toggleAssignmentFields() {
+            const status = statusSelect.value;
+            
+            // Hide all first
+            staffAssignment.style.display = 'none';
+            deliveryAssignment.style.display = 'none';
+            
+            // Show relevant fields based on status
+            if (status === 'IN_PROGRESS' || status === 'READY_FOR_PICKUP') {
+                staffAssignment.style.display = 'block';
+            } else if (status === 'PICKED_UP' || status === 'DELIVERED') {
+                deliveryAssignment.style.display = 'block';
+                
+                // Set default pickup and delivery times if empty
+                const now = new Date();
+                const pickupDate = document.getElementById('pickup_date');
+                const deliveryDate = document.getElementById('delivery_date');
+                
+                if (pickupDate && !pickupDate.value) {
+                    const pickupTime = new Date(now.getTime() + (30 * 60 * 1000)); // 30 minutes from now
+                    pickupDate.value = pickupTime.toISOString().slice(0, 16);
+                }
+                
+                if (deliveryDate && !deliveryDate.value) {
+                    const deliveryTime = new Date(now.getTime() + (2 * 60 * 60 * 1000)); // 2 hours from now
+                    deliveryDate.value = deliveryTime.toISOString().slice(0, 16);
+                    
+                    // Ensure delivery is after pickup
+                    deliveryDate.min = pickupDate.value;
+                }
+                
+                // Update min delivery date when pickup date changes
+                if (pickupDate && deliveryDate) {
+                    pickupDate.addEventListener('change', function() {
+                        deliveryDate.min = this.value;
+                        if (deliveryDate.value < this.value) {
+                            deliveryDate.value = this.value;
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Initial toggle
+        toggleAssignmentFields();
+        
+        // Toggle on status change
+        statusSelect.addEventListener('change', toggleAssignmentFields);
+        
+        // Form validation
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                let isValid = true;
+                
+                // Check required fields
+                if (!statusSelect.value) {
+                    isValid = false;
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback d-block';
+                    errorDiv.textContent = 'Please select a status';
+                    statusSelect.classList.add('is-invalid');
+                    if (!statusSelect.nextElementSibling.classList.contains('invalid-feedback')) {
+                        statusSelect.after(errorDiv);
+                    }
+                } else {
+                    statusSelect.classList.remove('is-invalid');
+                    const errorFeedback = statusSelect.nextElementSibling;
+                    if (errorFeedback && errorFeedback.classList.contains('invalid-feedback')) {
+                        errorFeedback.remove();
+                    }
+                }
+                
+                // Check delivery partner if needed
+                if (deliveryAssignment.style.display === 'block') {
+                    const deliveryPartner = document.getElementById('{{ form.delivery_partner.id_for_label }}');
+                    if (!deliveryPartner.value) {
+                        isValid = false;
+                        deliveryPartner.classList.add('is-invalid');
+                        if (!deliveryPartner.nextElementSibling.classList.contains('invalid-feedback')) {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'invalid-feedback';
+                            errorDiv.textContent = 'Please select a delivery partner';
+                            deliveryPartner.after(errorDiv);
+                        }
+                    } else {
+                        deliveryPartner.classList.remove('is-invalid');
+                        const errorFeedback = deliveryPartner.nextElementSibling;
+                        if (errorFeedback && errorFeedback.classList.contains('invalid-feedback')) {
+                            errorFeedback.remove();
+                        }
+                    }
+                }
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    
+                    // Scroll to first error
+                    const firstError = document.querySelector('.is-invalid');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+        }
+        
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+{% endblock %}

@@ -1,108 +1,1243 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags static %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-light">
-                    <h4 class="mb-0">
-                        {% if form.instance.pk %}
-                            Update Order #{{ form.instance.pk }}
-                        {% else %}
-                            Create New Order
-                        {% endif %}
-                    </h4>
+<div class="container-fluid py-2">
+    <div class="row gx-3">
+        <!-- Progress Steps - Sidebar -->
+        <div class="col-lg-1 px-0">
+            <div class="card shadow-sm sticky-top" style="top: 1rem;">
+                <div class="card-body p-2">
+                    <div class="steps flex-column">
+                        <div class="step active mb-2" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Details</div>
+                        </div>
+                        <div class="step mb-2" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Items</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Review</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form method="post" id="orderForm">
-                        {% csrf_token %}
-                        
-                        <div class="row mb-3">
+            </div>
+        </div>
+
+        <!-- Main Form Content -->
+        <div class="col-lg-11">
+            <form method="post" id="orderForm" enctype="multipart/form-data" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <!-- Step 1: Order Details -->
+                <div class="card shadow-sm mb-3 step-content" id="step-1">
+                    <div class="card-header bg-primary text-white py-2">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            {% if form.instance.pk %}Update{% else %}New{% endif %} Order Details
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
                             <div class="col-md-6">
-                                {{ form.service_type|as_crispy_field }}
+                                <div class="form-group">
+                                    <label class="form-label">Service Type <span class="text-danger">*</span></label>
+                                    {{ form.service_type }}
+                                    <div class="invalid-feedback">Please select a service type.</div>
+                                </div>
                             </div>
                             {% if form.status %}
                             <div class="col-md-6">
                                 {{ form.status|as_crispy_field }}
                             </div>
                             {% endif %}
-                        </div>
-                        
-                        <div class="row mb-3">
+                            
                             <div class="col-md-6">
-                                {{ form.pickup_date|as_crispy_field }}
+                                <div class="form-group">
+                                    <label class="form-label">Pickup Date/Time <span class="text-danger">*</span></label>
+                                    {{ form.pickup_date }}
+                                    <div class="form-text">Earliest available: {{ form.pickup_date.field.widget.attrs.min|default:"Next hour" }}</div>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                {{ form.delivery_date|as_crispy_field }}
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Date/Time <span class="text-danger">*</span></label>
+                                    {{ form.delivery_date }}
+                                    <div class="form-text">Must be after pickup time</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Pickup Address <span class="text-danger">*</span></label>
+                                    {{ form.pickup_address }}
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sameAsPickup">
+                                    <label class="form-check-label" for="sameAsPickup">
+                                        Same as pickup address
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Delivery Address <span class="text-danger">*</span></label>
+                                    {{ form.delivery_address }}
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Special Instructions</label>
+                                    {{ form.notes }}
+                                    <div class="form-text">Any special instructions for your order</div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            {{ form.pickup_address|as_crispy_field }}
+                    </div>
+                    <div class="card-footer bg-light d-flex justify-content-between">
+                        <a href="{% if form.instance.pk %}{% url 'orders:detail' form.instance.pk %}{% else %}{% url 'orders:list' %}{% endif %}" 
+                           class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Cancel
+                        </a>
+                        <button type="button" class="btn btn-primary next-step" data-next="2">
+                            Next: Add Items <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Order Items -->
+                <div class="card shadow-sm mb-4 step-content d-none" id="step-2">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-tshirt me-2"></i>
+                            Add Items to Your Order
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="order-items">
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                                <div class="row g-3 item-form mb-4 p-3 border rounded">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="form-label">Cloth Type <span class="text-danger">*</span></label>
+                                            {{ form.cloth_type }}
+                                            <div class="invalid-feedback">Please select a cloth type.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                                            {{ form.quantity }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Special Instructions</label>
+                                            {{ form.special_instructions }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-end">
+                                        {% if formset.can_delete %}
+                                        <button type="button" class="btn btn-outline-danger btn-sm remove-item" {% if forloop.first and formset.forms|length == 1 %}disabled{% endif %}>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        {% endif %}
+                                        {{ form.DELETE|as_crispy_field }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+                            <div class="text-center mt-4">
+                                <button type="button" class="btn btn-outline-primary add-item">
+                                    <i class="fas fa-plus me-2"></i> Add Another Item
+                                </button>
+                            </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            {{ form.delivery_address|as_crispy_field }}
+                    </div>
+                    <div class="card-footer bg-light d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </button>
+                        <button type="button" id="review-order-btn" class="btn btn-primary next-step" data-next="3">
+                            Review Order <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Review -->
+                <div class="card shadow-sm mb-4 step-content d-none" id="step-3">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-clipboard-check me-2"></i>
+                            Review Your Order
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-info-circle me-2"></i>Order Summary
+                                </h6>
+                                <dl class="row">
+                                    <dt class="col-sm-5">Service Type:</dt>
+                                    <dd class="col-sm-7" id="review-service-type"></dd>
+                                    
+                                    <dt class="col-sm-5">Pickup Date/Time:</dt>
+                                    <dd class="col-sm-7" id="review-pickup-date"></dd>
+                                    
+                                    <dt class="col-sm-5">Delivery Date/Time:</dt>
+                                    <dd class="col-sm-7" id="review-delivery-date"></dd>
+                                    
+                                    <dt class="col-sm-5">Pickup Address:</dt>
+                                    <dd class="col-sm-7" id="review-pickup-address"></dd>
+                                    
+                                    <dt class="col-sm-5">Delivery Address:</dt>
+                                    <dd class="col-sm-7" id="review-delivery-address"></dd>
+                                    
+                                    <dt class="col-sm-5">Special Instructions:</dt>
+                                    <dd class="col-sm-7" id="review-notes">None</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-tshirt me-2"></i>Order Items
+                                </h6>
+                                <div id="review-items">
+                                    <!-- Dynamically populated -->
+                                </div>
+                                <div class="text-end mt-3">
+                                    <h5>Total: <span id="review-total">$0.00</span></h5>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            {{ form.notes|as_crispy_field }}
-                        </div>
-                        
-                        <div class="d-flex justify-content-between">
-                            <a href="{% if form.instance.pk %}{% url 'orders:detail' form.instance.pk %}{% else %}{% url 'orders:list' %}{% endif %}" 
-                               class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-2"></i>Cancel
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-2"></i>
-                                {% if form.instance.pk %}Update{% else %}Create{% endif %} Order
+                    </div>
+                    <div class="card-footer bg-light d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Items
+                        </button>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary me-2" id="save-draft">
+                                <i class="far fa-save me-2"></i>Save as Draft
+                            </button>
+                            <button type="submit" class="btn btn-success" id="submit-order">
+                                <i class="fas fa-check-circle me-2"></i>
+                                {% if form.instance.pk %}Update{% else %}Place{% endif %} Order
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+{% endblock %}
 
-{% if not form.instance.pk %}
-<div class="container mt-4">
-    <div class="card shadow-sm">
-        <div class="card-header bg-light">
-            <h5 class="mb-0">Order Items</h5>
-        </div>
-        <div class="card-body">
-            <div id="order-items">
-                <p class="text-muted">Add items to your order after creating it.</p>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+    /* Progress Steps */
+    .steps {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        position: relative;
+    }
+    .steps.flex-column {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+    .steps:not(.flex-column)::before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #dee2e6;
+        z-index: 1;
+    }
+    .steps.flex-column::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        transform: translateX(-50%);
+        background: #dee2e6;
+        z-index: 1;
+    }
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        flex: 1;
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    .steps:not(.flex-column) .step:not(:last-child) {
+        margin-right: 15px;
+    }
+    .steps.flex-column .step:not(:last-child) {
+        margin-bottom: 20px;
+    }
+    .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin: 0 auto 8px;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+    .step.active .step-number {
+        background: #0d6efd;
+        color: white;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+        transform: scale(1.1);
+    }
+    .step.completed .step-number {
+        background: #198754;
+        color: white;
+        box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.25);
+    }
+    .step-text {
+        font-size: 0.8rem;
+        color: #6c757d;
+        text-align: center;
+        line-height: 1.2;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+    }
+    .step.active .step-text {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+    .step.completed .step-text {
+        color: #198754;
+        font-weight: 500;
+    }
+    
+    /* Form Styling */
+    .card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 1.25rem 2rem;
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    }
+    .card-header h5 {
+        font-weight: 600;
+        color: white;
+        margin: 0;
+    }
+    .card-body {
+        padding: 2rem;
+        background-color: #fff;
+    }
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #495057;
+    }
+    .form-control, .form-select {
+        padding: 0.7rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #dee2e6;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.3rem rgba(13, 110, 253, 0.15);
+    }
+    .btn {
+        padding: 0.65rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.85rem;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        border: none;
+    }
+    .btn-danger {
+        background: linear-gradient(135deg, #dc3545, #bb2d3b);
+        border: none;
+    }
+    .btn i {
+        margin-right: 0.5rem;
+    }
+    .item-form {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    .item-form:hover {
+        background-color: #f1f3f5;
+        border-color: #dee2e6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .remove-item {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+    .remove-item:hover {
+        transform: scale(1.1);
+    }
+    .invalid-feedback {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    .form-text {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    /* Buttons container */
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e9ecef;
+    }
+    /* Make form groups more compact */
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    @media (max-width: 992px) {
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-header {
+            padding: 1rem 1.5rem;
+        }
+        .step-text {
+            font-size: 0.7rem;
+        }
+        .btn {
+            padding: 0.6rem 1.25rem;
+            font-size: 0.8rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .card-body {
+            padding: 1.25rem;
+        }
+        .steps.flex-column {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+        .steps.flex-column::before {
+            display: none;
+        }
+        .steps.flex-column .step {
+            margin: 0.5rem;
+            padding: 8px 12px;
+            flex: 0 0 auto;
+        }
+        .step-number {
+            width: 26px;
+            height: 26px;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+        .step-text {
+            display: none;
+        }
+        .form-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-actions .btn {
+            width: 100%;
+            margin: 0.25rem 0;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-    // Initialize date pickers
-    $(function() {
-        $('.datepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
-            sideBySide: true,
-            icons: {
-                time: 'far fa-clock',
-                date: 'far fa-calendar',
-                up: 'fas fa-arrow-up',
-                down: 'fas fa-arrow-down',
-                previous: 'fas fa-chevron-left',
-                next: 'fas fa-chevron-right',
-                today: 'fas fa-calendar-check',
-                clear: 'fas fa-trash',
-                close: 'fas fa-times'
+    $(document).ready(function() {
+        // Helper function to add days to a date
+        function addDays(date, days) {
+            const result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
+
+        // Get tomorrow's date
+        const tomorrow = addDays(new Date(), 1);
+        const dayAfterTomorrow = addDays(new Date(), 2);
+
+        // Format date to YYYY-MM-DD
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        // Initialize pickup date picker
+        flatpickr("#id_pickup_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: "today",
+            defaultDate: tomorrow,
+            minTime: "09:00",
+            maxTime: "20:00",
+            minuteIncrement: 30,
+            time_24hr: true,
+            disable: [
+                function(date) {
+                    // Disable Sundays
+                    return (date.getDay() === 0);
+                }
+            ]
+        });
+        
+        // Initialize delivery date picker
+        flatpickr("#id_delivery_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: dayAfterTomorrow,
+            defaultDate: dayAfterTomorrow,
+            minTime: "09:00",
+            maxTime: "20:00",
+            minuteIncrement: 30,
+            time_24hr: true,
+            disable: [
+                function(date) {
+                    // Disable Sundays
+                    return (date.getDay() === 0);
+                }
+            ]
+        });
+        
+        // Same as pickup address toggle
+        $('#sameAsPickup').change(function() {
+            if ($(this).is(':checked')) {
+                $('#id_delivery_address').val($('#id_pickup_address').val());
             }
         });
+        
+        // Step navigation
+        $('.next-step').click(function() {
+            const currentStep = $(this).data('next');
+            const prevStep = currentStep - 1;
+            
+            // Validate current step before proceeding
+            if (prevStep === 1) {
+                if (!validateStep1()) return;
+                updateReviewSection();
+            } else if (prevStep === 2) {
+                if (!validateStep2()) return;
+                updateReviewItems();
+            }
+            
+            // Update progress
+            $(`.step[data-step="${prevStep}"]`).removeClass('active').addClass('completed');
+            $(`.step[data-step="${currentStep}"]`).addClass('active');
+            
+            // Show next step
+            $(`.step-content`).addClass('d-none');
+            $(`#step-${currentStep}`).removeClass('d-none');
+            
+            // Scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'smooth');
+        });
+        
+        $('.prev-step').click(function() {
+            const prevStep = $(this).data('prev');
+            const currentStep = prevStep + 1;
+            
+            // Update progress
+            $(`.step[data-step="${currentStep}"]`).removeClass('active');
+            $(`.step[data-step="${prevStep}"]`).removeClass('completed').addClass('active');
+            
+            // Show previous step
+            $(`.step-content`).addClass('d-none');
+            $(`#step-${prevStep}`).removeClass('d-none');
+            
+            // Scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'smooth');
+        });
+        
+        // Form validation functions
+        function validateStep1() {
+            let isValid = true;
+            const requiredFields = ['service_type', 'pickup_date', 'delivery_date', 'pickup_address', 'delivery_address'];
+            
+            requiredFields.forEach(field => {
+                const $field = $(`#id_${field}`);
+                if (!$field.val()) {
+                    $field.addClass('is-invalid');
+                    $field.siblings('.invalid-feedback').remove();
+                    $field.after(`<div class="invalid-feedback">This field is required.</div>`);
+                    isValid = false;
+                } else {
+                    $field.removeClass('is-invalid');
+                    $field.siblings('.invalid-feedback').remove();
+                }
+            });
+            
+            // Validate delivery date is after pickup date
+            const pickupDate = new Date($('#id_pickup_date').val());
+            const deliveryDate = new Date($('#id_delivery_date').val());
+            
+            if (deliveryDate <= pickupDate) {
+                $('#id_delivery_date').addClass('is-invalid');
+                $('#id_delivery_date').siblings('.invalid-feedback').remove();
+                $('#id_delivery_date').after(`<div class="invalid-feedback">Delivery date must be after pickup date.</div>`);
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        function validateStep2() {
+            debugLog('Starting Step 2 validation');
+            let isValid = true;
+            let hasItems = false;
+            
+            // Debug: Check how many item forms exist
+            const $itemForms = $('.item-form');
+            debugLog('Number of item forms found:', $itemForms.length);
+            
+            if ($itemForms.length === 0) {
+                console.error('No item forms found! Looking for elements with class .item-form');
+                alert('Please add at least one item to your order.');
+                return false;
+            }
+            
+            $itemForms.each(function(index) {
+                const $form = $(this);
+                debugLog(`Validating item form ${index}`);
+                
+                const $clothType = $form.find('select[name$="-cloth_type"]');
+                const $quantity = $form.find('input[name$="-quantity"]');
+                const $deleteField = $form.find('input[name$="-DELETE"]');
+                
+                debugLog(`Item ${index} - Cloth type field found:`, $clothType.length > 0);
+                debugLog(`Item ${index} - Quantity field found:`, $quantity.length > 0);
+                debugLog(`Item ${index} - Delete field checked:`, $deleteField.is(':checked'));
+                
+                // Skip deleted items
+                if ($deleteField.is(':checked')) {
+                    debugLog(`Item ${index} - Skipping (marked for deletion)`);
+                    return; // continue to next iteration
+                }
+                
+                const clothTypeValue = $clothType.val();
+                const quantityValue = $quantity.val();
+                
+                debugLog(`Item ${index} - Cloth type value:`, clothTypeValue);
+                debugLog(`Item ${index} - Quantity value:`, quantityValue);
+                
+                // Check if this item has any data entered
+                const hasClothType = clothTypeValue && clothTypeValue !== '';
+                const hasQuantity = quantityValue && quantityValue !== '' && parseInt(quantityValue) > 0;
+                
+                // If the item is completely empty (no cloth type and default/empty quantity), skip it
+                if (!hasClothType && (!quantityValue || parseInt(quantityValue) <= 1)) {
+                    debugLog(`Item ${index} - Skipping (empty item)`);
+                    // Clear any validation errors on empty items
+                    $clothType.removeClass('is-invalid');
+                    $clothType.siblings('.invalid-feedback').remove();
+                    $quantity.removeClass('is-invalid');
+                    $quantity.siblings('.invalid-feedback').remove();
+                    return; // continue to next iteration
+                }
+                
+                // If we reach here, the item has some data, so count it and validate it
+                hasItems = true;
+                
+                // Validate cloth type
+                if (!hasClothType) {
+                    debugLog(`Item ${index} - Cloth type is empty but quantity is set`);
+                    $clothType.addClass('is-invalid');
+                    $clothType.siblings('.invalid-feedback').remove();
+                    $clothType.after(`<div class="invalid-feedback">Please select a cloth type.</div>`);
+                    isValid = false;
+                } else {
+                    $clothType.removeClass('is-invalid');
+                    $clothType.siblings('.invalid-feedback').remove();
+                }
+                
+                // Validate quantity
+                if (!hasQuantity) {
+                    debugLog(`Item ${index} - Quantity is invalid`);
+                    $quantity.addClass('is-invalid');
+                    $quantity.siblings('.invalid-feedback').remove();
+                    $quantity.after(`<div class="invalid-feedback">Please enter a valid quantity (minimum 1).</div>`);
+                    isValid = false;
+                } else {
+                    $quantity.removeClass('is-invalid');
+                    $quantity.siblings('.invalid-feedback').remove();
+                }
+            });
+            
+            debugLog('Has items:', hasItems);
+            debugLog('Is valid:', isValid);
+            
+            if (!hasItems) {
+                console.error('No valid items found in the form');
+                alert('Please add at least one item to your order.');
+                return false;
+            }
+            
+            if (!isValid) {
+                console.error('Validation failed: Please check all required fields');
+                alert('Please fill in all required fields for each item.');
+            }
+            
+            return isValid;
+        }
+        
+        // Update review section with form data
+        function updateReviewSection() {
+            $('#review-service-type').text($('#id_service_type option:selected').text());
+            $('#review-pickup-date').text($('#id_pickup_date').val());
+            $('#review-delivery-date').text($('#id_delivery_date').val());
+            $('#review-pickup-address').text($('#id_pickup_address').val());
+            $('#review-delivery-address').text($('#id_delivery_address').val());
+            
+            const notes = $('#id_notes').val();
+            if (notes) {
+                $('#review-notes').text(notes);
+            }
+        }
+        
+        // Update review items section
+        function updateReviewItems() {
+            const $reviewItems = $('#review-items');
+            $reviewItems.empty();
+            let total = 0;
+            
+            $('.item-form').each(function() {
+                const $form = $(this);
+                const $deleteField = $form.find('input[name$="-DELETE"]');
+                
+                // Skip deleted items
+                if ($deleteField.length && $deleteField.is(':checked')) {
+                    debugLog('Skipping deleted item in review');
+                    return;
+                }
+                
+                const $clothTypeSelect = $form.find('select[name$="-cloth_type"]');
+                const $selectedOption = $clothTypeSelect.find('option:selected');
+                const clothType = $selectedOption.text();
+                const clothTypeValue = $clothTypeSelect.val();
+                
+                // Skip if no cloth type selected
+                if (!clothTypeValue) {
+                    debugLog('Skipping item with no cloth type in review');
+                    return;
+                }
+                
+                const quantity = parseInt($form.find('input[name$="-quantity"]').val()) || 0;
+                
+                // Extract price from the option text (e.g., "T-Shirt - $20" -> 20)
+                let price = 0;
+                const priceMatch = clothType.match(/\$(\d+(?:\.\d{2})?)/);
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1]);
+                } else {
+                    // Try to get from data attribute
+                    price = parseFloat($selectedOption.data('price') || 0);
+                }
+                
+                const itemTotal = price * quantity;
+                total += itemTotal;
+                
+                const specialInstructions = $form.find('textarea[name$="-special_instructions"]').val();
+                
+                const itemHtml = `
+                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                        <div>
+                            <h6 class="mb-1">${clothType} <span class="badge bg-primary">${quantity}x</span></h6>
+                            ${specialInstructions ? `<small class="text-muted">${specialInstructions}</small><br>` : ''}
+                            <small>$${price.toFixed(2)} each</small>
+                        </div>
+                        <div class="text-end">
+                            <strong>$${itemTotal.toFixed(2)}</strong>
+                        </div>
+                    </div>`;
+                
+                $reviewItems.append(itemHtml);
+            });
+            
+            $('#review-total').text(`$${total.toFixed(2)}`);
+            debugLog('Review total calculated:', total);
+        }
+        
+        // Add new item form
+        $('.add-item').click(function() {
+            const formCount = parseInt($('#id_items-TOTAL_FORMS').val());
+            const formPrefix = 'items-' + formCount + '-';
+            const newForm = `
+                <div class="row g-3 item-form mb-4 p-3 border rounded">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="form-label">Cloth Type <span class="text-danger">*</span></label>
+                            <select name="${formPrefix}cloth_type" class="form-select" id="id_${formPrefix}cloth_type" required>
+                                <option value="" selected disabled>Select a cloth type</option>
+                                <option value="shirt" data-price="30">Shirt - $30</option>
+                                <option value="pant" data-price="40">Pant - $40</option>
+                                <option value="jeans" data-price="50">Jeans - $50</option>
+                                <option value="t_shirt" data-price="20">T-Shirt - $20</option>
+                                <option value="suit" data-price="100">Suit - $100</option>
+                                <option value="dress" data-price="60">Dress - $60</option>
+                                <option value="skirt" data-price="35">Skirt - $35</option>
+                                <option value="blouse" data-price="25">Blouse - $25</option>
+                                <option value="sweater" data-price="45">Sweater - $45</option>
+                                <option value="jacket" data-price="70">Jacket - $70</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a cloth type.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                            <input type="number" name="${formPrefix}quantity" min="1" value="1" class="form-control" id="id_${formPrefix}quantity" required>
+                            <div class="invalid-feedback">Please enter a valid quantity.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Special Instructions</label>
+                            <input type="text" name="${formPrefix}special_instructions" class="form-control" id="id_${formPrefix}special_instructions">
+                        </div>
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-outline-danger btn-sm remove-item">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <input type="hidden" name="${formPrefix}id" id="id_${formPrefix}id">
+                        <input type="hidden" name="${formPrefix}DELETE" id="id_${formPrefix}DELETE">
+                    </div>
+                </div>
+            `;
+            
+            $('#order-items').append(newForm);
+            $('#id_items-TOTAL_FORMS').val(formCount + 1);
+            
+            // Enable all remove buttons if there's more than one item
+            if ($('.item-form').length > 1) {
+                $('.remove-item').prop('disabled', false);
+            }
+            
+            // Scroll to the new form
+            $('html, body').animate({
+                scrollTop: $('.item-form').last().offset().top - 100
+            }, 'slow');
+        });
+        
+        // Remove item
+        $(document).on('click', '.remove-item', function() {
+            const $itemForm = $(this).closest('.item-form');
+            const $deleteField = $itemForm.find('input[id$="-DELETE"]');
+            
+            if ($itemForm.hasClass('existing-item')) {
+                // For existing items, mark as deleted but keep in the DOM
+                $deleteField.val('on');
+                $itemForm.hide();
+            } else {
+                // For new items, remove from DOM
+                $itemForm.remove();
+                // Update form count
+                const formCount = $('.item-form:visible').length;
+                $('#id_items-TOTAL_FORMS').val(formCount);
+            }
+            
+            // Disable remove button if only one item left
+            if ($('.item-form:visible').length <= 1) {
+                $('.remove-item').prop('disabled', true);
+            }
+        });
+        
+        // Save as draft
+        $('#save-draft').click(function() {
+            // Add a hidden field to indicate draft
+            if ($('#is_draft').length === 0) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    id: 'is_draft',
+                    name: 'is_draft',
+                    value: 'true'
+                }).appendTo('#orderForm');
+            }
+            
+            // Submit the form
+            $('#orderForm').submit();
+        });
+        
+        // Add click handler specifically for the review button
+        $(document).on('click', '#review-order-btn', function(e) {
+            debugLog('Review order button clicked');
+            // The button already has the .next-step class, so the existing handler will take care of it
+        });
+        
+        // Initialize existing items for editing
+        $('.item-form').each(function() {
+            $(this).addClass('existing-item');
+            const $deleteField = $(this).find('input[id$="-DELETE"]');
+            if ($deleteField.val() === 'on') {
+                $(this).hide();
+            }
+        });
+        
+        // Disable remove button if only one item
+        if ($('.item-form:visible').length <= 1) {
+            $('.remove-item').prop('disabled', true);
+        }
+        
+        // Initialize tooltips
+        $('[data-bs-toggle="tooltip"]').tooltip();
+        
+        // Debug function
+        function debugLog(message, data = '') {
+            console.log(`[DEBUG] ${message}`, data);
+        }
+        
+        // Handle next step button clicks
+        $(document).on('click', '.next-step', function(e) {
+            e.preventDefault();
+            const $button = $(this);
+            const nextStep = $button.data('next');
+            const currentStep = nextStep - 1;
+            
+            debugLog('Next step button clicked', { currentStep, nextStep, buttonText: $button.text().trim() });
+            
+            // If going to review step (step 3), validate step 2 first
+            if (nextStep === 3) {
+                debugLog('Preparing to show review step');
+                if (typeof validateStep2 === 'function') {
+                    debugLog('Validating step 2');
+                    if (!validateStep2()) {
+                        console.error('Step 2 validation failed');
+                        return false;
+                    }
+                    // Update review section with current data
+                    debugLog('Updating review section');
+                    try {
+                        updateReviewSection();
+                        updateReviewItems();
+                        debugLog('Review section updated successfully');
+                    } catch (error) {
+                        console.error('Error updating review section:', error);
+                        return false;
+                    }
+                } else {
+                    console.error('validateStep2 function not found');
+                    return false;
+                }
+            }
+            
+            // Update progress steps
+            $(`.step[data-step="${currentStep}"]`).removeClass('active').addClass('completed');
+            $(`.step[data-step="${nextStep}"]`).addClass('active');
+            
+            // Show the target step and hide others
+            debugLog(`Showing step ${nextStep}`);
+            $('.step-content').addClass('d-none');
+            const $targetStep = $(`#step-${nextStep}`);
+            if ($targetStep.length) {
+                $targetStep.removeClass('d-none');
+                debugLog(`Step ${nextStep} is now visible`);
+            } else {
+                console.error(`Step ${nextStep} element not found`);
+                return false;
+            }
+            
+            // Scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'smooth');
+            
+            return false;
+        });
+        
+        // Handle back button clicks
+        $(document).on('click', '.prev-step, .back-to-items', function(e) {
+            e.preventDefault();
+            const prevStep = $(this).data('prev') || 1;
+            const currentStep = prevStep + 1;
+            
+            // Update progress steps
+            $(`.step[data-step="${currentStep}"]`).removeClass('active');
+            $(`.step[data-step="${prevStep}"]`).removeClass('completed').addClass('active');
+            
+            // Show the target step and hide others
+            $('.step-content').addClass('d-none');
+            $(`#step-${prevStep}`).removeClass('d-none');
+            
+            // Scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'smooth');
+            
+            return false;
+        });
+        
+        // Handle form submission
+        $('#orderForm').on('submit', function(e) {
+            debugLog('=== FORM SUBMISSION STARTED ===');
+            
+            // Check if we're on the review step
+            const reviewStepVisible = $('#step-3').is(':visible');
+            debugLog('Review step visible:', reviewStepVisible);
+            
+            if (!reviewStepVisible) {
+                e.preventDefault();
+                debugLog('Form submission prevented - not on review step');
+                alert('Please review your order before submitting.');
+                return false;
+            }
+            
+            // Show loading state
+            const $submitBtn = $('#submit-order');
+            $submitBtn.prop('disabled', true);
+            $submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Placing Order...');
+            
+            // Create a new form data object
+            const formData = new FormData();
+            
+            // Add all non-file input fields from the form
+            $('form#orderForm').find('input[type!="file"], select, textarea').each(function() {
+                const $field = $(this);
+                const name = $field.attr('name');
+                const type = $field.attr('type');
+                
+                // Skip if no name or disabled
+                if (!name || $field.is(':disabled')) {
+                    return;
+                }
+                
+                // Handle checkboxes and radio buttons
+                if (type === 'checkbox' || type === 'radio') {
+                    if ($field.is(':checked')) {
+                        formData.append(name, $field.val() || '');
+                    }
+                } 
+                // Handle file inputs
+                else if (type === 'file') {
+                    const files = $field[0].files;
+                    if (files && files.length > 0) {
+                        formData.append(name, files[0], files[0].name);
+                    }
+                } 
+                // Handle all other input types
+                else {
+                    formData.append(name, $field.val() || '');
+                }
+            });
+            
+            // Track valid items
+            let validItemCount = 0;
+            let formIndex = 0;
+            
+            // First, collect all form fields and remove empty items
+            $('.item-form').each(function(index) {
+                const $form = $(this);
+                const formPrefix = 'items-' + index + '-';
+                const $deleteField = $form.find('input[name$="-DELETE"]');
+                const $clothTypeSelect = $form.find('select[name$="-cloth_type"]');
+                const $quantity = $form.find('input[name$="-quantity"]');
+                const $specialInstructions = $form.find('textarea[name$="-special_instructions"]');
+                
+                const isDeleted = $deleteField.is(':checked');
+                const clothTypeValue = $clothTypeSelect.val();
+                
+                // Skip if form is empty or marked for deletion
+                if (!clothTypeValue || isDeleted) {
+                    formData.set(formPrefix + 'DELETE', 'on');
+                    return; // Skip to next item
+                }
+                
+                // This is a valid item
+                formIndexes.push(index);
+                validItemCount++;
+                
+                // Ensure the form is not marked for deletion
+                formData.set(formPrefix + 'DELETE', 'off');
+                
+                // Set cloth_type (ensure it's included)
+                if (clothTypeValue) {
+                    formData.set(formPrefix + 'cloth_type', clothTypeValue);
+                }
+                
+                // Set quantity (ensure it's at least 1)
+                const quantity = Math.max(1, parseInt($quantity.val()) || 1);
+                formData.set(formPrefix + 'quantity', quantity);
+                
+                // Set special instructions if any
+                if ($specialInstructions.length) {
+                    formData.set(formPrefix + 'special_instructions', $specialInstructions.val());
+                }
+                
+                // Set the form index for management form
+                formData.set(formPrefix + 'id', '');
+                formIndex++;
+            });
+            
+            // Update the formset management form data
+            formData.set('items-TOTAL_FORMS', formIndex);
+            formData.set('items-INITIAL_FORMS', '0');
+            formData.set('items-MIN_NUM_FORMS', '0');
+            formData.set('items-MAX_NUM_FORMS', '1000');
+            
+            debugLog('Valid items count:', validItemCount);
+            
+            if (validItemCount === 0) {
+                e.preventDefault();
+                $submitBtn.prop('disabled', false);
+                $submitBtn.html('Place Order <i class="fas fa-paper-plane ms-2"></i>');
+                alert('Please add at least one item to your order.');
+                return false;
+            }
+            
+            // Log the form data for debugging
+            debugLog('Form data being submitted:');
+            const formDataObj = {};
+            for (let [key, value] of formData.entries()) {
+                formDataObj[key] = value;
+            }
+            debugLog(JSON.stringify(formDataObj, null, 2));
+            
+            // Add CSRF token if not already present
+            if (!formData.has('csrfmiddlewaretoken')) {
+                const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                if (csrfToken) {
+                    formData.append('csrfmiddlewaretoken', csrfToken);
+                }
+            }
+            
+            // If we're already submitting, prevent duplicate submission
+            if ($(this).data('submitting')) {
+                return false;
+            }
+            
+            const form = this;
+            $(form).data('submitting', true);
+            
+            // Submit the form via AJAX
+            $.ajax({
+                url: $(form).attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    debugLog('Form submission successful', response);
+                    if (response.success && response.redirect) {
+                        window.location.href = response.redirect;
+                    } else if (response.success) {
+                        window.location.href = "{% url 'orders:list' %}";
+                    } else {
+                        // Handle validation errors
+                        let errorMessage = 'Please correct the following errors:\n\n';
+                        
+                        // Handle form errors
+                        if (response.form_errors) {
+                            for (const field in response.form_errors) {
+                                errorMessage += `${field}: ${response.form_errors[field].join(' ')}`;
+                            }
+                        }
+                        
+                        // Handle formset errors
+                        if (response.formset_errors) {
+                            for (const formIndex in response.formset_errors) {
+                                const formErrors = response.formset_errors[formIndex];
+                                for (const field in formErrors) {
+                                    errorMessage += `Item ${parseInt(formIndex) + 1} - ${field}: ${formErrors[field].join(' ')}`;
+                                }
+                            }
+                        }
+                        
+                        // Show error message
+                        alert(errorMessage);
+                        
+                        // Re-enable the submit button
+                        $submitBtn.prop('disabled', false);
+                        $submitBtn.html('Place Order <i class="fas fa-paper-plane ms-2"></i>');
+                        $(form).data('submitting', false);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    debugLog('Form submission error', {status: status, error: error, response: xhr.responseJSON});
+                    $submitBtn.prop('disabled', false);
+                    $submitBtn.html('Place Order <i class="fas fa-paper-plane ms-2"></i>');
+                    $(form).data('submitting', false);
+                    
+                    let errorMessage = 'An error occurred while submitting the form. Please try again.';
+                    
+                    if (xhr.responseJSON) {
+                        if (xhr.responseJSON.errors) {
+                            errorMessage = 'Please correct the following errors:\n';
+                            for (const field in xhr.responseJSON.errors) {
+                                errorMessage += `\n${field}: ${xhr.responseJSON.errors[field].join(', ')}`;
+                            }
+                        } else if (xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+            
+            // Prevent the default form submission
+            e.preventDefault();
+            return false;
+        });
+        
+        debugLog('Order form JavaScript initialized');
     });
 </script>
 {% endblock %}

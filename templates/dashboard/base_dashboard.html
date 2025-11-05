@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .dashboard-container {
+        padding: 20px;
+    }
+    .dashboard-header {
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    .dashboard-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+    }
+    .dashboard-card .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 15px 20px;
+        font-weight: 600;
+    }
+    .dashboard-card .card-body {
+        padding: 20px;
+    }
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .status-pending { background-color: #fff3cd; color: #856404; }
+    .status-confirmed { background-color: #cce5ff; color: #004085; }
+    .status-in-progress { background-color: #e2e3e5; color: #383d41; }
+    .status-ready { background-color: #d4edda; color: #155724; }
+    .status-picked-up { background-color: #d1ecf1; color: #0c5460; }
+    .status-delivered { background-color: #d4edda; color: #155724; }
+    .status-cancelled { background-color: #f8d7da; color: #721c24; }
+    .status-rejected { background-color: #f8d7da; color: #721c24; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid dashboard-container
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}" 
+                           href="{% url 'dashboard:home' %}">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    {% if user.is_customer %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'customer_dashboard' %} active{% endif %}" 
+                           href="{% url 'dashboard:customer_dashboard' %}">
+                            <i class="fas fa-shopping-bag me-2"></i>My Orders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'orders:create' %}">
+                            <i class="fas fa-plus-circle me-2"></i>New Order
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if user.is_press %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'press_dashboard' %} active{% endif %}" 
+                           href="{% url 'dashboard:press_dashboard' %}">
+                            <i class="fas fa-tshirt me-2"></i>Orders to Process
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if user.is_delivery %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'delivery_dashboard' %} active{% endif %}" 
+                           href="{% url 'dashboard:delivery_dashboard' %}">
+                            <i class="fas fa-truck me-2"></i>My Deliveries
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if user.is_admin %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'admin_dashboard' %} active{% endif %}" 
+                           href="{% url 'dashboard:admin_dashboard' %}">
+                            <i class="fas fa-chart-line me-2"></i>Admin Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">
+                            <i class="fas fa-cog me-2"></i>Admin Site
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <li class="nav-item mt-4">
+                        <a class="nav-link text-danger" href="{% url 'account_logout' %}">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            {% if messages %}
+            <div class="mt-3">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% block dashboard_content %}
+            {% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Enable Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+    
+    // Auto-hide alerts after 5 seconds
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 5000);
+</script>
+{% endblock %}

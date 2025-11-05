@@ -80,14 +80,22 @@ class ProfileView(LoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         """Add additional context data."""
+        from .models import UserProfile
+        
         context = super().get_context_data(**kwargs)
         user = self.request.user
         
+        # Get or create user profile
+        user_profile, created = UserProfile.objects.get_or_create(user=user)
+        
+        # Get recent orders using the correct related name
+        orders = user.customer_orders.all().order_by('-created_at')[:5] if hasattr(user, 'customer_orders') else []
+        
         context.update({
             'title': _('My Profile'),
-            'profile': user.userprofile,
-            'orders': user.orders.all()[:5],  # Recent orders
-            'unread_notifications': user.notifications.unread().count(),
+            'profile': user_profile,
+            'orders': orders,
+            'unread_notifications': user.notifications.unread().count() if hasattr(user, 'notifications') else 0,
         })
         return context
 

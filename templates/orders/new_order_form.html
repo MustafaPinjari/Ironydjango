@@ -1,0 +1,415 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .order-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        min-height: 100vh;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .address-input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+    .section-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 20px 0 15px 0;
+        color: #333;
+    }
+    .item-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #f9f9f9;
+        border: 2px solid #333;
+        border-radius: 8px;
+    }
+    .item-info h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .item-info p {
+        margin: 5px 0 0 0;
+        color: #666;
+        font-size: 14px;
+    }
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        border: 2px solid #333;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .quantity-btn {
+        background-color: #fff;
+        border: none;
+        padding: 8px 15px;
+        font-size: 18px;
+        cursor: pointer;
+        outline: none;
+    }
+    .quantity-display {
+        padding: 8px 15px;
+        font-size: 16px;
+        min-width: 30px;
+        text-align: center;
+        border-left: 2px solid #333;
+        border-right: 2px solid #333;
+    }
+    .total-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFD700;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin: 30px 0 20px 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .place-order-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .place-order-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="order-container">
+    <h2 style="text-align: center; margin-bottom: 20px;">Create New Order</h2>
+    
+    <form method="post" id="orderForm">
+        {% csrf_token %}
+        
+        <!-- Delivery Address Input -->
+        <input type="text" 
+               class="address-input" 
+               name="delivery_address" 
+               placeholder="Enter delivery address"
+               required>
+        
+        <!-- Items Selection -->
+        <div class="section-title">Select Items</div>
+        
+        <!-- Item 1: Shirt -->
+        <div class="item-card">
+            <div class="item-info">
+                <h4>SHIRT</h4>
+                <p>₹30 per item</p>
+            </div>
+            <div class="quantity-controls">
+                <button type="button" class="quantity-btn" onclick="updateQuantity('shirt', -1)">-</button>
+                <span id="shirt-quantity" class="quantity-display">0</span>
+                <button type="button" class="quantity-btn" onclick="updateQuantity('shirt', 1)">+</button>
+            </div>
+            <input type="hidden" name="shirt_quantity" id="shirt-hidden" value="0">
+        </div>
+        
+        <!-- Item 2: Pant -->
+        <div class="item-card">
+            <div class="item-info">
+                <h4>PANT</h4>
+                <p>₹40 per item</p>
+            </div>
+            <div class="quantity-controls">
+                <button type="button" class="quantity-btn" onclick="updateQuantity('pant', -1)">-</button>
+                <span id="pant-quantity" class="quantity-display">0</span>
+                <button type="button" class="quantity-btn" onclick="updateQuantity('pant', 1)">+</button>
+            </div>
+            <input type="hidden" name="pant_quantity" id="pant-hidden" value="0">
+        </div>
+        
+        <!-- Item 3: Dress -->
+        <div class="item-card">
+            <div class="item-info">
+                <h4>DRESS</h4>
+                <p>₹50 per item</p>
+            </div>
+            <div class="quantity-controls">
+                <button type="button" class="quantity-btn" onclick="updateQuantity('dress', -1)">-</button>
+                <span id="dress-quantity" class="quantity-display">0</span>
+                <button type="button" class="quantity-btn" onclick="updateQuantity('dress', 1)">+</button>
+            </div>
+            <input type="hidden" name="dress_quantity" id="dress-hidden" value="0">
+        </div>
+        
+        <!-- Item 4: Bedsheet -->
+        <div class="item-card">
+            <div class="item-info">
+                <h4>BEDSHEET</h4>
+                <p>₹60 per item</p>
+            </div>
+            <div class="quantity-controls">
+                <button type="button" class="quantity-btn" onclick="updateQuantity('bedsheet', -1)">-</button>
+                <span id="bedsheet-quantity" class="quantity-display">0</span>
+                <button type="button" class="quantity-btn" onclick="updateQuantity('bedsheet', 1)">+</button>
+            </div>
+            <input type="hidden" name="bedsheet_quantity" id="bedsheet-hidden" value="0">
+        </div>
+        
+        <!-- Item 5: Curtain -->
+        <div class="item-card">
+            <div class="item-info">
+                <h4>CURTAIN</h4>
+                <p>₹70 per item</p>
+            </div>
+            <div class="quantity-controls">
+                <button type="button" class="quantity-btn" onclick="updateQuantity('curtain', -1)">-</button>
+                <span id="curtain-quantity" class="quantity-display">0</span>
+                <button type="button" class="quantity-btn" onclick="updateQuantity('curtain', 1)">+</button>
+            </div>
+            <input type="hidden" name="curtain_quantity" id="curtain-hidden" value="0">
+        </div>
+        
+        <!-- Total and Place Order -->
+        <div class="total-bar">
+            <span>TOTAL</span>
+            <span id="total-amount">₹0</span>
+        </div>
+        
+        <div id="order-summary" style="display: none; margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <h4>Order Summary</h4>
+            <div id="summary-items"></div>
+            <div class="total-bar">
+                <span>TOTAL</span>
+                <span id="summary-total">₹0</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <button type="button" class="btn btn-secondary" onclick="backToEdit()">Back to Edit</button>
+                <button type="submit" class="btn btn-primary" style="float: right;">Confirm & Place Order</button>
+            </div>
+        </div>
+        
+        <button type="button" id="review-order-btn" class="place-order-btn" onclick="showOrderSummary()">REVIEW ORDER</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Debugging function
+    function debugLog(message, data = '') {
+        console.log(`[DEBUG] ${message}`, data);
+    }
+
+    // Prices for each item type
+    const prices = {
+        'shirt': 30,
+        'pant': 40,
+        'dress': 50,
+        'bedsheet': 60,
+        'curtain': 70
+    };
+    
+    // Update quantity for an item
+    function updateQuantity(item, change) {
+        const quantityElement = document.getElementById(`${item}-quantity`);
+        const hiddenInput = document.getElementById(`${item}-hidden`);
+        let quantity = parseInt(quantityElement.textContent) + change;
+        
+        // Ensure quantity doesn't go below 0
+        quantity = Math.max(0, quantity);
+        
+        // Update the display and hidden input
+        quantityElement.textContent = quantity;
+        hiddenInput.value = quantity;
+        
+        // Update the total
+        updateTotal();
+    }
+    
+    // Calculate and update the total amount
+    function updateTotal() {
+        let total = 0;
+        
+        // Calculate total for each item
+        for (const item in prices) {
+            const quantity = parseInt(document.getElementById(`${item}-quantity`).textContent);
+            total += quantity * prices[item];
+        }
+        
+        // Update the total display
+        document.getElementById('total-amount').textContent = `₹${total}`;
+    }
+    
+    // Toggle between edit and review modes
+    function showOrderSummary() {
+        debugLog('showOrderSummary called');
+        
+        try {
+            const totalElement = document.getElementById('total-amount');
+            if (!totalElement) {
+                throw new Error('Total amount element not found');
+            }
+            
+            const total = parseInt(totalElement.textContent.replace('₹', '').replace(/,/g, '')) || 0;
+            debugLog('Current total:', total);
+            
+            if (total <= 0) {
+                alert('Please select at least one item to place an order.');
+                return;
+            }
+            
+            // Update summary items
+            const items = [];
+            const itemNames = ['shirt', 'pant', 'dress', 'bedsheet', 'curtain'];
+            
+            itemNames.forEach(item => {
+                const quantityElement = document.getElementById(`${item}-quantity`);
+                if (!quantityElement) {
+                    debugLog(`Quantity element not found for: ${item}`);
+                    return;
+                }
+                
+                const quantity = parseInt(quantityElement.textContent) || 0;
+                if (quantity > 0) {
+                    items.push({
+                        name: item.toUpperCase(),
+                        quantity: quantity,
+                        price: prices[item]
+                    });
+                }
+            });
+            
+            const summaryItems = document.getElementById('summary-items');
+            if (!summaryItems) {
+                throw new Error('Summary items container not found');
+            }
+            
+            if (items.length === 0) {
+                alert('Please select at least one item to place an order.');
+                return;
+            }
+            
+            summaryItems.innerHTML = items.map(item => 
+                `<div class="summary-item">
+                    <span>${item.name} (${item.quantity} x ₹${item.price})</span>
+                    <span>₹${item.quantity * item.price}</span>
+                </div>`
+            ).join('');
+            
+            // Update summary total
+            const summaryTotal = document.getElementById('summary-total');
+            if (summaryTotal) {
+                summaryTotal.textContent = `₹${total}`;
+            }
+            
+            // Show summary and hide review button
+            const orderSummary = document.getElementById('order-summary');
+            const reviewButton = document.getElementById('review-order-btn');
+            
+            if (orderSummary && reviewButton) {
+                orderSummary.style.display = 'block';
+                reviewButton.style.display = 'none';
+                
+                // Disable form elements
+                const formElements = document.querySelectorAll('.item-card, .address-input, .section-title, .quantity-btn');
+                formElements.forEach(el => {
+                    if (el) {
+                        el.style.opacity = '0.5';
+                        el.style.pointerEvents = 'none';
+                    }
+                });
+                
+                // Scroll to summary
+                orderSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+        } catch (error) {
+            console.error('Error in showOrderSummary:', error);
+            alert('An error occurred while processing your order. Please try again.');
+        }
+    }
+    
+    function backToEdit() {
+        try {
+            const orderSummary = document.getElementById('order-summary');
+            const reviewButton = document.getElementById('review-order-btn');
+            
+            if (orderSummary && reviewButton) {
+                orderSummary.style.display = 'none';
+                reviewButton.style.display = 'block';
+                
+                // Re-enable form elements
+                const formElements = document.querySelectorAll('.item-card, .address-input, .section-title, .quantity-btn');
+                formElements.forEach(el => {
+                    if (el) {
+                        el.style.opacity = '1';
+                        el.style.pointerEvents = 'auto';
+                    }
+                });
+                
+                // Scroll to top of form
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        } catch (error) {
+            console.error('Error in backToEdit:', error);
+        }
+    }
+    
+    // Handle form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderForm = document.getElementById('orderForm');
+        if (orderForm) {
+            orderForm.addEventListener('submit', function(e) {
+                const totalElement = document.getElementById('total-amount');
+                const total = totalElement ? parseInt(totalElement.textContent.replace('₹', '').replace(/,/g, '')) : 0;
+                
+                if (total <= 0) {
+                    e.preventDefault();
+                    alert('Please select at least one item to place an order.');
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Placing Order...';
+                }
+            });
+            
+            // Initialize review button
+            const reviewButton = document.getElementById('review-order-btn');
+            if (reviewButton) {
+                reviewButton.addEventListener('click', showOrderSummary);
+                debugLog('Review button initialized');
+            } else {
+                console.error('Review button not found');
+            }
+        } else {
+            console.error('Order form not found');
+        }
+        
+        // Debug: Log when the script is loaded
+        debugLog('Order form script loaded');
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irony Laundry - User Accounts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .blur-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .user-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #6e8efb;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-card.admin {
+            border-left-color: #ff6b6b;
+        }
+        
+        .user-card.press {
+            border-left-color: #4ecdc4;
+        }
+        
+        .user-card.delivery {
+            border-left-color: #45b7d1;
+        }
+        
+        .user-card.customer {
+            border-left-color: #96e6a1;
+        }
+        
+        .role-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .admin .role-badge {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .press .role-badge {
+            background-color: #4ecdc4;
+            color: white;
+        }
+        
+        .delivery .role-badge {
+            background-color: #45b7d1;
+            color: white;
+        }
+        
+        .customer .role-badge {
+            background-color: #96e6a1;
+            color: #1e3a1e;
+        }
+        
+        .user-info {
+            margin-bottom: 0.5rem;
+        }
+        
+        .user-info i {
+            width: 24px;
+            text-align: center;
+            margin-right: 8px;
+            color: #6c757d;
+        }
+        
+        .section-title {
+            color: white;
+            margin: 2rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .password {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="blur-container">
+            <div class="header">
+                <h1><i class="bi-shop"></i> Irony Laundry</h1>
+                <p class="lead">User Accounts & Access Information</p>
+            </div>
+            
+            <h2 class="section-title">Admin Users</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="user-card admin">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Super Admin</h4>
+                            <span class="role-badge">Admin</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> admin@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">admin123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567890
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="user-card admin">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Secondary Admin</h4>
+                            <span class="role-badge">Admin</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> admin2@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">admin123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567897
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Press/Staff Users</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="user-card press">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Press Staff 1</h4>
+                            <span class="role-badge">Press</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> press@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">press123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567891
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="user-card press">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Press Staff 2</h4>
+                            <span class="role-badge">Press</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> press2@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">press123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567895
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Delivery Partners</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="user-card delivery">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Delivery Partner 1</h4>
+                            <span class="role-badge">Delivery</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> delivery@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">delivery123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567892
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="user-card delivery">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Delivery Partner 2</h4>
+                            <span class="role-badge">Delivery</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> delivery2@irony.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">delivery123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567896
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Customer Users</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="user-card customer">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Customer 1</h4>
+                            <span class="role-badge">Customer</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> customer1@example.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">customer123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567893
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="user-card customer">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Customer 2</h4>
+                            <span class="role-badge">Customer</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-envelope"></i> customer2@example.com
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-key"></i> <span class="password">customer123</span>
+                        </div>
+                        <div class="user-info">
+                            <i class="bi-telephone"></i> +911234567894
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <div class="alert alert-info">
+                    <i class="bi-info-circle"></i> This is a styled version of the README file. You can access it directly in your browser.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

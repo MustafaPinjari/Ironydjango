@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block title %}{% trans 'My Profile' %} | {{ block.super }}{% endblock %}
 
@@ -34,7 +35,7 @@
                     <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">
                         <i class="bi bi-pencil-square"></i> {% trans 'Edit Profile' %}
                     </a>
-                    <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-secondary">
+                    <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary">
                         <i class="bi bi-key"></i> {% trans 'Change Password' %}
                     </a>
                 </div>
