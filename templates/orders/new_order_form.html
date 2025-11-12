@@ -8,26 +8,30 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .order-container {
-        max-width: 600px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 20px;
         background-color: #fff;
         min-height: 100vh;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .address-input {
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-control {
         width: 100%;
-        padding: 15px;
-        margin-bottom: 20px;
-        border: 2px solid #ddd;
-        border-radius: 8px;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
         font-size: 16px;
     }
-    .section-title {
-        font-weight: bold;
-        font-size: 18px;
-        margin: 20px 0 15px 0;
-        color: #333;
+    .form-select {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: #fff;
     }
     .item-card {
         display: flex;
@@ -36,67 +40,74 @@
         padding: 15px;
         margin-bottom: 15px;
         background-color: #f9f9f9;
-        border: 2px solid #333;
-        border-radius: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
     }
-    .item-info h4 {
-        margin: 0;
-        font-size: 18px;
+    .item-details {
+        flex: 1;
+    }
+    .item-name {
         font-weight: bold;
+        margin-bottom: 5px;
     }
-    .item-info p {
-        margin: 5px 0 0 0;
+    .item-price {
         color: #666;
         font-size: 14px;
     }
     .quantity-controls {
         display: flex;
         align-items: center;
-        border: 2px solid #333;
-        border-radius: 6px;
-        overflow: hidden;
+        gap: 10px;
     }
     .quantity-btn {
-        background-color: #fff;
-        border: none;
-        padding: 8px 15px;
-        font-size: 18px;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-radius: 4px;
+        font-size: 16px;
         cursor: pointer;
-        outline: none;
     }
     .quantity-display {
-        padding: 8px 15px;
-        font-size: 16px;
-        min-width: 30px;
+        width: 40px;
         text-align: center;
-        border-left: 2px solid #333;
-        border-right: 2px solid #333;
     }
     .total-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #FFD700;
+        background-color: #f8f9fa;
         padding: 15px 20px;
-        border-radius: 8px;
+        border-radius: 4px;
         margin: 30px 0 20px 0;
         font-weight: bold;
         font-size: 18px;
     }
-    .place-order-btn {
-        width: 100%;
-        padding: 15px;
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    .btn-primary {
         background-color: #4CAF50;
         color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s;
     }
-    .place-order-btn:hover {
+    .btn-primary:hover {
         background-color: #45a049;
+    }
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
+    .hidden {
+        display: none;
     }
 </style>
 {% endblock %}
@@ -105,59 +116,84 @@
 <div class="order-container">
     <h2 style="text-align: center; margin-bottom: 20px;">Create New Order</h2>
     
-    <form method="post" id="orderForm">
+    <form method="post" id="orderForm" action="{% url 'orders:create' %}" novalidate>
         {% csrf_token %}
         
-        <!-- Delivery Address Input -->
-        <input type="text" 
-               class="address-input" 
-               name="delivery_address" 
-               placeholder="Enter delivery address"
-               required>
-        
-        <!-- Items Selection -->
-        <div class="section-title">Select Items</div>
-        
-        <!-- Item 1: Shirt -->
-        <div class="item-card">
-            <div class="item-info">
-                <h4>SHIRT</h4>
-                <p>₹30 per item</p>
-            </div>
-            <div class="quantity-controls">
-                <button type="button" class="quantity-btn" onclick="updateQuantity('shirt', -1)">-</button>
-                <span id="shirt-quantity" class="quantity-display">0</span>
-                <button type="button" class="quantity-btn" onclick="updateQuantity('shirt', 1)">+</button>
-            </div>
-            <input type="hidden" name="shirt_quantity" id="shirt-hidden" value="0">
+        <!-- Main Form Fields -->
+        <div class="form-group">
+            <label for="{{ form.delivery_address.id_for_label }}">Delivery Address</label>
+            {{ form.delivery_address }}
+            {% if form.delivery_address.errors %}
+                <div class="text-danger">{{ form.delivery_address.errors }}</div>
+            {% endif %}
         </div>
         
-        <!-- Item 2: Pant -->
-        <div class="item-card">
-            <div class="item-info">
-                <h4>PANT</h4>
-                <p>₹40 per item</p>
-            </div>
-            <div class="quantity-controls">
-                <button type="button" class="quantity-btn" onclick="updateQuantity('pant', -1)">-</button>
-                <span id="pant-quantity" class="quantity-display">0</span>
-                <button type="button" class="quantity-btn" onclick="updateQuantity('pant', 1)">+</button>
-            </div>
-            <input type="hidden" name="pant_quantity" id="pant-hidden" value="0">
+        <div class="form-group">
+            <label for="{{ form.special_instructions.id_for_label }}">Special Instructions (Optional)</label>
+            {{ form.special_instructions }}
         </div>
         
-        <!-- Item 3: Dress -->
-        <div class="item-card">
-            <div class="item-info">
-                <h4>DRESS</h4>
-                <p>₹50 per item</p>
+        <!-- Items Section -->
+        <div class="form-group">
+            <h4>Select Items</h4>
+            
+            {{ formset.management_form }}
+            
+            <div id="items-container">
+                {% for item_form in formset %}
+                <div class="item-card" id="item-{{ forloop.counter0 }}">
+                    <div class="item-details">
+                        <div class="form-group">
+                            {{ item_form.cloth_type.label_tag }}
+                            {{ item_form.cloth_type }}
+                            {% if item_form.cloth_type.errors %}
+                                <div class="text-danger">{{ item_form.cloth_type.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ item_form.quantity.label_tag }}
+                            <div class="quantity-controls">
+                                <button type="button" class="quantity-btn" onclick="updateQuantity({{ forloop.counter0 }}, -1)">-</button>
+                                {{ item_form.quantity }}
+                                <button type="button" class="quantity-btn" onclick="updateQuantity({{ forloop.counter0 }}, 1)">+</button>
+                            </div>
+                            {% if item_form.quantity.errors %}
+                                <div class="text-danger">{{ item_form.quantity.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ item_form.special_instructions.label_tag }}
+                            {{ item_form.special_instructions }}
+                        </div>
+                        
+                        {% if formset.can_delete %}
+                            <div class="form-group">
+                                {{ item_form.DELETE }} {{ item_form.DELETE.label_tag }}
+                            </div>
+                        {% endif %}
+                        
+                        {% for hidden in item_form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="quantity-controls">
-                <button type="button" class="quantity-btn" onclick="updateQuantity('dress', -1)">-</button>
-                <span id="dress-quantity" class="quantity-display">0</span>
-                <button type="button" class="quantity-btn" onclick="updateQuantity('dress', 1)">+</button>
-            </div>
-            <input type="hidden" name="dress_quantity" id="dress-hidden" value="0">
+            
+            <button type="button" class="btn btn-secondary" id="add-item-btn">Add Another Item</button>
+        </div>
+        
+        <!-- Total -->
+        <div class="total-bar">
+            <span>Total:</span>
+            <span id="total-amount">₹0.00</span>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
         </div>
         
         <!-- Item 4: Bedsheet -->
@@ -219,45 +255,93 @@
         console.log(`[DEBUG] ${message}`, data);
     }
 
-    // Prices for each item type
+    // Prices for each item types (you can fetch this from the server if needed)
     const prices = {
-        'shirt': 30,
-        'pant': 40,
-        'dress': 50,
-        'bedsheet': 60,
-        'curtain': 70
+        '1': 30,  // Shirt
+        '2': 40,  // Pant
+        '3': 50,  // Dress
+        '4': 60,  // Bedsheet
+        '5': 70   // Curtain
     };
     
     // Update quantity for an item
-    function updateQuantity(item, change) {
-        const quantityElement = document.getElementById(`${item}-quantity`);
-        const hiddenInput = document.getElementById(`${item}-hidden`);
-        let quantity = parseInt(quantityElement.textContent) + change;
+    function updateQuantity(itemIndex, change) {
+        const quantityInput = document.getElementById(`id_items-${itemIndex}-quantity`);
+        let quantity = parseInt(quantityInput.value) || 0;
+        quantity += change;
         
-        // Ensure quantity doesn't go below 0
-        quantity = Math.max(0, quantity);
+        if (quantity < 0) quantity = 0;
         
-        // Update the display and hidden input
-        quantityElement.textContent = quantity;
-        hiddenInput.value = quantity;
+        quantityInput.value = quantity;
         
-        // Update the total
+        // Update the DELETE field
+        const deleteInput = document.getElementById(`id_items-${itemIndex}-DELETE`);
+        if (deleteInput) {
+            deleteInput.value = quantity > 0 ? '' : 'on';
+        }
+        
         updateTotal();
     }
     
     // Calculate and update the total amount
     function updateTotal() {
         let total = 0;
+        let hasItems = false;
         
-        // Calculate total for each item
-        for (const item in prices) {
-            const quantity = parseInt(document.getElementById(`${item}-quantity`).textContent);
-            total += quantity * prices[item];
-        }
+        // Get all quantity inputs
+        const quantityInputs = document.querySelectorAll('input[id$="-quantity"]');
+        
+        quantityInputs.forEach(input => {
+            const itemId = input.id.match(/id_items-(\d+)-quantity/)[1];
+            const clothTypeSelect = document.getElementById(`id_items-${itemId}-cloth_type`);
+            const quantity = parseInt(input.value) || 0;
+            
+            if (clothTypeSelect && quantity > 0) {
+                const price = prices[clothTypeSelect.value] || 0;
+                total += quantity * price;
+                hasItems = true;
+            }
+        });
         
         // Update the total display
-        document.getElementById('total-amount').textContent = `₹${total}`;
+        const totalElement = document.getElementById('total-amount');
+        if (totalElement) {
+            totalElement.textContent = `₹${total.toLocaleString()}`;
+        }
+        
+        // Enable/disable submit button based on whether there are items
+        const submitBtn = document.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = !hasItems;
+        }
     }
+    
+    // Initialize the form
+    document.addEventListener('DOMContentLoaded', function() {
+        // Update total when page loads
+        updateTotal();
+        
+        // Add event listeners for cloth type changes
+        document.querySelectorAll('select[id$="-cloth_type"]').forEach(select => {
+            select.addEventListener('change', updateTotal);
+        });
+        
+        // Add event listener for quantity inputs
+        document.querySelectorAll('input[id$="-quantity"]').forEach(input => {
+            input.addEventListener('change', updateTotal);
+        });
+        
+        // Add item button
+        const addItemBtn = document.getElementById('add-item-btn');
+        if (addItemBtn) {
+            addItemBtn.addEventListener('click', function() {
+                // This would require JavaScript to clone the formset form and update indices
+                // For now, we'll just submit the form and let the server handle validation
+                // In a production app, you would implement dynamic formset addition
+                alert('Please submit the current items before adding more.');
+            });
+        }
+    });
     
     // Toggle between edit and review modes
     function showOrderSummary() {
@@ -378,14 +462,24 @@
     document.addEventListener('DOMContentLoaded', function() {
         const orderForm = document.getElementById('orderForm');
         if (orderForm) {
+            // Set the form method to POST
+            orderForm.method = 'post';
+            
+            // Initialize formset management form
+            const totalForms = document.getElementById('id_items-TOTAL_FORMS');
+            if (totalForms) {
+                totalForms.value = '3'; // Update this to match the number of items
+            }
+            
             orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
                 const totalElement = document.getElementById('total-amount');
                 const total = totalElement ? parseInt(totalElement.textContent.replace('₹', '').replace(/,/g, '')) : 0;
                 
                 if (total <= 0) {
-                    e.preventDefault();
                     alert('Please select at least one item to place an order.');
-                    return;
+                    return false;
                 }
                 
                 // Show loading state
@@ -394,6 +488,9 @@
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Placing Order...';
                 }
+                
+                // Submit the form normally
+                this.submit();
             });
             
             // Initialize review button
@@ -404,12 +501,38 @@
             } else {
                 console.error('Review button not found');
             }
+            
+            // Add CSRF token to all AJAX requests
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            
+            const csrftoken = getCookie('csrftoken');
+            
+            // Set up AJAX to include CSRF token
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+            
+            debugLog('Order form script loaded and initialized');
         } else {
             console.error('Order form not found');
         }
-        
-        // Debug: Log when the script is loaded
-        debugLog('Order form script loaded');
     });
 </script>
 {% endblock %}

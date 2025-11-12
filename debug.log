@@ -1,249 +1,124 @@
-INFO 2025-11-05 09:24:22,739 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:24:28,220 basehttp "GET / HTTP/1.1" 200 46522
-WARNING 2025-11-05 09:24:28,396 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:24:32,119 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-05 09:24:32,148 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-05 09:24:32,231 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22795
-WARNING 2025-11-05 09:24:32,317 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:24:34,616 basehttp "GET /orders/create/ HTTP/1.1" 200 73456
-WARNING 2025-11-05 09:24:34,653 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-ERROR 2025-11-05 09:24:45,525 log Internal Server Error: /orders/create/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
-    return super().post(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
-    return self.form_valid(form)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
-    is_valid, errors = self.validate_forms(form, formset)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
-    if not formset.is_valid():
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
-    self.errors
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
-    form_errors = form.errors
-                  ^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
-    self._post_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
-    self.instance.full_clean(exclude=exclude, validate_unique=False)
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
-    self.clean()
-  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 182, in clean
-    if not self.pk and self.cloth_type and not self.cloth_type.is_active:
-                       ^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 263, in __get__
-    raise self.RelatedObjectDoesNotExist(
-orders.models.OrderItem.cloth_type.RelatedObjectDoesNotExist: OrderItem has no cloth_type.. Did you mean: 'cloth_type_id'?
-ERROR 2025-11-05 09:24:45,601 basehttp "POST /orders/create/ HTTP/1.1" 500 167167
-INFO 2025-11-05 09:25:14,366 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
-INFO 2025-11-05 09:25:14,953 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-05 09:25:55,234 log Internal Server Error: /orders/create/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
-    return super().post(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
-    return self.form_valid(form)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
-    is_valid, errors = self.validate_forms(form, formset)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
-    if not formset.is_valid():
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
-    self.errors
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
-    form_errors = form.errors
-                  ^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
-    self._post_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
-    self.instance.full_clean(exclude=exclude, validate_unique=False)
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
-    self.clean()
-  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 183, in clean
-    if not self.cloth_type:
-           ^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 263, in __get__
-    raise self.RelatedObjectDoesNotExist(
-orders.models.OrderItem.cloth_type.RelatedObjectDoesNotExist: OrderItem has no cloth_type.. Did you mean: 'cloth_type_id'?
-ERROR 2025-11-05 09:25:55,331 basehttp "POST /orders/create/ HTTP/1.1" 500 167208
-INFO 2025-11-05 09:25:55,383 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-05 09:25:55,397 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:25:55,473 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:25:55,511 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:25:55,659 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:25:55,659 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:26:17,339 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
-INFO 2025-11-05 09:26:18,010 autoreload Watching for file changes with StatReloader
-ERROR 2025-11-05 09:26:32,907 log Internal Server Error: /orders/create/
-Traceback (most recent call last):
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
-    return self.dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
-    return super().dispatch(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
-    return handler(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
-    return super().post(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
-    return self.form_valid(form)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 130, in form_valid
-    is_valid, errors = self.validate_forms(form, formset)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/orders/views.py", line 76, in validate_forms
-    if not formset.is_valid():
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 384, in is_valid
-    self.errors
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 366, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/formsets.py", line 429, in full_clean
-    form_errors = form.errors
-                  ^^^^^^^^^^^
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 192, in errors
-    self.full_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/forms.py", line 329, in full_clean
-    self._post_clean()
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/forms/models.py", line 495, in _post_clean
-    self.instance.full_clean(exclude=exclude, validate_unique=False)
-  File "/home/mustafa/Desktop/zealProject/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1519, in full_clean
-    self.clean()
-  File "/home/mustafa/Desktop/zealProject/orders/models.py", line 184, in clean
-    raise ValidationError({
-          ^^^^^^^^^^^^^^^
-NameError: name 'ValidationError' is not defined
-ERROR 2025-11-05 09:26:32,987 basehttp "POST /orders/create/ HTTP/1.1" 500 162428
-INFO 2025-11-05 09:26:33,046 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-05 09:26:33,047 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:26:33,194 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:26:33,194 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:26:33,307 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:26:33,308 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:26:54,888 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:26:57,510 autoreload /home/mustafa/Desktop/zealProject/orders/models.py changed, reloading.
-INFO 2025-11-05 09:26:58,160 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:27:26,748 basehttp "POST /orders/create/ HTTP/1.1" 200 76954
-WARNING 2025-11-05 09:27:26,838 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:27:26,840 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-05 09:27:26,840 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:27:26,843 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-05 09:27:27,024 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:27:27,033 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:27:27,228 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:27:27,229 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:27:55,513 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:27:57,955 basehttp "POST /orders/create/ HTTP/1.1" 200 76954
-INFO 2025-11-05 09:27:58,023 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:27:58,025 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-05 09:27:58,026 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-WARNING 2025-11-05 09:27:58,026 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:27:58,122 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:27:58,129 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:27:58,283 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:27:58,283 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:28:14,381 basehttp "POST /orders/create/ HTTP/1.1" 200 80359
-WARNING 2025-11-05 09:28:14,421 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:30:29,688 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:30:33,239 basehttp "POST /orders/create/ HTTP/1.1" 200 80225
-INFO 2025-11-05 09:30:33,300 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-WARNING 2025-11-05 09:30:33,302 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:30:33,303 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-05 09:30:33,304 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:30:33,433 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:30:33,441 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:30:33,578 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:30:33,578 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:30:42,908 basehttp "POST /orders/create/ HTTP/1.1" 200 83606
-WARNING 2025-11-05 09:30:42,949 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:32:07,095 autoreload /home/mustafa/Desktop/zealProject/orders/forms.py changed, reloading.
-INFO 2025-11-05 09:32:07,782 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:32:37,408 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
-INFO 2025-11-05 09:32:38,108 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:33:34,878 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:34:09,346 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
-INFO 2025-11-05 09:34:09,995 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:34:35,873 basehttp "POST /orders/create/ HTTP/1.1" 200 87250
-INFO 2025-11-05 09:34:35,953 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-WARNING 2025-11-05 09:34:35,954 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:34:35,954 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-05 09:34:35,954 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:34:36,177 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:34:36,201 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:34:36,436 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:34:36,436 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:34:44,817 basehttp "POST /orders/create/ HTTP/1.1" 200 90674
-WARNING 2025-11-05 09:34:44,857 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:35:51,673 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:36:02,653 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
-INFO 2025-11-05 09:36:03,294 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:36:46,166 basehttp "POST /orders/create/ HTTP/1.1" 200 92231
-WARNING 2025-11-05 09:36:46,235 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:36:46,236 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-05 09:36:46,237 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-05 09:36:46,238 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-05 09:36:46,359 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-05 09:36:46,365 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-05 09:36:46,514 log Not Found: /favicon.ico
-WARNING 2025-11-05 09:36:46,514 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
-INFO 2025-11-05 09:37:04,543 basehttp "POST /orders/create/ HTTP/1.1" 200 95656
-WARNING 2025-11-05 09:37:04,584 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:39:03,739 autoreload Watching for file changes with StatReloader
-INFO 2025-11-05 09:39:11,561 basehttp "POST /orders/create/ HTTP/1.1" 200 96594
-WARNING 2025-11-05 09:39:11,629 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
-INFO 2025-11-05 09:39:23,146 basehttp "POST /orders/create/ HTTP/1.1" 200 100020
-WARNING 2025-11-05 09:39:23,180 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:45:48,337 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 09:45:51,002 basehttp "GET / HTTP/1.1" 200 46521
+INFO 2025-11-10 09:45:51,064 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
+INFO 2025-11-10 09:45:51,064 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-10 09:45:51,064 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+INFO 2025-11-10 09:45:51,135 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+WARNING 2025-11-10 09:45:51,137 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:45:51,268 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+INFO 2025-11-10 09:45:51,281 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+WARNING 2025-11-10 09:45:51,462 log Not Found: /favicon.ico
+WARNING 2025-11-10 09:45:51,462 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-10 09:46:53,941 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:46:53,972 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:46:54,036 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22795
+WARNING 2025-11-10 09:46:54,122 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:47:04,081 basehttp "GET /orders/create/ HTTP/1.1" 200 72548
+WARNING 2025-11-10 09:47:04,110 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:48:19,935 basehttp "POST /orders/create/ HTTP/1.1" 200 79472
+WARNING 2025-11-10 09:48:19,971 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:48:25,009 basehttp "GET /orders/ HTTP/1.1" 200 19607
+WARNING 2025-11-10 09:48:25,040 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:48:32,358 basehttp "GET /orders/create/ HTTP/1.1" 200 72548
+WARNING 2025-11-10 09:48:32,386 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:48:39,546 basehttp "GET /orders/ HTTP/1.1" 200 19607
+WARNING 2025-11-10 09:48:39,571 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:49:06,375 basehttp "GET /profile/profile/ HTTP/1.1" 200 37373
+INFO 2025-11-10 09:49:06,397 basehttp "GET /static/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-10 09:49:13,283 basehttp "GET /accounts/logout/ HTTP/1.1" 200 22059
+INFO 2025-11-10 09:49:20,329 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:49:20,350 basehttp "GET /accounts/login/ HTTP/1.1" 200 20201
+WARNING 2025-11-10 09:49:20,412 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:49:29,458 basehttp "GET /accounts/signup/ HTTP/1.1" 200 19517
+WARNING 2025-11-10 09:49:29,485 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:49:58,768 basehttp "POST /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:49:58,783 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:49:58,843 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 24197
+WARNING 2025-11-10 09:49:58,907 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:50:07,857 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:50:07,877 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22803
+WARNING 2025-11-10 09:50:07,937 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:50:16,526 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:50:20,246 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:50:40,059 basehttp "GET /orders/ HTTP/1.1" 200 19615
+INFO 2025-11-10 09:50:51,552 basehttp "GET /accounts/logout/ HTTP/1.1" 200 22073
+INFO 2025-11-10 09:50:53,484 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:50:53,500 basehttp "GET /accounts/login/ HTTP/1.1" 200 20197
+WARNING 2025-11-10 09:50:53,566 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:51:04,139 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:51:04,163 basehttp "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 20014
+WARNING 2025-11-10 09:51:04,226 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:51:06,076 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:51:06,090 basehttp "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 20013
+WARNING 2025-11-10 09:51:06,150 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:51:23,505 basehttp "GET / HTTP/1.1" 200 45391
+WARNING 2025-11-10 09:51:23,540 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:53:13,734 basehttp "GET /accounts/signup/ HTTP/1.1" 200 19515
+WARNING 2025-11-10 09:53:13,778 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-10 09:55:04,340 basehttp "GET / HTTP/1.1" 200 45393
+WARNING 2025-11-10 09:55:04,478 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+WARNING 2025-11-10 09:55:04,781 log Not Found: /favicon.ico
+WARNING 2025-11-10 09:55:04,782 basehttp "GET /favicon.ico HTTP/1.1" 404 17375
+INFO 2025-11-10 09:55:10,343 basehttp "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-11-10 09:55:10,368 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 18342
+INFO 2025-11-10 09:55:10,437 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 21544
+INFO 2025-11-10 09:55:10,443 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2682
+INFO 2025-11-10 09:55:10,444 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-11-10 09:55:10,447 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 17905
+INFO 2025-11-10 09:55:10,448 basehttp "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-11-10 09:55:10,462 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-11-10 09:55:10,462 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-11-10 09:55:20,365 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 18525
+INFO 2025-11-10 09:55:30,984 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 18525
+INFO 2025-11-12 13:15:39,015 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 13:15:47,922 basehttp "GET / HTTP/1.1" 200 45393
+INFO 2025-11-12 13:15:48,025 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-12 13:15:48,041 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+INFO 2025-11-12 13:15:48,049 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
+INFO 2025-11-12 13:15:48,162 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+WARNING 2025-11-12 13:15:48,164 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:15:48,438 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+INFO 2025-11-12 13:15:48,458 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+WARNING 2025-11-12 13:15:48,696 log Not Found: /favicon.ico
+WARNING 2025-11-12 13:15:48,696 basehttp "GET /favicon.ico HTTP/1.1" 404 17375
+INFO 2025-11-12 13:15:54,162 basehttp "GET /accounts/login/ HTTP/1.1" 200 19872
+WARNING 2025-11-12 13:15:54,202 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:16:02,867 basehttp "POST /accounts/login/ HTTP/1.1" 200 20136
+WARNING 2025-11-12 13:16:02,906 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:16:20,977 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-12 13:16:21,006 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-12 13:16:21,091 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 23521
+WARNING 2025-11-12 13:16:21,162 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:16:24,439 basehttp "GET /orders/create/ HTTP/1.1" 200 72548
+WARNING 2025-11-12 13:16:24,482 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:16:39,663 basehttp "POST /orders/create/ HTTP/1.1" 200 76037
+WARNING 2025-11-12 13:16:39,694 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:17:53,092 basehttp "POST /orders/create/ HTTP/1.1" 200 79467
+WARNING 2025-11-12 13:17:53,147 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:18:52,482 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 13:18:55,757 basehttp "GET / HTTP/1.1" 200 46522
+WARNING 2025-11-12 13:18:55,940 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:19:10,724 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-11-12 13:19:10,761 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-12 13:19:10,846 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22795
+WARNING 2025-11-12 13:19:10,922 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:19:13,201 basehttp "GET /orders/create/ HTTP/1.1" 200 72548
+WARNING 2025-11-12 13:19:13,242 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:19:33,549 basehttp "POST /orders/create/ HTTP/1.1" 200 76037
+WARNING 2025-11-12 13:19:33,582 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:20:33,813 basehttp "POST /orders/create/ HTTP/1.1" 200 79463
+WARNING 2025-11-12 13:20:33,889 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:21:45,970 autoreload /home/mustafa/Desktop/zealProject/orders/views.py changed, reloading.
+INFO 2025-11-12 13:21:46,674 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 13:23:20,372 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 13:23:23,656 basehttp "POST /orders/create/ HTTP/1.1" 200 79466
+WARNING 2025-11-12 13:23:23,736 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-12 13:23:23,738 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-12 13:23:23,739 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-12 13:23:23,739 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-12 13:23:23,899 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-12 13:23:23,900 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-12 13:23:24,123 log Not Found: /favicon.ico
+WARNING 2025-11-12 13:23:24,124 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
+INFO 2025-11-12 13:23:35,333 basehttp "POST /orders/create/ HTTP/1.1" 200 82889
+WARNING 2025-11-12 13:23:35,373 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896

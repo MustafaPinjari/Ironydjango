@@ -140,7 +140,6 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """Handle valid form submission."""
-        is_ajax = self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
         context = self.get_context_data()
         formset = context['formset']
         
@@ -148,66 +147,42 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         is_valid, errors = self.validate_forms(form, formset)
         
         if not is_valid:
-            if is_ajax:
-                return JsonResponse({
-                    'success': False,
-                    **errors,
-                    'message': 'Please correct the errors below.'
-                }, status=400)
-            return self.form_invalid(form)
+            # If form is invalid, return form with errors
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
         
         try:
             with transaction.atomic():
                 # Save the order
                 self.object = form.save(commit=False)
                 self.object.customer = self.request.user
+                self.object.status = 'PENDING'  # Set initial status
                 self.object.save()
                 
                 # Process the formset
-                instances = formset.save(commit=False)
-                
-                # Delete any instances marked for deletion
-                for obj in formset.deleted_objects:
-                    if obj.pk:
-                        obj.delete()
-                
-                # Save new and updated instances
-                for instance in instances:
-                    if not instance.quantity or int(instance.quantity) <= 0:
+                for item_form in formset:
+                    if item_form.cleaned_data.get('DELETE'):
+                        if item_form.instance.pk:
+                            item_form.instance.delete()
                         continue
-                    instance.order = self.object
-                    instance.save()
+                        
+                    if not item_form.cleaned_data.get('quantity', 0) > 0:
+                        continue
+                        
+                    order_item = item_form.save(commit=False)
+                    order_item.order = self.object
+                    order_item.save()
                 
-                # Update order total
+                # Calculate and save the total
                 self.object.calculate_total()
                 
                 messages.success(self.request, 'Order created successfully!')
-                
-                if is_ajax:
-                    return JsonResponse({
-                        'success': True,
-                        'redirect': self.get_success_url()
-                    })
                 return redirect(self.get_success_url())
                     
         except Exception as e:
             logger.error('Error saving order: %s', str(e), exc_info=True)
             messages.error(self.request, 'An error occurred while saving the order. Please try again.')
-            # Handle form errors
-            for field, error_list in errors.get('form_errors', {}).items():
-                for error in error_list:
-                    messages.error(self.request, f"{field}: {error}")
-                    
-            for form_errors in errors.get('formset_errors', {}).values():
-                for error in form_errors:
-                    if isinstance(error, str):
-                        messages.error(self.request, f"Item: {error}")
-                    elif isinstance(error, list):
-                        for sub_error in error:
-                            messages.error(self.request, f"Item: {sub_error}")
-                        
-            return self.form_invalid(form)
-        
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
     def form_invalid(self, form):
         """Handle invalid form submission."""
         context = self.get_context_data()
