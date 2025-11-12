@@ -27,9 +27,6 @@ urlpatterns = [
     # Custom accounts app URLs
     path('profile/', include('accounts.urls')),
     
-    # Orders app
-    path('orders/', include('orders.urls')),
-    
     # Dashboard app
     path('dashboard/', include('dashboard.urls')),
     

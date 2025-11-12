@@ -83,3 +83,116 @@ python manage.py runserver
 ---
 
 ## 🛠️ How to Create These Users
+Create a comprehensive order management system for a laundry service that handles order processing, tracking, and management. The system should support multiple user roles (customer, staff, admin) with appropriate permissions and workflows.
+
+Core Features
+1. User Roles & Authentication
+Customers: Place, view, and track their orders
+Staff: Process orders, update statuses, manage inventory
+Admin: Full system access, reporting, and configuration
+2. Order Processing
+Order Creation
+Multi-step order form with service selection
+Itemized service selection (Wash & Fold, Dry Cleaning, Ironing)
+Special instructions and preferences
+Pickup/Delivery scheduling
+Real-time price calculation
+Order Status Workflow
+Pending → Confirmed → In Progress → Ready for Pickup/Delivery → Completed
+Cancellation and refund handling
+Status update notifications
+3. Service Management
+Service Types
+Wash & Fold
+Dry Cleaning
+Ironing
+Special treatments (stain removal, etc.)
+Pricing
+Base prices per service
+Additional charges (express service, special handling)
+Discounts and promotions
+4. Customer Interface
+Dashboard
+Current orders with status
+Order history
+Favorite services
+Payment methods
+Order Management
+Create new orders
+View order details
+Track order status
+Request changes/cancellations
+5. Staff Interface
+Order Queue
+New orders
+In-progress orders
+Ready for pickup
+Completed orders
+Order Processing
+Update order status
+Add internal notes
+Handle special requests
+Manage inventory
+6. Admin Features
+Analytics & Reporting
+Sales reports
+Popular services
+Customer activity
+Revenue tracking
+System Configuration
+Service management
+Pricing configuration
+Staff permissions
+Business hours
+Technical Requirements
+Backend (Django)
+RESTful API endpoints
+JWT Authentication
+Role-based access control
+Database models for orders, services, users
+Background tasks for notifications
+Frontend (Your choice of framework)
+Responsive design
+Real-time updates
+Intuitive UI/UX
+Form validation
+Loading states and feedback
+Integrations
+Payment gateway
+Email/SMS notifications
+Calendar/scheduling
+Analytics
+Security
+Data encryption
+CSRF protection
+Input validation
+Rate limiting
+Audit logging
+User Flows
+Customer Flow
+Login/Register
+Select services
+Schedule pickup/delivery
+Make payment
+Track order status
+Receive notifications
+Provide feedback
+Staff Flow
+View order queue
+Update order status
+Handle special requests
+Process payments
+Generate reports
+Admin Flow
+View system analytics
+Manage services and pricing
+Handle user management
+Configure system settings
+Generate business reports
+Success Metrics
+Order processing time
+Customer satisfaction
+Order accuracy
+System uptime
+User engagement
+
