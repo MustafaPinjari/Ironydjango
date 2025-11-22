@@ -11,6 +11,7 @@ from allauth.account.views import (
     EmailVerificationSentView, ConfirmEmailView, EmailView
 )
 from . import views
+from .views_custom import CustomSignupView
 
 app_name = 'accounts'
 
@@ -21,7 +22,7 @@ urlpatterns = [
     
     # Allauth overrides (custom templates)
     path('login/', LoginView.as_view(template_name='accounts/login.html'), name='account_login'),
-    path('signup/', SignupView.as_view(template_name='accounts/register.html'), name='account_signup'),
+    path('signup/', CustomSignupView.as_view(template_name='account/signup.html'), name='account_signup'),
     path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name='account_logout'),
     
     # Password management
