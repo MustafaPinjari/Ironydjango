@@ -5,16 +5,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from . import views
+from orders.api_views import ServiceViewSet
 
 app_name = 'api'
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-# router.register('some-resource', views.SomeViewSet)
 
 urlpatterns = [
-    # API endpoints will be added here
+    # Service related endpoints
+    path('services/', include([
+        path('variants/', ServiceViewSet.as_view({'get': 'variants'}), name='service-variants'),
+        path('options/', ServiceViewSet.as_view({'get': 'options'}), name='service-options'),
+    ])),
 ] + router.urls
 
 # Only serve static files in development

@@ -58,7 +58,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Change in pr
 DEFAULT_FROM_EMAIL = 'noreply@ironyy.com'
 
 # Login/Logout settings
-LOGIN_REDIRECT_URL = 'orders:customer_dashboard'  # Default redirect after login
+LOGIN_REDIRECT_URL = 'dashboard:home'  # Redirect to role-based dashboard
 LOGIN_URL = 'account_login'
 LOGOUT_REDIRECT_URL = 'account_login'
 

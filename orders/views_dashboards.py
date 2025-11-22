@@ -44,7 +44,19 @@ class PressDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return self.request.user.role in ['PRESS', 'ADMIN']
     
     def get_queryset(self):
-        queryset = Order.objects.filter(assigned_staff=self.request.user)
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        
+        # Check if we should show all press orders or just the current user's
+        show_all = self.request.GET.get('show_all') == '1'
+        
+        if show_all and self.request.user.role == 'ADMIN':
+            # For admins, show all press orders when 'show_all' is True
+            press_staff = User.objects.filter(role='PRESS')
+            queryset = Order.objects.filter(assigned_staff__in=press_staff)
+        else:
+            # Default: show only orders assigned to the current user
+            queryset = Order.objects.filter(assigned_staff=self.request.user)
         
         # Filter by status if provided
         status = self.request.GET.get('status')
@@ -60,27 +72,22 @@ class PressDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.request.user
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
         
-        # Get counts for the dashboard cards
+        # Get all press staff users
+        press_staff = User.objects.filter(role='PRESS')
+        
+        # Get counts for the dashboard cards (all press orders)
+        press_orders = Order.objects.filter(assigned_staff__in=press_staff)
+        
         context.update({
-            'assigned_count': Order.objects.filter(
-                assigned_staff=user, 
-                status='assigned'
-            ).count(),
-            'in_progress_count': Order.objects.filter(
-                assigned_staff=user, 
-                status='processing'
-            ).count(),
-            'ready_count': Order.objects.filter(
-                assigned_staff=user, 
-                status='ready'
-            ).count(),
-            'completed_count': Order.objects.filter(
-                assigned_staff=user, 
-                status='completed'
-            ).count(),
+            'assigned_count': press_orders.filter(status='assigned').count(),
+            'in_progress_count': press_orders.filter(status='processing').count(),
+            'ready_count': press_orders.filter(status='ready').count(),
+            'completed_count': press_orders.filter(status='completed').count(),
             'active_tab': 'press_dashboard',
+            'show_assigned_to': True,  # Flag to show assigned staff column in template
         })
         return context
 

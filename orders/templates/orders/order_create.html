@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Create New Order - {{ block.super }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+<style>
+    .form-container {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    .order-item {
+        background: #f8f9fa;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #e9ecef;
+    }
+    .add-item-btn {
+        margin-bottom: 1.5rem;
+    }
+    .total-amount {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 1.5rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border-left: 4px solid #0d6efd;
+    }
+    .delivery-fields {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+    .show-delivery-fields .delivery-fields {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0">Create New Order</h1>
+                <a href="{% url 'orders:list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Orders
+                </a>
+            </div>
+
+            <div class="form-container">
+                <form method="post" id="order-form" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Order Items -->
+                    <h4 class="mb-3">Order Items</h4>
+                    {{ formset.management_form }}
+                    <div id="order-items">
+                        {% for form in formset %}
+                        <div class="order-item" id="item-{{ forloop.counter0 }}">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.service|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.variant|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ form.quantity|as_crispy_field }}
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    {{ form.options|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                {{ form.description|as_crispy_field }}
+                            </div>
+                            {% if form.DELETE %}
+                            <div class="form-check mb-3">
+                                {{ form.DELETE|as_crispy_field }}
+                                <label class="form-check-label" for="{{ form.DELETE.id_for_label }}">
+                                    Remove this item
+                                </label>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <button type="button" class="btn btn-outline-primary add-item-btn" id="add-item">
+                        <i class="fas fa-plus me-1"></i> Add Another Item
+                    </button>
+
+                    <!-- Order Details -->
+                    <h4 class="mt-5 mb-3">Order Details</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.delivery_type|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.pickup_address|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-fields">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.delivery_address|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.preferred_pickup_date|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.preferred_delivery_date|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form.special_instructions|as_crispy_field }}
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'orders:list' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Create Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+// Function to initialize all select2 elements
+function initSelect2() {
+    $('.service-select').each(function() {
+        if (!$(this).hasClass('select2-hidden-accessible')) {
+            $(this).select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select a service',
+                allowClear: true
+            }).on('change', function() {
+                loadVariants($(this));
+            });
+        }
+    });
+    
+    $('.variant-select').each(function() {
+        if (!$(this).hasClass('select2-hidden-accessible')) {
+            $(this).select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select a variant',
+                allowClear: true
+            });
+        }
+    });
+}
+
+// Function to load variants for a service
+function loadVariants(serviceSelect) {
+    const itemDiv = serviceSelect.closest('.order-item');
+    const variantSelect = itemDiv.find('.variant-select');
+    const serviceId = serviceSelect.val();
+    
+    // Clear and disable variant select while loading
+    variantSelect.empty().prop('disabled', true);
+    
+    if (!serviceId) {
+        variantSelect.trigger('change');
+        return;
+    }
+    
+    // Show loading state
+    variantSelect.html('<option value="">Loading variants...</option>');
+    
+    // Fetch variants for the selected service
+    $.ajax({
+        url: '/api/services/variants/',
+        data: { service_id: serviceId },
+        dataType: 'json',
+        success: function(data) {
+            // Clear the loading message
+            variantSelect.empty();
+            
+            // Add a default option
+            variantSelect.append($('<option>', {
+                value: '',
+                text: 'Select a variant',
+                selected: true,
+                disabled: true
+            }));
+            
+            // Add each variant as an option
+            if (data && data.length > 0) {
+                data.forEach(function(variant) {
+                    variantSelect.append($('<option>', {
+                        value: variant.id,
+                        text: `${variant.name} - $${variant.final_price.toFixed(2)}`,
+                        'data-price': variant.final_price
+                    }));
+                });
+                
+                // Enable the select and trigger change
+                variantSelect.prop('disabled', false);
+                
+                // Initialize Select2 on the variant select if not already initialized
+                if (!variantSelect.hasClass('select2-hidden-accessible')) {
+                    variantSelect.select2({
+                        theme: 'bootstrap-5',
+                        width: '100%',
+                        placeholder: 'Select a variant',
+                        allowClear: true
+                    });
+                }
+            } else {
+                variantSelect.append($('<option>', {
+                    value: '',
+                    text: 'No variants available',
+                    disabled: true
+                }));
+            }
+            
+            variantSelect.trigger('change');
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading variants:', error);
+            variantSelect.empty().append($('<option>', {
+                value: '',
+                text: 'Error loading variants',
+                disabled: true
+            }));
+        }
+    });
+}
+
+$(document).ready(function() {
+    // Initialize all select2 elements
+    initSelect2();
+
+    // Toggle delivery address fields
+    function toggleDeliveryFields() {
+        if ($('#id_delivery_type_1').is(':checked')) {
+            $('.delivery-fields').slideDown();
+        } else {
+            $('.delivery-fields').slideUp();
+        }
+    }
+    
+    // Initial toggle
+    toggleDeliveryFields();
+    
+    // Toggle on change
+    $('input[name="delivery_type"]').change(toggleDeliveryFields);
+
+    // Add new item form
+    $('#add-item').click(function() {
+        const formCount = $('#id_form-TOTAL_FORMS').val();
+        const formPrefix = `form-${formCount}`;
+        const newForm = $($('#empty-form').html().replace(/__prefix__/g, formCount));
+        
+        // Update management form
+        $('#id_form-TOTAL_FORMS').val(parseInt(formCount) + 1);
+        
+        // Add the new form
+        $('#order-items').append(newForm);
+        
+        // Initialize Select2 on new selects
+        newForm.find('.select2').select2({
+            theme: 'bootstrap-5',
+            width: '100%'
+        });
+        
+        // Scroll to the new form
+        $('html, body').animate({
+            scrollTop: newForm.offset().top - 100
+        }, 500);
+    });
+
+    // Handle service change to load variants
+    $(document).on('change', '.service-select', function() {
+        const $this = $(this);
+        const serviceId = $this.val();
+        const $variantSelect = $this.closest('.order-item').find('.variant-select');
+        
+        if (serviceId) {
+            $.ajax({
+                url: $this.data('url') + '?service_id=' + serviceId,
+                success: function(data) {
+                    let options = '<option value="">---------</option>';
+                    data.forEach(function(variant) {
+                        options += `<option value="${variant.id}">${variant.name} - $${variant.price}</option>`;
+                    });
+                    $variantSelect.html(options).trigger('change');
+                }
+            });
+        } else {
+            $variantSelect.html('<option value="">---------</option>').trigger('change');
+        }
+    });
+
+    // Calculate total when quantity or price changes
+    $(document).on('change', '.quantity, .unit-price', function() {
+        calculateTotal();
+    });
+
+    // Form validation
+    $('#order-form').on('submit', function(e) {
+        if (!this.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        $(this).addClass('was-validated');
+    });
+});
+
+// Hidden template for new items
+const emptyForm = `
+<div class="order-item" id="item-__prefix__">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Item #<span class="item-number">__number__</span></h5>
+        <button type="button" class="btn btn-sm btn-outline-danger remove-item">
+            <i class="fas fa-trash"></i> Remove
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <select name="form-__prefix__-service" class="form-select service-select" data-url="/api/services/" id="id_form-__prefix__-service">
+                <option value="" selected>---------</option>
+                {% for service in services %}
+                <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <select name="form-__prefix__-variant" class="form-select variant-select" id="id_form-__prefix__-variant">
+                <option value="" selected>---------</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <input type="number" name="form-__prefix__-quantity" min="1" value="1" class="form-control quantity" required id="id_form-__prefix__-quantity">
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="form-check">
+                <input type="checkbox" name="form-__prefix__-options" class="form-check-input" id="id_form-__prefix__-options_0">
+                <label class="form-check-label" for="id_form-__prefix__-options_0">Options will appear here</label>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <textarea name="form-__prefix__-special_instructions" class="form-control" rows="2" placeholder="Any special instructions for this item..." id="id_form-__prefix__-special_instructions"></textarea>
+    </div>
+    <input type="hidden" name="form-__prefix__-id" id="id_form-__prefix__-id">
+    <input type="hidden" name="form-__prefix__-order" id="id_form-__prefix__-order">
+</div>
+`;
+
+// Store the empty form template
+$('body').append(`<div id="empty-form" style="display: none;">${emptyForm}</div>`);
+</script>
+{% endblock %}

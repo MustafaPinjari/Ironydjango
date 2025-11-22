@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from . import views
 from .views_dashboards import CustomerDashboardView, PressDashboardView, DeliveryDashboardView, AdminDashboardView
 from .views_status import UpdateOrderStatusView
+from .views import AcceptOrderView, SchedulePickupView
 
 app_name = 'orders'  # This sets the application namespace
 
@@ -31,6 +32,11 @@ urlpatterns = [
     
     # Order confirmation
     path('<int:pk>/confirmation/', views.OrderConfirmationView.as_view(), name='order_confirmation'),
+    
+    # Order acceptance and scheduling
+    path('<int:pk>/accept/', AcceptOrderView.as_view(), name='accept_order'),
+    path('<int:pk>/schedule-pickup/', SchedulePickupView.as_view(), name='schedule_pickup'),
+    path('<int:pk>/cancel/', views.CancelOrderView.as_view(), name='cancel'),
     
     # Role-based views (kept for backward compatibility)
     path('assigned/', views.AssignedOrdersView.as_view(), name='assigned'),

@@ -14,8 +14,11 @@ class Order(models.Model):
         DRAFT = 'draft', _('Draft')
         PENDING = 'pending', _('Pending Payment')
         CONFIRMED = 'confirmed', _('Confirmed')
+        SCHEDULED_FOR_PICKUP = 'scheduled_for_pickup', _('Scheduled for Pickup')
+        OUT_FOR_PICKUP = 'out_for_pickup', _('Out for Pickup')
+        PICKED_UP = 'picked_up', _('Picked Up')
         PROCESSING = 'processing', _('In Progress')
-        READY = 'ready', _('Ready for Pickup/Delivery')
+        READY = 'ready', _('Ready for Delivery')
         OUT_FOR_DELIVERY = 'out_for_delivery', _('Out for Delivery')
         COMPLETED = 'completed', _('Completed')
         CANCELLED = 'cancelled', _('Cancelled')
@@ -144,6 +147,26 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.order_number} - {self.get_status_display()}"
+        
+    def calculate_total(self):
+        """
+        Calculate the total price of the order by summing up all line items.
+        Updates the total_amount field and saves the order.
+        """
+        total = Decimal('0.00')
+        
+        # Sum up all line items
+        for item in self.items.all():
+            total += item.total_price()
+        
+        # Apply any order-level discounts
+        if hasattr(self, 'discount_amount') and self.discount_amount:
+            total -= Decimal(str(self.discount_amount))
+        
+        # Ensure total is not negative
+        self.total_amount = max(Decimal('0.00'), total)
+        self.save(update_fields=['total_amount'])
+        return self.total_amount
         
     def save(self, *args, **kwargs):
         # First save to get a primary key
@@ -400,3 +423,48 @@ class OrderStatusUpdate(models.Model):
             self.content_type = ContentType.objects.get_for_model(Order)
             self.object_id = self.order_id
         super().save(*args, **kwargs)
+
+    class Delivery(models.Model):
+        class Status(models.TextChoices):
+            PENDING = 'pending', _('Pending')
+            ASSIGNED = 'assigned', _('Assigned')
+            PICKED_UP = 'picked_up', _('Picked Up')
+            IN_TRANSIT = 'in_transit', _('In Transit')
+            DELIVERED = 'delivered', _('Delivered')
+            CANCELLED = 'cancelled', _('Cancelled')
+        
+        order = models.OneToOneField(
+            Order,
+            on_delete=models.CASCADE,
+            related_name='delivery',
+            verbose_name=_('order')
+        )
+        delivery_partner = models.ForeignKey(
+            User,
+            on_delete=models.SET_NULL,
+            null=True,
+            blank=True,
+            related_name='assigned_deliveries',
+            verbose_name=_('delivery partner')
+        )
+        status = models.CharField(
+            _('status'),
+            max_length=20,
+            choices=Status.choices,
+            default=Status.PENDING
+        )
+        notes = models.TextField(_('notes'), blank=True)
+        assigned_at = models.DateTimeField(_('assigned at'), null=True, blank=True)
+        picked_up_at = models.DateTimeField(_('picked up at'), null=True, blank=True)
+        delivered_at = models.DateTimeField(_('delivered at'), null=True, blank=True)
+        created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+        updated_at = models.DateTimeField(_('updated at'), auto_now=True)
+    
+        class Meta:
+            verbose_name = _('delivery')
+            verbose_name_plural = _('deliveries')
+            ordering = ['-created_at']
+    
+        def __str__(self):
+            return f"{_('Delivery')} #{self.id} - {self.get_status_display()}"
+    

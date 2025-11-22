@@ -44,13 +44,13 @@ class PressDashboardView(LoginRequiredMixin, ListView):
     paginate_by = 10
     
     def get_queryset(self):
-        # Show all pending and in-progress orders
+        # Show orders relevant to press staff
         return Order.objects.filter(
-            Q(status=Order.Status.PENDING) | 
-            Q(status=Order.Status.CONFIRMED) |
-            Q(status=Order.Status.IN_PROGRESS) |
-            Q(status=Order.Status.READY_FOR_PICKUP)
-        ).order_by('status', 'pickup_date')
+            Q(status=Order.Status.CONFIRMED) |  # New orders to accept
+            Q(status=Order.Status.PICKED_UP) |  # Arrived at press
+            Q(status=Order.Status.PROCESSING) | # In progress
+            Q(status=Order.Status.READY)        # Done, waiting for delivery
+        ).order_by('status', 'created_at')
 
 class DeliveryDashboardView(LoginRequiredMixin, ListView):
     """
@@ -62,14 +62,21 @@ class DeliveryDashboardView(LoginRequiredMixin, ListView):
     paginate_by = 10
     
     def get_queryset(self):
-        # Show only orders assigned to this delivery partner
+        # Show orders relevant to delivery partners
+        # 1. Orders available for pickup (SCHEDULED_FOR_PICKUP) - Show to all or just assigned? 
+        #    Let's assume initially show to all, or if assigned show to assigned.
+        # 2. Orders ready for delivery (READY)
+        # 3. My active tasks (OUT_FOR_PICKUP, OUT_FOR_DELIVERY)
+        
+        user = self.request.user
         return Order.objects.filter(
-            delivery_partner=self.request.user,
-            status__in=[
-                Order.Status.READY_FOR_PICKUP,
-                Order.Status.PICKED_UP
-            ]
-        ).order_by('scheduled_delivery')
+            Q(status=Order.Status.SCHEDULED_FOR_PICKUP) |  # Available for pickup
+            Q(status=Order.Status.READY) |                 # Available for delivery
+            Q(delivery_person=user, status__in=[          # My active tasks
+                Order.Status.OUT_FOR_PICKUP,
+                Order.Status.OUT_FOR_DELIVERY
+            ])
+        ).order_by('status', 'created_at')
 
 class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     """
@@ -89,10 +96,10 @@ class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['pending_orders'] = Order.objects.filter(status=Order.Status.PENDING).count()
         context['in_progress_orders'] = Order.objects.filter(
-            status__in=[Order.Status.CONFIRMED, Order.Status.IN_PROGRESS]
+            status__in=[Order.Status.PROCESSING, Order.Status.PICKED_UP]
         ).count()
         context['delivery_pending'] = Order.objects.filter(
-            status=Order.Status.READY_FOR_PICKUP
+            status__in=[Order.Status.SCHEDULED_FOR_PICKUP, Order.Status.READY]
         ).count()
         return context
 
@@ -116,7 +123,7 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
             return qs
         # Delivery partners can only see their assigned orders
         elif user.is_delivery:
-            return qs.filter(delivery_partner=user)
+            return qs.filter(delivery_person=user)
         return qs.none()
 
 class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -133,10 +140,16 @@ class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
             return True
         
         order = self.get_object()
+        # Allow customers to confirm their own draft/pending orders
+        if user.is_customer and order.customer == user:
+            return order.status in [Order.Status.DRAFT, Order.Status.PENDING]
+            
         if user.is_press:
-            return order.press_person == user or order.press_person is None
+            return order.assigned_staff == user or order.assigned_staff is None
         elif user.is_delivery:
-            return order.delivery_partner == user
+            return order.delivery_person == user or (
+                order.status == Order.Status.SCHEDULED_FOR_PICKUP and order.delivery_person is None
+            )
         return False
     
     def form_valid(self, form):
@@ -145,21 +158,34 @@ class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         
         # Validate status transition
         valid_transitions = {
-            'PENDING': ['CONFIRMED', 'REJECTED'],
-            'CONFIRMED': ['IN_PROGRESS', 'CANCELLED'],
-            'IN_PROGRESS': ['READY_FOR_PICKUP', 'CANCELLED'],
-            'READY_FOR_PICKUP': ['PICKED_UP', 'CANCELLED'],
-            'PICKED_UP': ['DELIVERED', 'CANCELLED'],
+            Order.Status.DRAFT: [Order.Status.CONFIRMED, Order.Status.CANCELLED],
+            Order.Status.PENDING: [Order.Status.CONFIRMED, Order.Status.CANCELLED],
+            Order.Status.CONFIRMED: [Order.Status.SCHEDULED_FOR_PICKUP, Order.Status.CANCELLED],
+            Order.Status.SCHEDULED_FOR_PICKUP: [Order.Status.OUT_FOR_PICKUP, Order.Status.CANCELLED],
+            Order.Status.OUT_FOR_PICKUP: [Order.Status.PICKED_UP, Order.Status.CANCELLED],
+            Order.Status.PICKED_UP: [Order.Status.PROCESSING, Order.Status.CANCELLED],
+            Order.Status.PROCESSING: [Order.Status.READY, Order.Status.CANCELLED],
+            Order.Status.READY: [Order.Status.OUT_FOR_DELIVERY, Order.Status.CANCELLED],
+            Order.Status.OUT_FOR_DELIVERY: [Order.Status.COMPLETED, Order.Status.CANCELLED],
         }
         
-        if new_status in valid_transitions.get(order.status, []):
+        transitions = valid_transitions.get(order.status, [])
+        
+        if new_status in transitions:
             order.status = new_status
+            # Assign staff if needed
+            if new_status == Order.Status.SCHEDULED_FOR_PICKUP and self.request.user.is_press:
+                order.assigned_staff = self.request.user
+            elif new_status == Order.Status.OUT_FOR_PICKUP and self.request.user.is_delivery:
+                order.delivery_person = self.request.user
+                
             order.save()
             messages.success(self.request, f'Order status updated to {order.get_status_display()}')
         else:
             messages.error(self.request, 'Invalid status transition')
         
-        return super().form_valid(form)
+        
+        return redirect(self.get_success_url())
     
     def get_success_url(self):
         return reverse_lazy('dashboard:order_detail', kwargs={'pk': self.object.pk})

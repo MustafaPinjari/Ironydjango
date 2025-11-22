@@ -93,15 +93,17 @@
                                             <a href="{% url 'orders:detail' order.pk %}" class="btn btn-sm btn-outline-primary">
                                                 <i class="fas fa-eye"></i> View
                                             </a>
-                                            {% if order.status == 'assigned' %}
-                                                <form method="post" action="{% url 'orders:update_status' order.pk %}" class="d-inline">
+                                            {% if order.status == 'pending' or order.status == 'confirmed' %}
+                                                <form method="post" action="{% url 'orders:accept_order' order.pk %}" class="d-inline">
                                                     {% csrf_token %}
-                                                    <input type="hidden" name="status" value="processing">
-                                                    <button type="submit" class="btn btn-sm btn-outline-success">
-                                                        <i class="fas fa-play"></i> Start
+                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-check-circle"></i> Accept Order
                                                     </button>
                                                 </form>
                                             {% elif order.status == 'processing' %}
+                                                <a href="{% url 'orders:schedule_pickup' order.pk %}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-calendar-plus"></i> Schedule Pickup
+                                                </a>
                                                 <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#completeModal{{ order.id }}">
                                                     <i class="fas fa-check"></i> Mark Ready
                                                 </button>
@@ -117,11 +119,11 @@
                                                             <form method="post" action="{% url 'orders:update_status' order.pk %}">
                                                                 {% csrf_token %}
                                                                 <div class="modal-body">
-                                                                    <p>Are you sure you want to mark this order as ready?</p>
+                                                                    <p>Are you sure you want to mark this order as ready for pickup/delivery?</p>
                                                                     <input type="hidden" name="status" value="ready">
                                                                     <div class="mb-3">
                                                                         <label for="notes{{ order.id }}" class="form-label">Notes (Optional)</label>
-                                                                        <textarea class="form-control" id="notes{{ order.id }}" name="notes" rows="3"></textarea>
+                                                                        <textarea class="form-control" id="notes{{ order.id }}" name="notes" rows="3" placeholder="Any special instructions for delivery..."></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">

@@ -1,14 +1,23 @@
-from django.urls import reverse_lazy
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-)
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView, FormView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
+from django.forms import inlineformset_factory
+from django.db import transaction
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import random
+import string
 
-from .models import Order, OrderItem
+from .models import Order, OrderItem, OrderStatusUpdate
+from .forms import OrderForm, OrderItemForm, OrderItemFormSet
 from accounts.models import User
+from services.models import Service, ServiceVariant, ServiceOption
 
 class OrderListView(LoginRequiredMixin, ListView):
     model = Order
@@ -33,100 +42,103 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
 
 import logging
 from django import forms
-from django.utils import timezone
+from .forms import OrderForm
 
 logger = logging.getLogger(__name__)
 
-class OrderForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = ['delivery_type', 'pickup_address', 'delivery_address', 
-                 'preferred_pickup_date', 'preferred_delivery_date', 'special_instructions']
-        widgets = {
-            'preferred_pickup_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'preferred_delivery_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'special_instructions': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-        }
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Make delivery date not required
-        self.fields['preferred_delivery_date'].required = False
-        
-        # Set minimum date to today
-        today = timezone.now().date()
-        self.fields['preferred_pickup_date'].widget.attrs['min'] = today
-        self.fields['preferred_delivery_date'].widget.attrs['min'] = today
+# Removed duplicate CancelOrderView - using the one at the bottom of the file
 
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
     form_class = OrderForm
-    template_name = 'orders/order_form.html'
-
-    def get_form(self, form_class=None):
-        logger.debug("Entering get_form")
-        form = super().get_form(form_class)
-        logger.debug(f"Form fields: {form.fields.keys()}")
-        return form
-
+    template_name = 'orders/order_create.html'
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['formset'] = OrderItemFormSet(
+                self.request.POST, 
+                self.request.FILES, 
+                instance=self.object,
+                form_kwargs={'user': self.request.user}
+            )
+        else:
+            context['formset'] = OrderItemFormSet(
+                instance=self.object,
+                form_kwargs={'user': self.request.user}
+            )
+        return context
+    
     def form_valid(self, form):
-        logger.debug("Entering form_valid")
-        try:
-            form.instance.customer = self.request.user
-            form.instance.status = Order.Status.PENDING
-            
-            # Set default delivery date to pickup date if not provided
-            if not form.cleaned_data.get('preferred_delivery_date') and form.cleaned_data.get('delivery_type') == 'delivery':
-                form.instance.preferred_delivery_date = form.cleaned_data.get('preferred_pickup_date')
-            
-            logger.debug(f"Form data before save: {form.cleaned_data}")
-            
-            # Save the form and get the order instance
-            self.object = form.save()
-            logger.info(f"Order created successfully: {self.object.order_number}")
-            
-            # Add success message
-            messages.success(self.request, 'Order created successfully! What would you like to do next?')
-            
-            # Log the redirect URL
-            redirect_url = self.get_success_url()
-            logger.debug(f"Redirecting to: {redirect_url}")
-            
-            # Use HttpResponseRedirect to ensure proper redirection
-            from django.http import HttpResponseRedirect
-            return HttpResponseRedirect(redirect_url)
-            
-        except Exception as e:
-            logger.error(f"Error in form_valid: {str(e)}", exc_info=True)
-            messages.error(self.request, 'There was an error processing your order. Please try again.')
-            return self.form_invalid(form)
+        context = self.get_context_data()
+        formset = context['formset']
+        
+        if formset.is_valid():
+            with transaction.atomic():
+                # Set the customer before saving
+                self.object = form.save(commit=False)
+                self.object.customer = self.request.user
+                self.object.status = Order.Status.CONFIRMED
+                self.object.save()
+                
+                # Save the formset
+                instances = formset.save(commit=False)
+                for instance in instances:
+                    instance.order = self.object
+                    instance.save()
+                formset.save_m2m()  # Save many-to-many data
+                
+                # Calculate and save order total
+                self.object.calculate_totals()
+                
+                messages.success(self.request, 'Order created successfully!')
+                return super().form_valid(form)
+        else:
+            # Log formset errors for debugging
+            for form in formset:
+                if form.errors:
+                    logger.warning(f"Formset errors: {form.errors}")
+            return self.render_to_response(self.get_context_data(form=form))
     
     def get_success_url(self):
-        try:
-            if not hasattr(self, 'object') or not self.object or not self.object.pk:
-                logger.error("No valid order object found for redirection")
-                return reverse_lazy('orders:list')
-                
-            url = reverse_lazy('orders:order_confirmation', kwargs={'pk': self.object.pk})
-            logger.debug(f"Success URL: {url}")
-            return url
-            
-        except Exception as e:
-            logger.error(f"Error generating success URL: {str(e)}")
+        if not hasattr(self, 'object') or not self.object or not self.object.pk:
+            logger.error("No valid order object found for redirection")
             return reverse_lazy('orders:list')
-            
+        return reverse_lazy('orders:detail', kwargs={'pk': self.object.pk})
+
     def form_invalid(self, form):
         logger.warning(f"Form is invalid. Errors: {form.errors}")
         return super().form_invalid(form)
 
 class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Order
+    form_class = OrderForm
     template_name = 'orders/order_form.html'
-    fields = ['status', 'shipping_address', 'payment_status']
-
+    
     def test_func(self):
         order = self.get_object()
-        return self.request.user.is_staff or order.customer == self.request.user
+        return self.request.user == order.customer or self.request.user.is_staff
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Pass the user to the form
+        kwargs['user'] = self.request.user
+        return kwargs
+        
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        if not self.request.user.is_staff:
+            # Remove fields that only staff should edit
+            if 'status' in form.fields:
+                del form.fields['status']
+            if 'payment_status' in form.fields:
+                del form.fields['payment_status']
+        return form
 
     def form_valid(self, form):
         messages.success(self.request, 'Order updated successfully!')
@@ -139,14 +151,101 @@ class OrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Order
     template_name = 'orders/order_confirm_delete.html'
     success_url = reverse_lazy('orders:list')
-
+    
     def test_func(self):
         order = self.get_object()
-        return self.request.user.is_staff or order.customer == self.request.user
-
+        return self.request.user == order.customer or self.request.user.is_staff
+    
     def delete(self, request, *args, **kwargs):
-        messages.success(request, 'Order deleted successfully!')
+        messages.success(request, 'Order was successfully cancelled.')
         return super().delete(request, *args, **kwargs)
+
+class AcceptOrderView(LoginRequiredMixin, UserPassesTestMixin, View):
+    """View for staff to accept an order and schedule pickup."""
+    
+    def test_func(self):
+        """Only staff members can accept orders."""
+        return self.request.user.role in ['PRESS', 'ADMIN']
+    
+    def post(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        
+        # Only allow accepting pending or confirmed orders
+        if order.status not in [Order.Status.PENDING, Order.Status.CONFIRMED]:
+            messages.error(request, 'This order cannot be accepted in its current status.')
+            return redirect('orders:press_dashboard')
+        
+        # Update order status to processing
+        previous_status = order.status
+        order.status = Order.Status.PROCESSING
+        order.assigned_staff = request.user
+        order.assigned_at = timezone.now()
+        order.save()
+        
+        # Create status update
+        OrderStatusUpdate.objects.create(
+            order=order,
+            from_status=previous_status,
+            to_status=order.status,
+            changed_by=request.user,
+            notes=f'Order accepted by {request.user.get_full_name() or request.user.email}'
+        )
+        
+        messages.success(request, f'Order #{order.order_number} has been accepted and is now in progress.')
+        return redirect('orders:press_dashboard')
+
+class SchedulePickupView(LoginRequiredMixin, UserPassesTestMixin, View):
+    """View for staff to schedule a pickup for an order."""
+    
+    def test_func(self):
+        """Only staff members can schedule pickups."""
+        return self.request.user.role in ['PRESS', 'ADMIN']
+    
+    def get(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        return render(request, 'orders/schedule_pickup.html', {'order': order})
+    
+    def post(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        
+        # Only allow scheduling pickup for processing orders
+        if order.status != Order.Status.PROCESSING:
+            messages.error(request, 'You can only schedule pickup for orders that are in progress.')
+            return redirect('orders:press_dashboard')
+        
+        pickup_date = request.POST.get('pickup_date')
+        pickup_time = request.POST.get('pickup_time')
+        notes = request.POST.get('notes', '')
+        
+        try:
+            # Parse the datetime
+            from datetime import datetime
+            pickup_datetime = datetime.strptime(f"{pickup_date} {pickup_time}", "%Y-%m-%d %H:%M")
+            
+            # Ensure pickup is in the future
+            if pickup_datetime < timezone.now():
+                raise ValueError("Pickup time must be in the future.")
+                
+            # Update order with pickup details
+            order.pickup_scheduled_at = pickup_datetime
+            order.status = Order.Status.READY
+            order.save()
+            
+            # Create status update
+            OrderStatusUpdate.objects.create(
+                order=order,
+                from_status=Order.Status.PROCESSING,
+                to_status=order.status,
+                changed_by=request.user,
+                notes=f"Pickup scheduled for {pickup_datetime.strftime('%B %d, %Y at %I:%M %p')}. {notes}".strip()
+            )
+            
+            messages.success(request, f'Pickup for order #{order.order_number} has been scheduled successfully.')
+            return redirect('orders:press_dashboard')
+            
+        except ValueError as e:
+            messages.error(request, f'Invalid date/time format: {str(e)}')
+            return render(request, 'orders/schedule_pickup.html', {'order': order})
 
 class AssignStaffView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Order
@@ -218,14 +317,52 @@ class PressOrderListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
             status__in=[Order.Status.PROCESSING, Order.Status.SHIPPED]
         ).order_by('status', 'created_at')
 
+class CancelOrderView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Order
+    fields = ['cancellation_reason']
+    template_name = 'orders/order_confirm_cancel.html'
+    
+    def test_func(self):
+        order = self.get_object()
+        return (self.request.user == order.customer or 
+                self.request.user.is_staff or 
+                self.request.user == order.assigned_staff or 
+                self.request.user == order.delivery_person)
+    
+    def form_valid(self, form):
+        order = form.save(commit=False)
+        if order.status != Order.Status.CANCELLED:
+            order.status = Order.Status.CANCELLED
+            order.cancelled_at = timezone.now()
+            order.save(update_fields=['status', 'cancellation_reason', 'cancelled_at', 'updated_at'])
+            
+            # Create status update
+            OrderStatusUpdate.objects.create(
+                order=order,
+                from_status=order.status,
+                to_status=Order.Status.CANCELLED,
+                changed_by=self.request.user,
+                notes=f'Order cancelled by {self.request.user.get_full_name() or self.request.user.email}. ' \
+                     f'Reason: {form.cleaned_data.get("cancellation_reason", "No reason provided")}'
+            )
+            
+            messages.success(self.request, 'Order has been cancelled successfully.')
+        else:
+            messages.warning(self.request, 'This order is already cancelled.')
+            
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('orders:detail', kwargs={'pk': self.object.pk})
+
 class OrderConfirmationView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Order
     template_name = 'orders/order_confirmation.html'
     context_object_name = 'order'
-    
+
     def test_func(self):
         order = self.get_object()
-        return self.request.user == order.customer or self.request.user.role in ['ADMIN', 'PRESS', 'DELIVERY']
+        return self.request.user == order.customer or self.request.user.is_staff or self.request.user.role in ['ADMIN', 'PRESS', 'DELIVERY']
 
 class DeliveryOrderListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Order
