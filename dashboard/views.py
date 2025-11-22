@@ -34,6 +34,22 @@ class CustomerDashboardView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Order.objects.filter(customer=self.request.user).order_by('-created_at')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_orders = Order.objects.filter(customer=self.request.user)
+        
+        context['active_orders_count'] = user_orders.exclude(
+            status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED, Order.Status.REFUNDED]
+        ).count()
+        
+        from django.db.models import Sum
+        total_spent = user_orders.filter(
+            status=Order.Status.COMPLETED
+        ).aggregate(Sum('total_amount'))['total_amount__sum'] or 0
+        
+        context['total_spent'] = total_spent
+        return context
+
 class PressDashboardView(LoginRequiredMixin, ListView):
     """
     Dashboard for press staff to manage orders.
@@ -51,6 +67,15 @@ class PressDashboardView(LoginRequiredMixin, ListView):
             Q(status=Order.Status.PROCESSING) | # In progress
             Q(status=Order.Status.READY)        # Done, waiting for delivery
         ).order_by('status', 'created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['pending_requests_count'] = Order.objects.filter(status=Order.Status.CONFIRMED).count()
+        context['in_progress_count'] = Order.objects.filter(status=Order.Status.PROCESSING).count()
+        context['ready_count'] = Order.objects.filter(status=Order.Status.READY).count()
+        
+        return context
 
 class DeliveryDashboardView(LoginRequiredMixin, ListView):
     """
@@ -77,6 +102,17 @@ class DeliveryDashboardView(LoginRequiredMixin, ListView):
                 Order.Status.OUT_FOR_DELIVERY
             ])
         ).order_by('status', 'created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        
+        context['available_pickups_count'] = Order.objects.filter(status=Order.Status.SCHEDULED_FOR_PICKUP).count()
+        context['active_pickups_count'] = Order.objects.filter(delivery_person=user, status=Order.Status.OUT_FOR_PICKUP).count()
+        context['available_deliveries_count'] = Order.objects.filter(status=Order.Status.READY).count()
+        context['active_deliveries_count'] = Order.objects.filter(delivery_person=user, status=Order.Status.OUT_FOR_DELIVERY).count()
+        
+        return context
 
 class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     """
@@ -126,13 +162,13 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
             return qs.filter(delivery_person=user)
         return qs.none()
 
-class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     """
     View for updating order status (for press staff and delivery partners).
     """
     model = Order
-    fields = []  # We'll handle the status update in form_valid
     template_name = 'dashboard/update_order_status.html'
+    context_object_name = 'order'
     
     def test_func(self):
         user = self.request.user
@@ -152,9 +188,44 @@ class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
             )
         return False
     
-    def form_valid(self, form):
-        new_status = self.request.POST.get('status')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         order = self.get_object()
+        
+        # Get valid transitions for current status
+        valid_transitions = {
+            Order.Status.DRAFT: [Order.Status.CONFIRMED, Order.Status.CANCELLED],
+            Order.Status.PENDING: [Order.Status.CONFIRMED, Order.Status.CANCELLED],
+            Order.Status.CONFIRMED: [Order.Status.SCHEDULED_FOR_PICKUP, Order.Status.CANCELLED],
+            Order.Status.SCHEDULED_FOR_PICKUP: [Order.Status.OUT_FOR_PICKUP, Order.Status.CANCELLED],
+            Order.Status.OUT_FOR_PICKUP: [Order.Status.PICKED_UP, Order.Status.CANCELLED],
+            Order.Status.PICKED_UP: [Order.Status.PROCESSING, Order.Status.CANCELLED],
+            Order.Status.PROCESSING: [Order.Status.READY, Order.Status.CANCELLED],
+            Order.Status.READY: [Order.Status.OUT_FOR_DELIVERY, Order.Status.CANCELLED],
+            Order.Status.OUT_FOR_DELIVERY: [Order.Status.COMPLETED, Order.Status.CANCELLED],
+        }
+        
+        # Get valid next statuses
+        valid_next_statuses = valid_transitions.get(order.status, [])
+        
+        # Create choices for the status dropdown
+        status_choices = [(status, Order.Status(status).label) for status in valid_next_statuses]
+        
+        # Get staff and delivery partner choices
+        from accounts.models import User
+        press_staff = User.objects.filter(role=User.Role.PRESS)
+        delivery_partners = User.objects.filter(role=User.Role.DELIVERY)
+        
+        context['status_choices'] = status_choices
+        context['press_staff'] = press_staff
+        context['delivery_partners'] = delivery_partners
+        context['all_statuses'] = Order.Status.choices
+        
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        order = self.get_object()
+        new_status = request.POST.get('status')
         
         # Validate status transition
         valid_transitions = {
@@ -174,18 +245,15 @@ class UpdateOrderStatusView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         if new_status in transitions:
             order.status = new_status
             # Assign staff if needed
-            if new_status == Order.Status.SCHEDULED_FOR_PICKUP and self.request.user.is_press:
-                order.assigned_staff = self.request.user
-            elif new_status == Order.Status.OUT_FOR_PICKUP and self.request.user.is_delivery:
-                order.delivery_person = self.request.user
+            if new_status == Order.Status.SCHEDULED_FOR_PICKUP and request.user.is_press:
+                order.assigned_staff = request.user
+            elif new_status == Order.Status.OUT_FOR_PICKUP and request.user.is_delivery:
+                order.delivery_person = request.user
                 
             order.save()
-            messages.success(self.request, f'Order status updated to {order.get_status_display()}')
+            messages.success(request, f'Order status updated to {order.get_status_display()}')
         else:
-            messages.error(self.request, 'Invalid status transition')
+            messages.error(request, 'Invalid status transition')
         
-        
-        return redirect(self.get_success_url())
-    
-    def get_success_url(self):
-        return reverse_lazy('dashboard:order_detail', kwargs={'pk': self.object.pk})
+        return redirect('dashboard:order_detail', pk=order.pk)
+

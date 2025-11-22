@@ -1,80 +1,38 @@
-INFO 2025-11-22 03:12:37,696 autoreload Watching for file changes with StatReloader
-INFO 2025-11-22 03:12:48,322 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:12:48,341 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:12:48,404 basehttp "GET /dashboard/press/ HTTP/1.1" 200 26309
-INFO 2025-11-22 03:12:53,686 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:12:53,704 basehttp "GET /dashboard/press/ HTTP/1.1" 200 25681
-INFO 2025-11-22 03:12:58,123 basehttp "GET /accounts/logout/ HTTP/1.1" 200 21799
-INFO 2025-11-22 03:12:59,413 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:12:59,429 basehttp "GET /accounts/login/ HTTP/1.1" 200 20102
-INFO 2025-11-22 03:13:06,433 basehttp "POST /accounts/login/ HTTP/1.1" 200 20078
-INFO 2025-11-22 03:13:13,169 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:13,182 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:13,250 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 27792
-INFO 2025-11-22 03:13:44,981 basehttp "GET / HTTP/1.1" 200 46635
-INFO 2025-11-22 03:13:46,818 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:46,832 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:46,897 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 27152
-INFO 2025-11-22 03:13:48,903 basehttp "GET /accounts/logout/ HTTP/1.1" 200 22074
-INFO 2025-11-22 03:13:50,334 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:50,348 basehttp "GET /accounts/login/ HTTP/1.1" 200 20100
-INFO 2025-11-22 03:13:55,537 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:55,550 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:13:55,613 basehttp "GET /dashboard/press/ HTTP/1.1" 200 26309
-INFO 2025-11-22 03:14:41,732 autoreload /home/mustafa/Desktop/Ironydjango/dashboard/views.py changed, reloading.
-INFO 2025-11-22 03:14:42,222 autoreload Watching for file changes with StatReloader
-INFO 2025-11-22 03:15:11,049 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
-INFO 2025-11-22 03:15:11,454 autoreload Watching for file changes with StatReloader
-INFO 2025-11-22 03:16:05,079 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 22733
-INFO 2025-11-22 03:16:05,119 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
-INFO 2025-11-22 03:16:05,119 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-22 03:16:05,120 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-22 03:16:05,120 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-22 03:16:05,281 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-22 03:16:05,284 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-22 03:16:05,521 log Not Found: /favicon.ico
-WARNING 2025-11-22 03:16:05,521 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
-INFO 2025-11-22 03:16:15,076 basehttp "GET /dashboard/press/ HTTP/1.1" 200 25681
-INFO 2025-11-22 03:16:15,090 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
-INFO 2025-11-22 03:16:15,090 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-22 03:16:15,090 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-22 03:16:15,091 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-22 03:16:15,247 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-22 03:16:15,250 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-22 03:16:15,391 log Not Found: /favicon.ico
-WARNING 2025-11-22 03:16:15,391 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
-INFO 2025-11-22 03:16:22,242 basehttp "GET /orders/create/ HTTP/1.1" 200 48478
-INFO 2025-11-22 03:16:37,261 basehttp "POST /orders/create/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:16:37,296 basehttp "GET /orders/5/ HTTP/1.1" 200 27428
-INFO 2025-11-22 03:16:46,134 basehttp "GET /dashboard/press/ HTTP/1.1" 200 27002
-INFO 2025-11-22 03:16:46,152 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
-INFO 2025-11-22 03:16:46,153 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
-INFO 2025-11-22 03:16:46,153 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
-INFO 2025-11-22 03:16:46,153 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
-INFO 2025-11-22 03:16:46,390 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
-INFO 2025-11-22 03:16:46,393 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
-WARNING 2025-11-22 03:16:46,689 log Not Found: /favicon.ico
-WARNING 2025-11-22 03:16:46,689 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
-INFO 2025-11-22 03:16:49,069 basehttp "POST /dashboard/order/5/update-status/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:16:49,096 basehttp "GET /dashboard/order/5/ HTTP/1.1" 200 32046
-INFO 2025-11-22 03:16:56,256 basehttp "GET /accounts/logout/ HTTP/1.1" 200 21799
-INFO 2025-11-22 03:16:57,778 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:16:57,793 basehttp "GET /accounts/login/ HTTP/1.1" 200 20104
-INFO 2025-11-22 03:17:19,072 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:17:19,087 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:17:19,150 basehttp "GET /dashboard/delivery/ HTTP/1.1" 200 27451
-INFO 2025-11-22 03:17:22,976 basehttp "POST /dashboard/order/5/update-status/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:17:22,999 basehttp "GET /dashboard/order/5/ HTTP/1.1" 200 30862
-INFO 2025-11-22 03:17:33,232 basehttp "GET /orders/5/ HTTP/1.1" 200 27479
-INFO 2025-11-22 03:17:50,022 basehttp "GET /accounts/logout/ HTTP/1.1" 200 21798
-INFO 2025-11-22 03:17:54,711 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:17:54,725 basehttp "GET /accounts/login/ HTTP/1.1" 200 20100
-INFO 2025-11-22 03:18:04,002 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:18:04,016 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:18:04,083 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 30108
-INFO 2025-11-22 03:18:09,245 basehttp "POST /dashboard/order/1/update-status/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:18:09,269 basehttp "GET /dashboard/order/1/ HTTP/1.1" 200 30828
-INFO 2025-11-22 03:18:13,522 basehttp "GET /dashboard/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:18:13,543 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 28742
-INFO 2025-11-22 03:18:19,937 basehttp "POST /dashboard/order/4/update-status/ HTTP/1.1" 302 0
-INFO 2025-11-22 03:18:19,962 basehttp "GET /dashboard/order/4/ HTTP/1.1" 200 31226
+INFO 2025-11-22 03:59:36,187 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 04:00:59,665 autoreload /home/mustafa/Desktop/Ironydjango/dashboard/views.py changed, reloading.
+INFO 2025-11-22 04:01:00,453 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 04:01:16,578 basehttp "GET /dashboard/order/1/update-status/ HTTP/1.1" 200 38001
+INFO 2025-11-22 04:01:16,679 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 04:01:16,681 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 04:01:16,683 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 04:01:16,690 basehttp "GET /static/css/style.css HTTP/1.1" 200 68617
+INFO 2025-11-22 04:01:17,038 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 04:01:17,047 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 04:01:17,464 log Not Found: /favicon.ico
+WARNING 2025-11-22 04:01:17,465 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+WARNING 2025-11-22 04:01:24,888 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-22 04:01:24,889 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 04:03:45,637 basehttp "GET /dashboard/order/1/update-status/ HTTP/1.1" 200 38589
+INFO 2025-11-22 04:03:45,724 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 04:03:45,732 basehttp "GET /static/css/style.css HTTP/1.1" 200 68617
+INFO 2025-11-22 04:03:45,736 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 04:03:45,744 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+WARNING 2025-11-22 04:03:45,793 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-22 04:03:45,795 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 04:03:46,155 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-22 04:03:46,162 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-22 04:03:46,564 log Not Found: /favicon.ico
+WARNING 2025-11-22 04:03:46,565 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-22 04:03:54,849 basehttp "POST /dashboard/order/1/update-status/ HTTP/1.1" 302 0
+INFO 2025-11-22 04:03:54,910 basehttp "GET /dashboard/order/1/ HTTP/1.1" 200 34695
+WARNING 2025-11-22 04:03:55,043 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-22 04:03:55,044 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 04:05:22,654 basehttp "GET /accounts/logout/ HTTP/1.1" 200 21799
+INFO 2025-11-22 04:05:24,162 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-22 04:05:24,199 basehttp "GET /accounts/login/ HTTP/1.1" 200 22748
+INFO 2025-11-22 04:05:30,583 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-22 04:05:30,610 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-22 04:05:30,705 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 34582
+INFO 2025-11-22 04:05:38,754 basehttp "POST /dashboard/order/2/update-status/ HTTP/1.1" 302 0
+INFO 2025-11-22 04:05:38,805 basehttp "GET /dashboard/order/2/ HTTP/1.1" 200 34287
+INFO 2025-11-22 04:05:45,004 basehttp "GET /orders/create/ HTTP/1.1" 200 51412
