@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    .order-card {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .status-badge {
+        font-size: 0.8rem;
+        padding: 0.35em 0.65em;
+    }
+    .order-timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin: 1.5rem 0;
+    }
+    .order-timeline::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e9ecef;
+    }
+    .timeline-step {
+        position: relative;
+        padding-bottom: 1.5rem;
+    }
+    .timeline-step:last-child {
+        padding-bottom: 0;
+    }
+    .timeline-step::before {
+        content: '';
+        position: absolute;
+        left: -2rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #dee2e6;
+        margin-top: 5px;
+    }
+    .timeline-step.active::before {
+        background: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+    }
+    .timeline-step.completed::before {
+        background: #198754;
+        box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h1 class="h2 mb-0">
+                    {% block page_title %}{% endblock %}
+                </h1>
+                <div class="btn-group" role="group">
+                    {% block header_actions %}{% endblock %}
+                </div>
+            </div>
+            
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    {% block breadcrumbs %}{% endblock %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Messages -->
+    {% if messages %}
+    <div class="row">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-center">
+                    {% if message.tags == 'success' %}
+                        <i class="fas fa-check-circle me-2"></i>
+                    {% elif message.tags == 'error' %}
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                    {% elif message.tags == 'warning' %}
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                    {% else %}
+                        <i class="fas fa-info-circle me-2"></i>
+                    {% endif %}
+                    <div>
+                        {{ message }}
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Main Content -->
+    <div class="row">
+        <div class="col-12">
+            {% block orders_content %}
+            {% endblock %}
+        </div>
+    </div>
+    
+    <!-- Status Update Modal -->
+    <div class="modal fade" id="statusUpdateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Order Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="statusUpdateForm" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div id="statusUpdateContent">
+                            <!-- Content will be loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Global function to handle status updates
+    function updateOrderStatus(orderId, status, title, contentUrl) {
+        const modal = new bootstrap.Modal(document.getElementById('statusUpdateModal'));
+        const modalTitle = document.querySelector('#statusUpdateModal .modal-title');
+        const modalContent = document.getElementById('statusUpdateContent');
+        const statusForm = document.getElementById('statusUpdateForm');
+        
+        // Set modal title
+        modalTitle.textContent = title || 'Update Order Status';
+        
+        // Load content dynamically if URL is provided
+        if (contentUrl) {
+            fetch(contentUrl)
+                .then(response => response.text())
+                .then(html => {
+                    modalContent.innerHTML = html;
+                    statusForm.action = `/orders/${orderId}/update-status/`;
+                    if (status) {
+                        const statusInput = document.createElement('input');
+                        statusInput.type = 'hidden';
+                        statusInput.name = 'status';
+                        statusInput.value = status;
+                        statusForm.appendChild(statusInput);
+                    }
+                    modal.show();
+                });
+        } else {
+            if (status) {
+                modalContent.innerHTML = `
+                    <p>Are you sure you want to update the status of this order?</p>
+                    <input type="hidden" name="status" value="${status}">
+                `;
+            }
+            statusForm.action = `/orders/${orderId}/update-status/`;
+            modal.show();
+        }
+    }
+    
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+{% endblock %}

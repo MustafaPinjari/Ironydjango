@@ -27,8 +27,8 @@ urlpatterns = [
     # Custom accounts app URLs
     path('profile/', include('accounts.urls')),
     
-    # Dashboard app
-    path('dashboard/', include('dashboard.urls')),
+    # Orders app
+    path('orders/', include('orders.urls', namespace='orders')),
     
     # API endpoints
     path('api/', include('api.urls')),

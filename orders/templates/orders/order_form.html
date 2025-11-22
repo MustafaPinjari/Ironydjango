@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}{% if form.instance.pk %}Update{% else %}Create{% endif %} Order - Ironyy{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+/* Style form labels */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Style form sections */
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: #4e73df;
+    color: white;
+}
+
+.card-header h4 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Form styling */
+.form-control, .form-select {
+    border-radius: 0.35rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d3e2;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #bac8f3;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Button styling */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.35rem;
+    transition: all 0.3s;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .d-flex {
+        flex-direction: column;
+    }
+    
+    .me-1 {
+        margin-right: 0.25rem !important;
+    }
+}
+
+/* Form sections */
+.form-section {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: #f8f9fc;
+    border-radius: 0.35rem;
+    border: 1px solid #e3e6f0;
+}
+
+.form-section h5 {
+    color: #4e73df;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e3e6f0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{% if form.instance.pk %}Update{% else %}Create New{% endif %} Order</h1>
+        <a href="{% if form.instance.pk %}{% url 'orders:detail' form.instance.pk %}{% else %}{% url 'orders:list' %}{% endif %}" 
+           class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+            <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back to Orders
+        </a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Order Details</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="orderForm" class="needs-validation" novalidate action="{% if form.instance.pk %}{% url 'orders:update' form.instance.pk %}{% else %}{% url 'orders:create' %}{% endif %}">
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Delivery Type -->
+                        <div class="form-group mb-4">
+                            <label class="form-label">Delivery Type</label>
+                            {{ form.delivery_type|as_crispy_field }}
+                        </div>
+                        
+                        <!-- Address Fields -->
+                        <div class="form-section" id="pickupAddressSection">
+                            <h5>Pickup Information</h5>
+                            <div class="form-group">
+                                {{ form.pickup_address|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.preferred_pickup_date|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        <div class="form-section" id="deliveryAddressSection">
+                            <h5>Delivery Information</h5>
+                            <div class="form-group">
+                                {{ form.delivery_address|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.preferred_delivery_date|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        <!-- Special Instructions -->
+                        <div class="form-group mb-4">
+                            <label class="form-label">Special Instructions</label>
+                            {{ form.special_instructions|as_crispy_field }}
+                            <small class="form-text text-muted">Any special instructions for your order (optional)</small>
+                        </div>
+                        
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-between mt-5">
+                            <a href="{% if form.instance.pk %}{% url 'orders:detail' form.instance.pk %}{% else %}{% url 'orders:list' %}{% endif %}" 
+                               class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> {% if form.instance.pk %}Update{% else %}Create{% endif %} Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar with Help -->
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Order Help</h6>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-primary">Need help with your order?</h5>
+                    <p>Fill in the required details on the left to create a new order. Here are some tips:</p>
+                    <ul>
+                        <li>Select the appropriate delivery type (Pickup or Delivery)</li>
+                        <li>Provide accurate pickup and delivery addresses</li>
+                        <li>Select your preferred dates for pickup and delivery</li>
+                        <li>Add any special instructions for our team</li>
+                    </ul>
+                    <p class="mb-0">For urgent inquiries, please contact our support team at <a href="mailto:support@ironyy.com">support@ironyy.com</a> or call us at <strong>+1 (555) 123-4567</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle delivery address based on delivery type
+    const deliverySection = document.getElementById('deliveryAddressSection');
+    const deliveryTypeSelect = document.querySelector('select[name="delivery_type"]');
+    
+    // Function to toggle address sections
+    function toggleAddressSections() {
+        if (!deliveryTypeSelect || !deliverySection) return;
+        
+        const deliveryType = deliveryTypeSelect.value;
+        deliverySection.style.display = (deliveryType === 'delivery') ? 'block' : 'none';
+    }
+    
+    // Set up event listeners
+    if (deliveryTypeSelect) {
+        deliveryTypeSelect.addEventListener('change', toggleAddressSections);
+        toggleAddressSections(); // Initial call
+    }
+    
+    // Set minimum date for date inputs
+    const today = new Date().toISOString().split('T')[0];
+    
+    const pickupDateInput = document.getElementById('id_preferred_pickup_date');
+    const deliveryDateInput = document.getElementById('id_preferred_delivery_date');
+    
+    if (pickupDateInput) pickupDateInput.min = today;
+    if (deliveryDateInput) deliveryDateInput.min = today;
+    
+    // Add form validation
+    const form = document.getElementById('orderForm');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    }
+});
+</script>
+{% endblock %}

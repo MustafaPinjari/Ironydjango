@@ -1,0 +1,205 @@
+{% extends 'orders/base_orders.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Assigned Orders</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Assigned</h5>
+                            <h2 class="mb-0">{{ assigned_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">In Progress</h5>
+                            <h2 class="mb-0">{{ in_progress_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Ready</h5>
+                            <h2 class="mb-0">{{ ready_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-secondary text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Completed</h5>
+                            <h2 class="mb-0">{{ completed_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if not request.GET.status %}active{% endif %}" 
+                               href="{% url 'orders:press_dashboard' %}">All Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'assigned' %}active{% endif %}" 
+                               href="?status=assigned">Assigned</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'in_progress' %}active{% endif %}" 
+                               href="?status=in_progress">In Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'ready' %}active{% endif %}" 
+                               href="?status=ready">Ready</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if orders %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Customer</th>
+                                        <th>Assigned Date</th>
+                                        <th>Status</th>
+                                        <th>Items</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.order_number }}</td>
+                                        <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                                        <td>{{ order.assigned_at|date:"M d, Y"|default:"-" }}</td>
+                                        <td>
+                                            <span class="badge {% if order.status == 'completed' %}bg-success{% elif order.status == 'cancelled' %}bg-danger{% else %}bg-info{% endif %}">
+                                                {{ order.get_status_display }}
+                                            </span>
+                                        </td>
+                                        <td>{{ order.items.count }} items</td>
+                                        <td>
+                                            <a href="{% url 'orders:detail' order.pk %}" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                            {% if order.status == 'assigned' %}
+                                                <form method="post" action="{% url 'orders:update_status' order.pk %}" class="d-inline">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="status" value="processing">
+                                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                                        <i class="fas fa-play"></i> Start
+                                                    </button>
+                                                </form>
+                                            {% elif order.status == 'processing' %}
+                                                <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#completeModal{{ order.id }}">
+                                                    <i class="fas fa-check"></i> Mark Ready
+                                                </button>
+                                                
+                                                <!-- Complete Modal -->
+                                                <div class="modal fade" id="completeModal{{ order.id }}" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="completeModalLabel">Mark Order as Ready</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form method="post" action="{% url 'orders:update_status' order.pk %}">
+                                                                {% csrf_token %}
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to mark this order as ready?</p>
+                                                                    <input type="hidden" name="status" value="ready">
+                                                                    <div class="mb-3">
+                                                                        <label for="notes{{ order.id }}" class="form-label">Notes (Optional)</label>
+                                                                        <textarea class="form-control" id="notes{{ order.id }}" name="notes" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-primary">Mark as Ready</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        {% if is_paginated %}
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == num %}
+                                            <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ num }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">{{ num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+                        
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                            <h5>No orders assigned</h5>
+                            <p class="text-muted">You don't have any orders assigned to you at the moment.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-refresh the page every 60 seconds to check for new assignments
+    setTimeout(function() {
+        window.location.reload();
+    }, 60000);
+    
+    // Initialize any modals if needed
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+{% endblock %}

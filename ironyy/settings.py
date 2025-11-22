@@ -58,7 +58,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Change in pr
 DEFAULT_FROM_EMAIL = 'noreply@ironyy.com'
 
 # Login/Logout settings
-LOGIN_REDIRECT_URL = 'dashboard:home'
+LOGIN_REDIRECT_URL = 'orders:customer_dashboard'  # Default redirect after login
 LOGIN_URL = 'account_login'
 LOGOUT_REDIRECT_URL = 'account_login'
 
@@ -74,8 +74,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',  # For human-readable formatting in templates
     # Local apps
     'accounts.apps.AccountsConfig',
-    
     'dashboard.apps.DashboardConfig',
+    'orders.apps.OrdersConfig',
+    'services.apps.ServicesConfig',
     # Third-party apps
     'crispy_forms',
     'crispy_bootstrap5',
@@ -97,6 +98,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'orders.middleware.DashboardRedirectMiddleware',  # Custom middleware for role-based redirects
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',  # Required by django-allauth
 ]

@@ -1,0 +1,294 @@
+{% extends 'orders/base_orders.html' %}
+{% load static humanize %}
+
+{% block page_title %}Admin Dashboard{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active" aria-current="page">Admin Dashboard</li>
+{% endblock %}
+
+{% block orders_content %}
+<div class="row">
+    <!-- Summary Cards -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Orders</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_orders|intcomma }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Pending Orders</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_orders|intcomma }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            In Progress</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ in_progress_orders|intcomma }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-tasks fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Ready for Delivery</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ ready_orders|intcomma }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Orders -->
+    <div class="col-lg-8 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+                <a href="{% url 'admin:orders_order_changelist' %}" class="btn btn-sm btn-primary">
+                    View All
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Customer</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in recent_orders %}
+                            <tr>
+                                <td>{{ order.order_number }}</td>
+                                <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                                <td>
+                                    <span class="badge {% if order.status == 'completed' %}bg-success{% elif order.status == 'cancelled' %}bg-danger{% else %}bg-info{% endif %}">
+                                        {{ order.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>₹{{ order.total_amount|floatformat:2 }}</td>
+                                <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                <td>
+                                    <a href="{% url 'orders:detail' order.pk %}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">No recent orders found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Performance -->
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Top Performing Staff</h6>
+            </div>
+            <div class="card-body">
+                {% if staff_performance %}
+                    {% for staff in staff_performance %}
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="font-weight-bold">
+                                {{ staff.assigned_staff__first_name }} {{ staff.assigned_staff__last_name }}
+                                <small class="text-muted">({{ staff.assigned_staff__email }})</small>
+                            </span>
+                            <span class="badge bg-primary">{{ staff.total_orders }} orders</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {{ staff.total_orders|floatformat:0 }}%" 
+                                 aria-valuenow="{{ staff.total_orders }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                            </div>
+                        </div>
+                        <small class="text-muted">
+                            Avg. processing time: 
+                            {{ staff.avg_processing_time|default:"N/A" }}
+                        </small>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted">No performance data available yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row
+
+<!-- Order Status Chart -->
+<div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Order Status Distribution</h6>
+        </div>
+        <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+                <canvas id="orderStatusChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+                <span class="mr-2">
+                    <i class="fas fa-circle text-primary"></i> Pending
+                </span>
+                <span class="mr-2">
+                    <i class="fas fa-circle text-info"></i> In Progress
+                </span>
+                <span class="mr-2">
+                    <i class="fas fa-circle text-warning"></i> Ready
+                </span>
+                <span class="mr-2">
+                    <i class="fas fa-circle text-success"></i> Completed
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activities -->
+<div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Recent Activities</h6>
+        </div>
+        <div class="card-body">
+            <div class="timeline">
+                {% for activity in recent_activities|slice:":5" %}
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-circle text-{{ activity.icon_color }}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <p class="mb-1">
+                            <strong>{{ activity.user.get_full_name|default:activity.user.email }}</strong>
+                            {{ activity.action }}
+                            <span class="text-muted small">{{ activity.timestamp|timesince }} ago</span>
+                        </p>
+                        {% if activity.details %}
+                        <p class="small text-muted mb-0">{{ activity.details }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted">No recent activities found.</p>
+                {% endfor %}
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'admin:logentry_changelist' %}" class="btn btn-sm btn-primary">
+                    View All Activities
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Order Status Chart
+const ctx = document.getElementById('orderStatusChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pending', 'In Progress', 'Ready', 'Completed', 'Cancelled'],
+            datasets: [{
+                data: [
+                    {{ status_counts.pending|default:0 }}, 
+                    {{ status_counts.processing|default:0 }}, 
+                    {{ status_counts.ready|default:0 }}, 
+                    {{ status_counts.completed|default:0 }}, 
+                    {{ status_counts.cancelled|default:0 }}
+                ],
+                backgroundColor: ['#4e73df', '#36b9cc', '#f6c23e', '#1cc88a', '#e74a3b'],
+                hoverBackgroundColor: ['#2e59d9', '#2c9faf', '#dda20a', '#17a673', '#be2617'],
+                hoverBorderColor: 'rgba(234, 236, 244, 1)',
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgb(255,255,255)',
+                    bodyFontColor: '#858796',
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+            },
+            cutout: '80%',
+        },
+    });
+}
+
+// Auto-refresh the page every 5 minutes to get updated data
+setTimeout(function() {
+    window.location.reload();
+}, 5 * 60 * 1000);
+</script>
+{% endblock %}

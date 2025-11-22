@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Order Confirmation - Ironyy{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Order Confirmation</h1>
+        <div>
+            <a href="{% url 'orders:list' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Orders
+            </a>
+            <a href="{% url 'orders:detail' order.pk %}" class="btn btn-primary ml-2">
+                <i class="fas fa-eye"></i> View Order Details
+            </a>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Order Summary Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Thank you for your order!</h6>
+                    <span class="badge bg-success text-white">{{ order.get_status_display }}</span>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        <h3 class="mt-3">Order #{{ order.order_number }} has been received!</h3>
+                        <p class="lead">We've sent a confirmation email to {{ order.customer.email }}</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Order Details</h5>
+                            <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+                            <p><strong>Order Date:</strong> {{ order.created_at|date:"F j, Y H:i" }}</p>
+                            <p><strong>Delivery Type:</strong> {{ order.get_delivery_type_display }}</p>
+                            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+                            {% if order.assigned_staff %}
+                                <p><strong>Assigned Staff:</strong> {{ order.assigned_staff.get_full_name|default:order.assigned_staff.username }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Delivery Information</h5>
+                            <p><strong>Pickup Address:</strong> {{ order.pickup_address|linebreaksbr }}</p>
+                            {% if order.delivery_type == 'delivery' %}
+                                <p><strong>Delivery Address:</strong> {{ order.delivery_address|linebreaksbr }}</p>
+                                <p><strong>Preferred Delivery Date:</strong> {{ order.preferred_delivery_date|date:"F j, Y" }}</p>
+                            {% endif %}
+                            <p><strong>Preferred Pickup Date:</strong> {{ order.preferred_pickup_date|date:"F j, Y" }}</p>
+                        </div>
+                    </div>
+
+                    {% if order.special_instructions %}
+                        <div class="mt-4">
+                            <h5>Special Instructions</h5>
+                            <p>{{ order.special_instructions|linebreaks }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Next Steps Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">What Happens Next?</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-tshirt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6>Step 1: Pickup</h6>
+                                    <p class="mb-0 text-muted small">We'll pick up your items on the scheduled date.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-spa text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6>Step 2: Processing</h6>
+                                    <p class="mb-0 text-muted small">Our team will process your order with care.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-truck text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6>Step 3: Delivery</h6>
+                                    <p class="mb-0 text-muted small">Your items will be delivered to your doorstep.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6>Step 4: Enjoy!</h6>
+                                    <p class="mb-0 text-muted small">Your clothes are fresh and ready to wear!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Order Summary Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Order Summary</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Subtotal</span>
+                        <span>₹{{ order.subtotal|floatformat:2|intcomma }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Delivery Fee</span>
+                        <span>{% if order.delivery_fee %}{{ order.currency }} {{ order.delivery_fee|floatformat:2|intcomma }}{% else %}Free{% endif %}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Tax ({{ order.tax_rate }}%)</span>
+                        <span>₹{{ order.tax_amount|floatformat:2|intcomma }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-1">
+                        <strong>Total</strong>
+                        <strong>₹{{ order.total|floatformat:2|intcomma }}</strong>
+                    </div>
+                    <small class="text-muted">Inclusive of all taxes</small>
+                </div>
+            </div>
+
+            <!-- Support Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Need Help?</h6>
+                </div>
+                <div class="card-body">
+                    <p>If you have any questions about your order, our customer service team is happy to help.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-phone-alt text-primary mr-2"></i>
+                            <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope text-primary mr-2"></i>
+                            <a href="mailto:support@ironyy.com">support@ironyy.com</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-comment-dots text-primary mr-2"></i>
+                            <a href="#" data-toggle="modal" data-target="#chatModal">Live Chat</a>
+                        </li>
+                    </ul>
+                    <a href="{% url 'orders:list' %}" class="btn btn-outline-primary btn-block mt-3">
+                        <i class="fas fa-list"></i> View All Orders
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+// Add any custom JavaScript for the order confirmation page here
+</script>
+{% endblock %}

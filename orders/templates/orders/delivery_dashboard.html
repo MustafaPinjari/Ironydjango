@@ -1,0 +1,275 @@
+{% extends 'orders/base_orders.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Delivery Dashboard</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Assigned</h5>
+                            <h2 class="mb-0">{{ assigned_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Out for Delivery</h5>
+                            <h2 class="mb-0">{{ out_for_delivery_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Delivered</h5>
+                            <h2 class="mb-0">{{ delivered_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-secondary text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Total</h5>
+                            <h2 class="mb-0">{{ total_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if not request.GET.status %}active{% endif %}" 
+                               href="{% url 'orders:delivery_dashboard' %}">All Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'ready' %}active{% endif %}" 
+                               href="?status=ready">Ready for Delivery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'out_for_delivery' %}active{% endif %}" 
+                               href="?status=out_for_delivery">Out for Delivery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.status == 'delivered' %}active{% endif %}" 
+                               href="?status=delivered">Delivered</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if orders %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Customer</th>
+                                        <th>Delivery Address</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.order_number }}</td>
+                                        <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                                        <td>
+                                            {% if order.delivery_type == 'delivery' %}
+                                                {{ order.delivery_address|truncatechars:30 }}
+                                            {% else %}
+                                                <span class="text-muted">Customer Pickup</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge {% if order.status == 'completed' %}bg-success{% elif order.status == 'cancelled' %}bg-danger{% elif order.status == 'out_for_delivery' %}bg-warning{% else %}bg-info{% endif %}">
+                                                {{ order.get_status_display }}
+                                            </span>
+                                        </td>
+                                        <td>₹{{ order.total_amount|floatformat:2 }}</td>
+                                        <td>
+                                            <a href="{% url 'orders:detail' order.pk %}" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                            
+                                            {% if order.status == 'ready' and order.delivery_type == 'delivery' %}
+                                                <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#outForDeliveryModal{{ order.id }}">
+                                                    <i class="fas fa-truck"></i> Out for Delivery
+                                                </button>
+                                                
+                                                <!-- Out for Delivery Modal -->
+                                                <div class="modal fade" id="outForDeliveryModal{{ order.id }}" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Mark as Out for Delivery</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form method="post" action="{% url 'orders:update_status' order.pk %}">
+                                                                {% csrf_token %}
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to mark this order as out for delivery?</p>
+                                                                    <input type="hidden" name="status" value="out_for_delivery">
+                                                                    <div class="mb-3">
+                                                                        <label for="deliveryNotes{{ order.id }}" class="form-label">Delivery Notes (Optional)</label>
+                                                                        <textarea class="form-control" id="deliveryNotes{{ order.id }}" name="notes" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-warning">Mark as Out for Delivery</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            {% elif order.status == 'out_for_delivery' %}
+                                                <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#deliveredModal{{ order.id }}">
+                                                    <i class="fas fa-check-circle"></i> Mark Delivered
+                                                </button>
+                                                
+                                                <!-- Delivered Modal -->
+                                                <div class="modal fade" id="deliveredModal{{ order.id }}" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Mark as Delivered</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form method="post" action="{% url 'orders:update_status' order.pk %}">
+                                                                {% csrf_token %}
+                                                                <div class="modal-body">
+                                                                    <p>Please confirm that the order has been delivered to the customer.</p>
+                                                                    <input type="hidden" name="status" value="completed">
+                                                                    <div class="mb-3">
+                                                                        <label for="deliveryProof{{ order.id }}" class="form-label">Delivery Notes (Optional)</label>
+                                                                        <textarea class="form-control" id="deliveryProof{{ order.id }}" name="notes" rows="3" placeholder="Any additional notes about the delivery..."></textarea>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="otpVerification{{ order.id }}" class="form-label">OTP Verification</label>
+                                                                        <input type="text" class="form-control" id="otpVerification{{ order.id }}" name="otp" placeholder="Enter OTP from customer" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-success">Confirm Delivery</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        {% if is_paginated %}
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == num %}
+                                            <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ num }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">{{ num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+                        
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                            <h5>No delivery orders found</h5>
+                            <p class="text-muted">There are no orders matching your current filter.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Map View Toggle (Future Enhancement) -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#mapView" aria-expanded="false" aria-controls="mapView">
+                            <i class="fas fa-map-marked-alt"></i> View Deliveries on Map
+                        </button>
+                    </h5>
+                </div>
+                <div id="mapView" class="collapse">
+                    <div class="card-body">
+                        <div id="deliveryMap" style="height: 400px; width: 100%;">
+                            <div class="text-center py-5">
+                                <i class="fas fa-map-marked-alt fa-4x text-muted mb-3"></i>
+                                <p class="text-muted">Map view will be available here in the next update.</p>
+                                <p class="small">This will show all your deliveries on an interactive map with optimized routes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-refresh the page every 60 seconds to check for new deliveries
+    setTimeout(function() {
+        window.location.reload();
+    }, 60000);
+    
+    // Initialize any modals or tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Initialize map (future implementation)
+        // This is a placeholder for future map integration
+        function initMap() {
+            // Will be implemented with Google Maps or similar service
+            console.log('Map initialization will be implemented here');
+        }
+        
+        // Load map when the map view is shown
+        document.getElementById('mapView').addEventListener('shown.bs.collapse', function () {
+            initMap();
+        });
+    });
+</script>
+{% endblock %}

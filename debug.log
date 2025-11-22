@@ -122,3 +122,1085 @@ WARNING 2025-11-12 13:23:24,123 log Not Found: /favicon.ico
 WARNING 2025-11-12 13:23:24,124 basehttp "GET /favicon.ico HTTP/1.1" 404 17373
 INFO 2025-11-12 13:23:35,333 basehttp "POST /orders/create/ HTTP/1.1" 200 82889
 WARNING 2025-11-12 13:23:35,373 basehttp "GET /static/js/script.js HTTP/1.1" 404 1896
+INFO 2025-11-15 04:47:24,219 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 03:40:27,143 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:09:59,962 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:13:41,518 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/settings.py changed, reloading.
+INFO 2025-11-19 04:13:41,891 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-19 04:14:25,691 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'orders'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'orders' is not a registered namespace
+ERROR 2025-11-19 04:14:25,731 basehttp "GET / HTTP/1.1" 500 180752
+INFO 2025-11-19 04:14:25,772 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 04:14:25,773 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 04:14:25,851 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 04:14:25,901 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 04:14:26,046 log Not Found: /favicon.ico
+WARNING 2025-11-19 04:14:26,046 basehttp "GET /favicon.ico HTTP/1.1" 404 17753
+INFO 2025-11-19 04:14:42,649 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-19 04:14:51,981 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'orders'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'orders' is not a registered namespace
+ERROR 2025-11-19 04:14:52,021 basehttp "GET / HTTP/1.1" 500 180752
+INFO 2025-11-19 04:15:40,233 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/urls.py changed, reloading.
+INFO 2025-11-19 04:15:40,600 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:15:55,023 autoreload /home/mustafa/Desktop/Ironydjango/orders/urls.py changed, reloading.
+INFO 2025-11-19 04:15:55,359 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:26:22,751 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:26:25,067 autoreload /home/mustafa/Desktop/Ironydjango/orders/models.py changed, reloading.
+INFO 2025-11-19 04:26:25,399 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:40:08,884 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:42:35,020 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:44:25,574 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 04:44:32,378 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 15:49:44,201 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 15:50:47,076 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-19 15:50:55,075 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 320, in render
+    match = condition.eval(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 886, in eval
+    return self.value.resolve(context, ignore_failures=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 722, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 40, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 20, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 304, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 95, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 231, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 157, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-11-19 15:50:55,156 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 403, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 74, in get
+    return self._session.get(key, default)
+           ^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 231, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 157, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-11-19 15:50:55,351 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 145, in __call__
+    return self._postprocess(request, response, toolbar)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 182, in _postprocess
+    panel.generate_stats(request, response)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/request.py", line 62, in generate_stats
+    session_data = dict(request.session)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 160, in keys
+    return self._session.keys()
+           ^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-11-19 15:50:55,358 basehttp "GET / HTTP/1.1" 500 181116
+ERROR 2025-11-19 15:50:55,891 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 403, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 74, in get
+    return self._session.get(key, default)
+           ^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 231, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 157, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-11-19 15:50:56,057 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 145, in __call__
+    return self._postprocess(request, response, toolbar)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 182, in _postprocess
+    panel.generate_stats(request, response)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/request.py", line 62, in generate_stats
+    session_data = dict(request.session)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 160, in keys
+    return self._session.keys()
+           ^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-11-19 15:50:56,064 basehttp "GET /favicon.ico HTTP/1.1" 500 179943
+INFO 2025-11-19 15:52:09,092 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 15:52:11,161 basehttp "GET / HTTP/1.1" 200 45393
+WARNING 2025-11-19 15:52:11,236 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 15:52:11,241 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 15:52:11,243 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 15:52:11,244 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 15:52:11,246 basehttp "GET /static/images/iron.png HTTP/1.1" 200 383363
+INFO 2025-11-19 15:52:11,904 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 15:52:11,905 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 15:52:11,990 log Not Found: /favicon.ico
+WARNING 2025-11-19 15:52:11,991 basehttp "GET /favicon.ico HTTP/1.1" 404 17905
+INFO 2025-11-19 15:52:13,542 basehttp "GET /accounts/login/ HTTP/1.1" 200 19872
+WARNING 2025-11-19 15:52:13,583 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 15:57:19,337 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 15:57:24,507 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-19 15:57:24,536 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+ERROR 2025-11-19 15:57:24,652 log Internal Server Error: /dashboard/customer/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: orders_order
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/paginator.py", line 110, in count
+    return c()
+           ^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/query.py", line 606, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 644, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 626, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 231, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 157, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: orders_order
+ERROR 2025-11-19 15:57:24,742 basehttp "GET /dashboard/customer/ HTTP/1.1" 500 227251
+INFO 2025-11-19 15:57:24,783 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 15:57:24,784 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 15:57:24,980 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 15:57:25,071 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 15:57:25,272 log Not Found: /favicon.ico
+WARNING 2025-11-19 15:57:25,272 basehttp "GET /favicon.ico HTTP/1.1" 404 17903
+INFO 2025-11-19 15:58:43,468 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 15:58:46,020 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 23556
+WARNING 2025-11-19 15:58:46,084 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 15:58:46,087 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 15:58:46,088 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 15:58:46,088 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 15:58:46,249 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 15:58:46,257 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 15:58:47,554 log Not Found: /favicon.ico
+WARNING 2025-11-19 15:58:47,555 basehttp "GET /favicon.ico HTTP/1.1" 404 17903
+ERROR 2025-11-19 15:58:49,983 log Internal Server Error: /orders/create/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 36, in get_form
+    form_class = self.get_form_class()
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 108, in get_form_class
+    return model_forms.modelform_factory(model, fields=self.fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/forms/models.py", line 654, in modelform_factory
+    return type(form)(class_name, (form,), form_class_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/forms/models.py", line 334, in __new__
+    raise FieldError(message)
+django.core.exceptions.FieldError: Unknown field(s) (items, shipping_address) specified for Order
+ERROR 2025-11-19 15:58:50,042 basehttp "GET /orders/create/ HTTP/1.1" 500 142298
+INFO 2025-11-19 16:00:06,260 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-19 16:00:09,134 log Internal Server Error: /orders/create/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: orders/order_form.html
+ERROR 2025-11-19 16:00:09,192 basehttp "GET /orders/create/ HTTP/1.1" 500 114642
+INFO 2025-11-19 16:00:09,250 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:00:09,251 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:00:09,303 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:00:09,368 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:00:09,497 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:00:09,498 basehttp "GET /favicon.ico HTTP/1.1" 404 17903
+INFO 2025-11-19 16:06:56,379 autoreload /home/mustafa/Desktop/Ironydjango/orders/urls.py changed, reloading.
+INFO 2025-11-19 16:06:57,038 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:07:48,957 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/settings.py changed, reloading.
+INFO 2025-11-19 16:07:49,643 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:13:45,597 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-19 16:13:54,522 log Internal Server Error: /orders/create/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: orders/order_form.html
+ERROR 2025-11-19 16:13:54,579 basehttp "GET /orders/create/ HTTP/1.1" 500 114773
+INFO 2025-11-19 16:13:54,632 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:13:54,633 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:13:54,682 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:13:54,749 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:13:54,874 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:13:54,874 basehttp "GET /favicon.ico HTTP/1.1" 404 17903
+INFO 2025-11-19 16:15:29,867 basehttp "GET /orders/create/ HTTP/1.1" 200 26644
+WARNING 2025-11-19 16:15:29,935 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:15:29,938 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:15:29,939 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:15:29,939 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:15:30,283 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:15:30,289 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:15:30,515 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:15:30,515 basehttp "GET /favicon.ico HTTP/1.1" 404 17903
+INFO 2025-11-19 16:16:48,400 basehttp "POST /orders/create/ HTTP/1.1" 200 26978
+WARNING 2025-11-19 16:16:48,470 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:18:52,428 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/urls.py changed, reloading.
+INFO 2025-11-19 16:18:53,180 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:19:13,294 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/settings.py changed, reloading.
+INFO 2025-11-19 16:19:13,976 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:20:44,975 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:21:32,902 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:21:35,691 basehttp "POST /orders/create/ HTTP/1.1" 200 30172
+WARNING 2025-11-19 16:21:35,800 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:21:35,801 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:21:35,801 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:21:35,802 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:21:37,895 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:21:37,903 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:21:38,132 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:21:38,132 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-19 16:21:42,960 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:21:42,999 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:21:46,029 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:21:46,060 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:23:28,002 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:23:28,707 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:23:52,952 autoreload /home/mustafa/Desktop/Ironydjango/orders/urls.py changed, reloading.
+INFO 2025-11-19 16:23:53,587 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:24:06,416 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:24:07,105 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:24:17,883 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:24:18,525 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:25:30,008 basehttp "POST /orders/create/ HTTP/1.1" 200 30172
+WARNING 2025-11-19 16:25:30,089 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:25:30,091 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:25:30,092 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:25:30,092 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:25:30,260 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:25:30,260 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:25:30,424 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:25:30,424 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-19 16:25:33,457 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:25:33,494 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:06,122 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:06,177 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:07,853 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:07,889 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:08,862 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:08,893 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:09,673 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:09,705 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:10,412 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:10,438 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:11,416 basehttp "POST /orders/create/ HTTP/1.1" 200 30170
+WARNING 2025-11-19 16:26:11,445 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:26:15,140 basehttp "POST /orders/create/ HTTP/1.1" 200 30175
+WARNING 2025-11-19 16:26:15,169 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:27:07,078 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:27:07,751 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:27:42,468 basehttp "POST /orders/create/ HTTP/1.1" 200 30217
+WARNING 2025-11-19 16:27:42,552 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:27:42,555 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:27:42,555 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:27:42,556 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:27:42,789 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:27:42,797 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:27:43,947 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:27:43,947 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-19 16:27:47,475 basehttp "POST /orders/create/ HTTP/1.1" 200 30215
+WARNING 2025-11-19 16:27:47,510 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-11-19 16:27:49,910 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-19 16:27:49,911 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-19 16:28:23,131 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:28:35,958 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:28:36,659 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:29:37,104 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:29:45,543 basehttp "POST /orders/create/ HTTP/1.1" 200 30641
+WARNING 2025-11-19 16:29:45,604 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:29:45,607 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:29:45,607 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:29:45,608 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:29:50,637 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:29:50,644 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:29:51,123 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:29:51,124 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-19 16:29:53,246 basehttp "POST /orders/create/ HTTP/1.1" 200 30639
+WARNING 2025-11-19 16:29:53,282 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:30:35,872 autoreload /home/mustafa/Desktop/Ironydjango/orders/views.py changed, reloading.
+INFO 2025-11-19 16:30:36,558 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:33:13,456 autoreload Watching for file changes with StatReloader
+INFO 2025-11-19 16:33:15,826 basehttp "POST /orders/create/ HTTP/1.1" 200 30148
+WARNING 2025-11-19 16:33:15,928 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-19 16:33:15,930 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-19 16:33:15,931 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-19 16:33:15,931 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+INFO 2025-11-19 16:33:16,143 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-19 16:33:16,153 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-19 16:33:16,940 log Not Found: /favicon.ico
+WARNING 2025-11-19 16:33:16,941 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+ERROR 2025-11-19 16:33:21,835 log Internal Server Error: /orders/
+Traceback (most recent call last):
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mustafa/Desktop/Ironydjango/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+ERROR 2025-11-19 16:33:21,981 basehttp "GET /orders/ HTTP/1.1" 500 204490
+INFO 2025-11-19 16:33:27,518 basehttp "POST /orders/create/ HTTP/1.1" 200 30202
+WARNING 2025-11-19 16:33:27,560 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-11-19 16:33:31,111 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-19 16:33:31,112 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 01:37:25,537 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:37:28,654 basehttp "GET / HTTP/1.1" 200 46527
+INFO 2025-11-22 01:37:28,693 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
+INFO 2025-11-22 01:37:28,693 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-22 01:37:28,697 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+WARNING 2025-11-22 01:37:28,759 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-22 01:37:28,760 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+INFO 2025-11-22 01:37:28,786 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+INFO 2025-11-22 01:37:28,786 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+WARNING 2025-11-22 01:37:28,938 log Not Found: /favicon.ico
+WARNING 2025-11-22 01:37:28,939 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-22 01:37:32,200 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-22 01:37:32,223 basehttp "GET /orders/dashboard/ HTTP/1.1" 200 22046
+WARNING 2025-11-22 01:37:32,287 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-22 01:37:34,474 basehttp "GET /orders/create/ HTTP/1.1" 200 29792
+WARNING 2025-11-22 01:37:34,494 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-11-22 01:37:45,335 basehttp "POST /orders/create/ HTTP/1.1" 200 30207
+WARNING 2025-11-22 01:37:45,354 basehttp "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-11-22 01:37:48,565 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-22 01:37:48,565 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 01:38:47,612 autoreload /home/mustafa/Desktop/Ironydjango/orders/models.py changed, reloading.
+INFO 2025-11-22 01:38:47,981 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:39:31,110 autoreload /home/mustafa/Desktop/Ironydjango/orders/models.py changed, reloading.
+INFO 2025-11-22 01:39:31,445 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:39:38,537 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:39:56,743 autoreload /home/mustafa/Desktop/Ironydjango/orders/models.py changed, reloading.
+INFO 2025-11-22 01:39:57,056 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:40:06,568 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 01:40:09,461 basehttp "POST /orders/create/ HTTP/1.1" 302 0
+INFO 2025-11-22 01:40:09,492 basehttp "GET /orders/1/confirmation/ HTTP/1.1" 200 27058
+INFO 2025-11-22 01:40:09,603 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 01:40:09,605 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 01:40:09,606 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 01:40:09,606 basehttp "GET /static/css/style.css HTTP/1.1" 200 76275
+WARNING 2025-11-22 01:40:09,617 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-22 01:40:09,617 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17898
+INFO 2025-11-22 01:40:09,726 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 01:40:09,736 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 01:40:09,931 log Not Found: /favicon.ico
+WARNING 2025-11-22 01:40:09,931 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
