@@ -64,19 +64,39 @@
                             {% endif %}
                         </div>
                         
+                        <!-- Debug Info
+                        Form has role field: {{ form.role|yesno:"Yes,No" }}
+                        Role choices from form: {{ form.role.field.choices|length }}
+                        Role choices from context: {{ role_choices|length }}
+                        Current role value: {{ form.role.value }}
+                        -->
+                        
                         <div class="mb-4">
                             <label class="form-label d-block">{% trans "I am a" %}</label>
-                            <div class="btn-group w-100" role="group" aria-label="User role">
-                                {% for value, label in form.role.field.choices %}
-                                    <input type="radio" class="btn-check" name="role" id="id_role_{{ forloop.counter }}" 
-                                           value="{{ value }}" {% if forloop.first %}checked{% endif %}>
-                                    <label class="btn btn-outline-primary" for="id_role_{{ forloop.counter }}">
-                                        {{ label }}
-                                    </label>
+                            <div class="form-check">
+                                {% for value, label in role_choices %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" 
+                                               name="role" 
+                                               id="id_role_{{ forloop.counter }}" 
+                                               value="{{ value }}" 
+                                               {% if form.role.value == value or forloop.first and not form.role.value %}checked{% endif %}>
+                                        <label class="form-check-label" for="id_role_{{ forloop.counter }}">
+                                            {{ label }}
+                                        </label>
+                                    </div>
+                                {% empty %}
+                                    <div class="alert alert-warning">
+                                        <strong>Warning:</strong> No role choices available. Please contact support.
+                                    </div>
                                 {% endfor %}
                             </div>
                             {% if form.role.errors %}
-                                <div class="text-danger">{{ form.role.errors }}</div>
+                                <div class="alert alert-danger">
+                                    {% for error in form.role.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
                             {% endif %}
                         </div>
                         

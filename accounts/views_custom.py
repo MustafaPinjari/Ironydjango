@@ -19,7 +19,25 @@ class CustomSignupView(AllauthSignupView):
     
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
+        # Ensure the form has access to the request object
+        kwargs['request'] = self.request
+        # Initialize with default role if not set
+        if 'initial' not in kwargs:
+            kwargs['initial'] = {}
+        if 'role' not in kwargs['initial']:
+            kwargs['initial']['role'] = 'CUSTOMER'
         return kwargs
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Explicitly define role choices in the view
+        context['role_choices'] = [
+            ('CUSTOMER', 'Customer'),
+            ('PRESS', 'Press Person'),
+            ('DELIVERY', 'Delivery Partner'),
+            ('ADMIN', 'Admin')
+        ]
+        return context
     
     def form_valid(self, form):
         # Create the user but don't log them in yet

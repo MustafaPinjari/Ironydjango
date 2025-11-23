@@ -426,3 +426,214 @@ INFO 2025-11-22 13:31:03,244 basehttp "POST /accounts/login/ HTTP/1.1" 200 26869
 INFO 2025-11-22 13:31:11,077 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
 INFO 2025-11-22 13:31:11,095 basehttp "GET /dashboard/ HTTP/1.1" 302 0
 INFO 2025-11-22 13:31:11,169 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 38331
+INFO 2025-11-22 13:35:28,385 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:35:30,954 basehttp "GET / HTTP/1.1" 200 80303
+WARNING 2025-11-22 13:35:31,387 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:35:31,387 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-22 13:35:36,454 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-22 13:35:36,469 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-22 13:35:36,539 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 37392
+INFO 2025-11-22 13:35:40,457 basehttp "GET /accounts/logout/ HTTP/1.1" 200 22074
+INFO 2025-11-22 13:35:41,764 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-22 13:35:41,780 basehttp "GET /accounts/login/ HTTP/1.1" 200 27194
+INFO 2025-11-22 13:35:43,916 basehttp "GET /accounts/signup/ HTTP/1.1" 200 28842
+INFO 2025-11-22 13:36:18,873 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:36:19,383 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:36:26,819 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:36:27,214 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:36:53,375 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29181
+INFO 2025-11-22 13:36:53,413 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:36:53,413 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:36:53,414 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:36:53,414 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:36:53,551 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 13:36:53,553 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 13:36:53,819 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:36:53,819 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:37:30,931 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:37:31,392 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:37:38,829 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:37:39,286 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:38:01,162 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29404
+INFO 2025-11-22 13:38:01,208 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:38:01,210 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:38:01,210 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:38:01,210 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:38:01,322 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-22 13:38:01,325 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-22 13:38:01,588 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:38:01,589 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:38:29,895 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:38:30,344 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:38:38,806 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:38:39,298 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:39:02,571 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29390
+INFO 2025-11-22 13:39:02,615 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:39:02,615 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:39:02,615 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:39:02,615 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:39:02,787 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-22 13:39:02,789 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-22 13:39:03,022 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:39:03,022 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:39:04,537 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29392
+INFO 2025-11-22 13:39:04,556 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:39:04,557 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:39:04,557 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:39:04,557 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:39:04,693 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 13:39:04,697 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 13:39:04,922 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:39:04,922 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:39:05,296 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29392
+INFO 2025-11-22 13:39:05,312 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:39:05,313 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:39:05,313 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:39:05,313 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:39:05,434 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 13:39:05,449 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 13:39:05,608 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:39:05,608 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:39:12,737 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:39:17,871 basehttp "GET / HTTP/1.1" 200 78563
+INFO 2025-11-22 13:39:20,992 basehttp "GET /accounts/login/ HTTP/1.1" 200 26604
+INFO 2025-11-22 13:39:23,336 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29394
+INFO 2025-11-22 13:40:27,737 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:40:28,110 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:40:35,395 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:40:35,770 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:40:36,922 autoreload /home/mustafa/Desktop/Ironydjango/accounts/views_custom.py changed, reloading.
+INFO 2025-11-22 13:40:37,259 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:41:05,154 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:41:05,543 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:41:12,810 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:41:13,168 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:41:36,962 autoreload /home/mustafa/Desktop/Ironydjango/accounts/forms.py changed, reloading.
+INFO 2025-11-22 13:41:37,330 autoreload Watching for file changes with StatReloader
+INFO 2025-11-22 13:42:07,007 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29390
+INFO 2025-11-22 13:42:07,047 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:42:07,048 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:42:07,048 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:42:07,048 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:42:07,212 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 13:42:07,216 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 13:42:07,423 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:42:07,423 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-22 13:42:08,094 basehttp "GET /accounts/signup/ HTTP/1.1" 200 29394
+INFO 2025-11-22 13:42:08,112 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-22 13:42:08,113 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-22 13:42:08,113 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-22 13:42:08,113 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-22 13:42:08,246 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-22 13:42:08,250 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-22 13:42:08,376 log Not Found: /favicon.ico
+WARNING 2025-11-22 13:42:08,376 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 03:54:59,371 autoreload Watching for file changes with StatReloader
+INFO 2025-11-23 03:55:03,667 basehttp "GET / HTTP/1.1" 200 78563
+INFO 2025-11-23 03:55:03,803 basehttp "GET / HTTP/1.1" 200 78563
+INFO 2025-11-23 03:55:03,804 basehttp "GET /static/images/iron.png HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:03,805 basehttp "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:03,807 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:03,969 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:03,979 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:04,041 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+INFO 2025-11-23 03:55:04,048 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+WARNING 2025-11-23 03:55:04,783 log Not Found: /favicon.ico
+WARNING 2025-11-23 03:55:04,784 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 03:56:28,230 basehttp "GET /accounts/login/ HTTP/1.1" 200 26606
+INFO 2025-11-23 03:56:40,420 basehttp "GET / HTTP/1.1" 200 78568
+INFO 2025-11-23 03:56:40,459 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 03:56:40,460 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 03:56:43,617 basehttp "GET /static/images/iron.png HTTP/1.1" 200 1214412
+INFO 2025-11-23 03:56:44,074 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 03:56:44,079 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 03:56:55,241 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-23 03:56:59,922 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-23 03:57:08,842 log Not Found: /favicon.ico
+WARNING 2025-11-23 03:57:08,842 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 03:58:24,637 basehttp "GET / HTTP/1.1" 200 77403
+INFO 2025-11-23 03:58:24,716 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 03:58:24,717 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 03:58:24,854 basehttp "GET /static/images/iron.png HTTP/1.1" 200 1214412
+INFO 2025-11-23 03:58:24,861 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 03:58:24,908 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 03:58:25,454 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-23 03:58:26,017 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-23 03:58:27,164 log Not Found: /favicon.ico
+WARNING 2025-11-23 03:58:27,165 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 03:58:37,144 basehttp "GET / HTTP/1.1" 200 77398
+INFO 2025-11-23 03:58:37,173 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 03:58:37,174 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 03:58:37,286 basehttp "GET /static/images/iron.png HTTP/1.1" 200 1214412
+INFO 2025-11-23 03:58:37,295 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 03:58:37,331 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 03:58:37,653 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-23 03:58:37,657 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-23 03:58:37,767 log Not Found: /favicon.ico
+WARNING 2025-11-23 03:58:37,767 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 03:58:38,121 basehttp "GET / HTTP/1.1" 200 77398
+INFO 2025-11-23 03:58:38,148 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 03:58:38,149 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 03:58:38,251 basehttp "GET /static/images/iron.png HTTP/1.1" 200 1214412
+INFO 2025-11-23 03:58:38,261 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 03:58:38,308 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 03:58:38,425 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-23 03:58:38,534 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-23 03:58:38,837 log Not Found: /favicon.ico
+WARNING 2025-11-23 03:58:38,837 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 04:00:08,223 basehttp "GET / HTTP/1.1" 200 77292
+INFO 2025-11-23 04:00:08,271 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 04:00:08,271 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 04:00:08,430 basehttp "GET /static/images/iron.png HTTP/1.1" 200 1214412
+INFO 2025-11-23 04:00:08,439 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 04:00:08,484 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 04:00:08,735 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+INFO 2025-11-23 04:00:09,367 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+WARNING 2025-11-23 04:00:09,570 log Not Found: /favicon.ico
+WARNING 2025-11-23 04:00:09,570 basehttp "GET /favicon.ico HTTP/1.1" 404 17752
+INFO 2025-11-23 04:00:17,451 basehttp "GET /accounts/login/ HTTP/1.1" 200 25326
+INFO 2025-11-23 04:00:25,706 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:00:25,735 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:00:25,834 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 35341
+INFO 2025-11-23 04:01:30,579 autoreload /home/mustafa/Desktop/Ironydjango/ironyy/views.py changed, reloading.
+INFO 2025-11-23 04:01:31,600 autoreload Watching for file changes with StatReloader
+INFO 2025-11-23 04:01:36,272 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 37404
+INFO 2025-11-23 04:01:36,328 basehttp "GET /static/js/script.js HTTP/1.1" 200 1397
+INFO 2025-11-23 04:01:36,329 basehttp "GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14879
+INFO 2025-11-23 04:01:36,329 basehttp "GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 30101
+INFO 2025-11-23 04:01:36,330 basehttp "GET /static/css/style.css HTTP/1.1" 200 76392
+INFO 2025-11-23 04:01:36,478 basehttp "GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+INFO 2025-11-23 04:01:36,538 basehttp "GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4700
+WARNING 2025-11-23 04:01:37,109 log Not Found: /favicon.ico
+WARNING 2025-11-23 04:01:37,110 basehttp "GET /favicon.ico HTTP/1.1" 404 17750
+INFO 2025-11-23 04:01:42,109 basehttp "GET / HTTP/1.1" 200 77295
+INFO 2025-11-23 04:01:51,177 basehttp "GET /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:01:51,204 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:01:51,306 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 37402
+INFO 2025-11-23 04:02:01,032 basehttp "GET /accounts/logout/ HTTP/1.1" 200 22074
+INFO 2025-11-23 04:02:01,074 basehttp "GET /static/js/main.js HTTP/1.1" 200 10524
+INFO 2025-11-23 04:02:10,768 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:02:10,807 basehttp "GET /accounts/login/ HTTP/1.1" 200 27204
+INFO 2025-11-23 04:02:29,471 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:02:29,499 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:02:29,611 basehttp "GET /dashboard/admin/ HTTP/1.1" 200 47153
+INFO 2025-11-23 04:03:08,758 basehttp "GET /admin/ HTTP/1.1" 200 32532
+INFO 2025-11-23 04:03:08,815 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-11-23 04:03:08,825 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-11-23 04:03:08,826 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-11-23 04:03:08,826 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-11-23 04:03:08,826 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-11-23 04:03:08,828 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-11-23 04:03:08,861 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-11-23 04:03:08,896 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-11-23 04:03:08,896 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-11-23 04:03:11,070 basehttp "GET /dashboard/admin/ HTTP/1.1" 200 46226
+INFO 2025-11-23 04:03:12,417 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:03:12,472 basehttp "GET /dashboard/admin/ HTTP/1.1" 200 46226
+INFO 2025-11-23 04:03:19,580 basehttp "GET /accounts/logout/ HTTP/1.1" 200 21503
+INFO 2025-11-23 04:03:21,168 basehttp "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:03:21,196 basehttp "GET /accounts/login/ HTTP/1.1" 200 27202
+INFO 2025-11-23 04:03:29,864 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:03:29,891 basehttp "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-11-23 04:03:29,982 basehttp "GET /dashboard/customer/ HTTP/1.1" 200 38341
+INFO 2025-11-23 04:03:37,771 basehttp "GET /orders/create/ HTTP/1.1" 200 55896

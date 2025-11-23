@@ -15,7 +15,10 @@ class LandingPageView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_year'] = timezone.now().year
+        context.update({
+            'current_year': timezone.now().year,
+            'hide_navbar': True  # This will hide the navbar in the base template
+        })
         return context
 
 

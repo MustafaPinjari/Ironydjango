@@ -12,6 +12,14 @@ from django.core.validators import RegexValidator
 
 from .models import User
 
+# Define role choices at the module level
+ROLE_CHOICES = [
+    ('CUSTOMER', _('Customer')),
+    ('PRESS', _('Press Person')),
+    ('DELIVERY', _('Delivery Partner')),
+    ('ADMIN', _('Admin')),
+]
+
 
 class UserRegistrationForm(UserCreationForm):
     """
@@ -70,12 +78,25 @@ class UserRegistrationForm(UserCreationForm):
     
     role = forms.ChoiceField(
         label=_('I am a'),
-        choices=User.Role.choices,
-        initial=User.Role.CUSTOMER,
+        choices=[],  # Will be set in __init__
         widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
         help_text=_('Select your role in the system.')
     )
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].help_text = None
+        # Set role choices directly
+        self.fields['role'].choices = [
+            ('CUSTOMER', 'Customer'),
+            ('PRESS', 'Press Person'),
+            ('DELIVERY', 'Delivery Partner'),
+            ('ADMIN', 'Admin')
+        ]
+        # Set default role if not already set
+        if not self.initial.get('role'):
+            self.initial['role'] = 'CUSTOMER'
+
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'phone_number', 'role')
@@ -85,7 +106,11 @@ class UserRegistrationForm(UserCreationForm):
         # Remove the default help text for username
         self.fields['email'].help_text = None
         
-        # Set role choices based on user type (for admin adding users)
+        # Set default role if not already set
+        if not self.initial.get('role'):
+            self.initial['role'] = 'CUSTOMER'
+            
+        # Set role based on initial data if provided
         if 'initial' in kwargs and 'role' in kwargs['initial']:
             self.fields['role'].initial = kwargs['initial']['role']
     
