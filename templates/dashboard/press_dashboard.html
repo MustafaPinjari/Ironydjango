@@ -90,8 +90,13 @@
                                     <i class="fas fa-user small"></i>
                                 </div>
                                 <div>
-                                    <div class="fw-medium">{{ order.customer.get_full_name|default:order.customer.email
-                                        }}</div>
+                                    <div class="fw-medium">
+                                        {% if order.customer.get_full_name %}
+                                            {{ order.customer.get_full_name }}
+                                        {% else %}
+                                            {{ order.customer.email }}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </td>
@@ -155,7 +160,23 @@
                     {% if order.status == 'picked_up' %}
                     <tr>
                         <td class="ps-4 fw-medium">#{{ order.id }}</td>
-                        <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-circle bg-light text-muted rounded-circle d-flex align-items-center justify-content-center me-2"
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fas fa-user small"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-medium">
+                                        {% if order.customer.get_full_name %}
+                                            {{ order.customer.get_full_name }}
+                                        {% else %}
+                                            {{ order.customer.email }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td><span class="badge bg-light text-dark border fw-normal">{{ order.items.count }} items</span>
                         </td>
                         <td class="text-muted">{{ order.updated_at|date:"M d, H:i" }}</td>
@@ -200,7 +221,23 @@
                     {% if order.status == 'processing' %}
                     <tr>
                         <td class="ps-4 fw-medium">#{{ order.id }}</td>
-                        <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-circle bg-light text-muted rounded-circle d-flex align-items-center justify-content-center me-2"
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fas fa-user small"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-medium">
+                                        {% if order.customer.get_full_name %}
+                                            {{ order.customer.get_full_name }}
+                                        {% else %}
+                                            {{ order.customer.email }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td><span class="badge bg-light text-dark border fw-normal">{{ order.items.count }} items</span>
                         </td>
                         <td class="text-muted">{{ order.updated_at|date:"M d, H:i" }}</td>
@@ -245,7 +282,23 @@
                     {% if order.status == 'ready' %}
                     <tr>
                         <td class="ps-4 fw-medium">#{{ order.id }}</td>
-                        <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-circle bg-light text-muted rounded-circle d-flex align-items-center justify-content-center me-2"
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fas fa-user small"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-medium">
+                                        {% if order.customer.get_full_name %}
+                                            {{ order.customer.get_full_name }}
+                                        {% else %}
+                                            {{ order.customer.email }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td><span class="badge bg-light text-dark border fw-normal">{{ order.items.count }} items</span>
                         </td>
                         <td class="text-muted">{{ order.updated_at|date:"M d, H:i" }}</td>
