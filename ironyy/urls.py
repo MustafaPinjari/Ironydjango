@@ -32,6 +32,9 @@ urlpatterns = [
     
     # API endpoints
     path('api/', include('api.urls')),
+    
+    # Services API endpoints
+    path('api/services/', include('services.urls')),
 ]
 
 # Serve static and media files in development

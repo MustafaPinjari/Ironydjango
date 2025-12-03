@@ -382,13 +382,105 @@ $(document).ready(function() {
         }
     });
     
-    // Handle variant change to update price if needed
+    // Function to load options for a service and variant
+    function loadOptions(serviceId, variantId, itemDiv) {
+        // Find the options container - it's the parent of the options field
+        const optionsContainer = itemDiv.find('.form-group:has(.form-check-input[type="checkbox"])').first();
+        
+        if (!optionsContainer.length) {
+            console.error('Options container not found');
+            return;
+        }
+        
+        // Show loading state
+        optionsContainer.html('<div class="alert alert-info">Loading options...</div>');
+        
+        // Fetch options for the selected service and variant
+        $.ajax({
+            url: '/api/services/options/',
+            data: {
+                service_id: serviceId,
+                variant_id: variantId
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log('Options API Response:', data);
+                
+                // Clear the loading message
+                optionsContainer.empty();
+                
+                if (data && data.length > 0) {
+                    // Create a form group for each option
+                    data.forEach(function(option) {
+                        const optionGroup = $('<div class="form-group mb-3"></div>');
+                        const label = $(`<label class="form-label">${option.name}</label>`);
+                        
+                        if (option.description) {
+                            label.append(`<small class="form-text text-muted">${option.description}</small>`);
+                        }
+                        
+                        optionGroup.append(label);
+                        
+                        // Create different input types based on option_type
+                        if (option.option_type === 'checkbox') {
+                            const checkbox = $(`
+                                <div class="form-check">
+                                    <input class="form-check-input option-checkbox" 
+                                           type="checkbox" 
+                                           name="options[]" 
+                                           value="${option.id}" 
+                                           id="option-${option.id}"
+                                           ${option.is_required ? 'required' : ''}
+                                           data-price="${option.price_adjustment}">
+                                    <label class="form-check-label" for="option-${option.id}">
+                                        Add for $${parseFloat(option.price_adjustment).toFixed(2)}
+                                    </label>
+                                </div>
+                            `);
+                            optionGroup.append(checkbox);
+                        } 
+                        // Add support for other option types (select, radio) if needed
+                        
+                        optionsContainer.append(optionGroup);
+                    });
+                } else {
+                    optionsContainer.html('<div class="alert alert-info">No additional options available for this variant.</div>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading options:', error);
+                console.error('Response:', xhr.responseText);
+                optionsContainer.html('<div class="alert alert-danger">Error loading options. Please try again.</div>');
+            }
+        });
+    }
+    
+    // Handle variant change to update price and load options
     $(document).on('change', '.variant-select', function() {
         const selectedOption = $(this).find('option:selected');
+        const itemDiv = $(this).closest('.order-item');
+        const serviceId = itemDiv.find('.service-select').val();
+        const variantId = $(this).val();
+        
+        console.log('Variant changed - Service ID:', serviceId, 'Variant ID:', variantId);
+        
+        // Update price if available
         if (selectedOption.length && selectedOption.data('price') !== undefined) {
-            const priceField = $(this).closest('.order-item').find('.price-input');
+            const priceField = itemDiv.find('.price-input');
             if (priceField.length) {
                 priceField.val(parseFloat(selectedOption.data('price')).toFixed(2));
+            }
+        }
+        
+        // Load options for the selected variant
+        if (serviceId && variantId) {
+            console.log('Loading options for service:', serviceId, 'variant:', variantId);
+            loadOptions(serviceId, variantId, itemDiv);
+        } else {
+            console.log('Missing service ID or variant ID');
+            const optionsContainer = itemDiv.find('.form-group:has(.form-check-input[type="checkbox"])').first();
+            if (optionsContainer.length) {
+                optionsContainer.html('<div class="alert alert-warning">Please select a service and variant to see available options.</div>');
             }
         }
     });
