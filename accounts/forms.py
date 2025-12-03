@@ -12,114 +12,68 @@ from django.core.validators import RegexValidator
 
 from .models import User
 
-# Define role choices at the module level
-ROLE_CHOICES = [
-    ('CUSTOMER', _('Customer')),
-    ('PRESS', _('Press Person')),
-    ('DELIVERY', _('Delivery Partner')),
-    ('ADMIN', _('Admin')),
-]
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from django import forms
+from django.utils.translation import gettext_lazy as _
 
+User = get_user_model()
 
 class UserRegistrationForm(UserCreationForm):
-    """
-    Form for user registration.
-    """
-    email = forms.EmailField(
-        label=_('Email'),
-        max_length=254,
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': _('Enter your email')}),
-        help_text=_('Required. Enter a valid email address.')
-    )
-    
     first_name = forms.CharField(
         label=_('First Name'),
         max_length=30,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Enter your first name')}),
-        required=True
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
     )
-    
     last_name = forms.CharField(
         label=_('Last Name'),
         max_length=30,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Enter your last name')}),
-        required=True
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
     )
-    
-    password1 = forms.CharField(
-        label=_('Password'),
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Create a password')}),
-        help_text=_(
-            'Your password must contain at least 8 characters, including at least one letter and one number.'
-        )
+    email = forms.EmailField(
+        label=_('Email'),
+        max_length=254,
+        required=True,
+        widget=forms.EmailInput(attrs={'class': 'form-control'})
     )
-    
-    password2 = forms.CharField(
-        label=_('Password Confirmation'),
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Confirm your password')}),
-        help_text=_('Enter the same password as before, for verification.')
-    )
-    
-    phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,15}$',
-        message=_("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    )
-    
     phone_number = forms.CharField(
         label=_('Phone Number'),
-        validators=[phone_regex],
-        max_length=17,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': _('e.g., +1234567890')
-        }),
-        required=False
+        max_length=20,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+    
+    # Role choices
+    ROLE_CHOICES = [
+        ('CUSTOMER', 'Customer'),
+        ('PRESS', 'Press Person'),
+        ('DELIVERY', 'Delivery Partner')
+    ]
     
     role = forms.ChoiceField(
-        label=_('I am a'),
-        choices=[],  # Will be set in __init__
+        choices=ROLE_CHOICES,
         widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
-        help_text=_('Select your role in the system.')
+        initial='CUSTOMER',
+        label=_('I am a')
     )
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['email'].help_text = None
-        # Set role choices directly
-        self.fields['role'].choices = [
-            ('CUSTOMER', 'Customer'),
-            ('PRESS', 'Press Person'),
-            ('DELIVERY', 'Delivery Partner'),
-            ('ADMIN', 'Admin')
-        ]
-        # Set default role if not already set
-        if not self.initial.get('role'):
-            self.initial['role'] = 'CUSTOMER'
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone_number', 'role')
-    
+        fields = ('email', 'first_name', 'last_name', 'phone_number', 'role', 'password1', 'password2')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Remove the default help text for username
-        self.fields['email'].help_text = None
+        # Update widget attributes for password fields
+        self.fields['password1'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control'})
         
-        # Set default role if not already set
-        if not self.initial.get('role'):
-            self.initial['role'] = 'CUSTOMER'
-            
-        # Set role based on initial data if provided
-        if 'initial' in kwargs and 'role' in kwargs['initial']:
-            self.fields['role'].initial = kwargs['initial']['role']
-    
-    def clean_email(self):
-        """Ensure email is unique."""
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError(_('A user with this email already exists.'))
-        return email
+        # Set help text for password fields
+        self.fields['password1'].help_text = _(
+            "Your password must contain at least 8 characters, including at least one letter and one number."
+        )
+        self.fields['password2'].help_text = _("Enter the same password as before, for verification.")
 
 
 class UserProfileForm(forms.ModelForm):
@@ -151,22 +105,21 @@ class UserProfileForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # If the user has a profile, get the initial data
-        if hasattr(self.instance, 'userprofile'):
-            profile = self.instance.userprofile
-            self.fields['profile_picture'] = forms.ImageField(
-                label=_('Profile Picture'),
-                required=False,
-                widget=forms.FileInput(attrs={'class': 'form-control'})
-            )
-            self.fields['address'] = forms.CharField(
-                label=_('Address'),
-                widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-                required=False,
-                initial=profile.address
-            )
-            if profile.profile_picture:
-                self.fields['profile_picture'].initial = profile.profile_picture
+        self.fields['email'].help_text = None
+        
+        # Define role choices
+        role_choices = [
+            ('CUSTOMER', 'Customer'),
+            ('PRESS', 'Press Person'),
+            ('DELIVERY', 'Delivery Partner')
+        ]
+        
+        # Set role choices for the field
+        self.fields['role'].choices = role_choices
+        
+        # Set default role if not already set
+        if not self.initial.get('role'):
+            self.initial['role'] = 'CUSTOMER'
     
     def save(self, commit=True):
         user = super().save(commit=commit)

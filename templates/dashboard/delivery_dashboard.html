@@ -95,58 +95,55 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for order in orders %}
-                            {% if order.status == 'out_for_pickup' or order.status == 'out_for_delivery' %}
+                            {% for order in my_active_tasks %}
                             <tr>
                                 <td class="ps-4 fw-medium">#{{ order.id }}</td>
                                 <td>
                                     {% if order.status == 'out_for_pickup' %}
-                                    <span
-                                        class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3">Pickup</span>
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3">
+                                        Pickup
+                                    </span>
                                     {% else %}
-                                    <span
-                                        class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3">Delivery</span>
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3">
+                                        Delivery
+                                    </span>
                                     {% endif %}
                                 </td>
                                 <td>{{ order.customer.get_full_name|default:order.customer.email }}</td>
                                 <td>
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
                                     {% if order.status == 'out_for_pickup' %}
-                                    <i class="fas fa-map-marker-alt text-muted me-1"></i> {{
-                                    order.pickup_address|default:"Not provided" }}
+                                        {{ order.pickup_address|default:"Not provided" }}
                                     {% else %}
-                                    <i class="fas fa-map-marker-alt text-muted me-1"></i> {{
-                                    order.delivery_address|default:"Not provided" }}
+                                        {{ order.delivery_address|default:"Not provided" }}
                                     {% endif %}
                                 </td>
                                 <td class="text-muted">{{ order.updated_at|date:"M d, H:i" }}</td>
                                 <td class="text-end pe-4">
-                                    <form method="post" action="{% url 'dashboard:update_order_status' order.pk %}"
-                                        class="d-inline">
+                                    <form method="post" action="{% url 'dashboard:update_order_status' order.pk %}" class="d-inline">
                                         {% csrf_token %}
                                         {% if order.status == 'out_for_pickup' %}
-                                        <input type="hidden" name="status" value="picked_up">
-                                        <button type="submit" class="btn btn-sm btn-success">
-                                            <i class="fas fa-check me-1"></i>Confirm Pickup
-                                        </button>
+                                            <input type="hidden" name="status" value="picked_up">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-check me-1"></i>Confirm Pickup
+                                            </button>
                                         {% else %}
-                                        <input type="hidden" name="status" value="completed">
-                                        <button type="submit" class="btn btn-sm btn-success">
-                                            <i class="fas fa-check-double me-1"></i>Confirm Delivery
-                                        </button>
+                                            <input type="hidden" name="status" value="completed">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-check-double me-1"></i>Confirm Delivery
+                                            </button>
                                         {% endif %}
                                     </form>
                                 </td>
                             </tr>
-                            {% endif %}
-                            {% endfor %}
-                            {% if active_pickups_count == 0 and active_deliveries_count == 0 %}
+                            {% empty %}
                             <tr>
                                 <td colspan="6" class="text-center py-4 text-muted">
                                     <i class="fas fa-check-circle fa-2x mb-2 d-block opacity-25"></i>
                                     No active tasks. Pick up a new task below!
                                 </td>
                             </tr>
-                            {% endif %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -11,120 +11,113 @@
             <div class="card shadow">
                 <div class="card-body p-5">
                     <h2 class="text-center mb-4">{% trans "Create an Account" %}</h2>
-                    
+
                     <p class="text-center mb-4">
-                        {% blocktrans %}Already have an account? 
+                        {% blocktrans %}Already have an account?
                         <a href="{{ login_url }}" class="text-primary">Sign In</a>{% endblocktrans %}
                     </p>
 
                     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                         {% csrf_token %}
-                        
+
                         {% if form.non_field_errors %}
-                            <div class="alert alert-danger">
-                                {{ form.non_field_errors }}
-                            </div>
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
                         {% endif %}
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="id_first_name" class="form-label">{% trans "First Name" %}</label>
-                                <input type="text" name="first_name" class="form-control" id="id_first_name" 
-                                       placeholder="{% trans 'Enter your first name' %}" required>
+                                <input type="text" name="first_name" class="form-control" id="id_first_name"
+                                    placeholder="{% trans 'Enter your first name' %}" required>
                                 {% if form.first_name.errors %}
-                                    <div class="text-danger">{{ form.first_name.errors }}</div>
+                                <div class="text-danger">{{ form.first_name.errors }}</div>
                                 {% endif %}
                             </div>
-                            
+
                             <div class="col-md-6 mb-3">
                                 <label for="id_last_name" class="form-label">{% trans "Last Name" %}</label>
-                                <input type="text" name="last_name" class="form-control" id="id_last_name" 
-                                       placeholder="{% trans 'Enter your last name' %}" required>
+                                <input type="text" name="last_name" class="form-control" id="id_last_name"
+                                    placeholder="{% trans 'Enter your last name' %}" required>
                                 {% if form.last_name.errors %}
-                                    <div class="text-danger">{{ form.last_name.errors }}</div>
+                                <div class="text-danger">{{ form.last_name.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="id_email" class="form-label">{% trans "Email" %}</label>
-                            <input type="email" name="email" class="form-control" id="id_email" 
-                                   placeholder="{% trans 'Enter your email' %}" required>
+                            <input type="email" name="email" class="form-control" id="id_email"
+                                placeholder="{% trans 'Enter your email' %}" required>
                             {% if form.email.errors %}
-                                <div class="text-danger">{{ form.email.errors }}</div>
+                            <div class="text-danger">{{ form.email.errors }}</div>
                             {% endif %}
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="id_phone_number" class="form-label">{% trans "Phone Number" %}</label>
-                            <input type="tel" name="phone_number" class="form-control" id="id_phone_number" 
-                                   placeholder="{% trans 'e.g., +1234567890' %}">
+                            <input type="tel" name="phone_number" class="form-control" id="id_phone_number"
+                                placeholder="{% trans 'e.g., +1234567890' %}">
                             {% if form.phone_number.errors %}
-                                <div class="text-danger">{{ form.phone_number.errors }}</div>
+                            <div class="text-danger">{{ form.phone_number.errors }}</div>
                             {% endif %}
                         </div>
-                        
+
                         <!-- Debug Info
                         Form has role field: {{ form.role|yesno:"Yes,No" }}
                         Role choices from form: {{ form.role.field.choices|length }}
                         Role choices from context: {{ role_choices|length }}
                         Current role value: {{ form.role.value }}
                         -->
-                        
+
                         <div class="mb-4">
-                            <label class="form-label d-block">{% trans "I am a" %}</label>
-                            <div class="form-check">
-                                {% for value, label in role_choices %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" 
-                                               name="role" 
-                                               id="id_role_{{ forloop.counter }}" 
-                                               value="{{ value }}" 
-                                               {% if form.role.value == value or forloop.first and not form.role.value %}checked{% endif %}>
-                                        <label class="form-check-label" for="id_role_{{ forloop.counter }}">
-                                            {{ label }}
-                                        </label>
-                                    </div>
-                                {% empty %}
-                                    <div class="alert alert-warning">
-                                        <strong>Warning:</strong> No role choices available. Please contact support.
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            {% if form.role.errors %}
-                                <div class="alert alert-danger">
-                                    {% for error in form.role.errors %}
-                                        {{ error }}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
-                        
+    <label class="form-label d-block">{% trans "I am a" %}</label>
+    <div class="form-check">
+        {% for radio in form.role %}
+            <div class="form-check">
+                {{ radio.tag }}
+                <label class="form-check-label" for="{{ radio.id_for_label }}">
+                    {{ radio.choice_label }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    {% if form.role.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.role.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
                         <div class="mb-3">
                             <label for="id_password1" class="form-label">{% trans "Password" %}</label>
-                            <input type="password" name="password1" class="form-control" 
-                                   id="id_password1" placeholder="{% trans 'Create a password' %}" required>
+                            <input type="password" name="password1" class="form-control" id="id_password1"
+                                placeholder="{% trans 'Create a password' %}" required>
                             {% if form.password1.errors %}
-                                <div class="text-danger">{{ form.password1.errors }}</div>
+                            <div class="text-danger">{{ form.password1.errors }}</div>
                             {% endif %}
                             <div class="form-text">
-                                {% trans "Your password must contain at least 8 characters, including at least one letter and one number." %}
+                                {% trans "Your password must contain at least 8 characters, including at least one
+                                letter and one number." %}
                             </div>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="id_password2" class="form-label">{% trans "Confirm Password" %}</label>
-                            <input type="password" name="password2" class="form-control" 
-                                   id="id_password2" placeholder="{% trans 'Confirm your password' %}" required>
+                            <input type="password" name="password2" class="form-control" id="id_password2"
+                                placeholder="{% trans 'Confirm your password' %}" required>
                             {% if form.password2.errors %}
-                                <div class="text-danger">{{ form.password2.errors }}</div>
+                            <div class="text-danger">{{ form.password2.errors }}</div>
                             {% endif %}
                         </div>
-                        
+
                         {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-                        
+
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-lg" type="submit">
                                 {% trans "Create Account" %}
@@ -138,35 +131,35 @@
 </div>
 
 <style>
-/* Custom styles for the role selection buttons */
-.btn-group .btn {
-    flex: 1;
-    text-align: center;
-    white-space: nowrap;
-}
-
-/* Style for the active state of the role buttons */
-.btn-check:checked + .btn-outline-primary {
-    background-color: #0d6efd;
-    color: white;
-}
-
-/* Remove focus outline for better appearance */
-.btn-check:focus + .btn-outline-primary {
-    box-shadow: none;
-}
-
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
+    /* Custom styles for the role selection buttons */
     .btn-group .btn {
-        width: 100%;
+        flex: 1;
+        text-align: center;
+        white-space: nowrap;
     }
-}
+
+    /* Style for the active state of the role buttons */
+    .btn-check:checked+.btn-outline-primary {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    /* Remove focus outline for better appearance */
+    .btn-check:focus+.btn-outline-primary {
+        box-shadow: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-group .btn {
+            width: 100%;
+        }
+    }
 </style>
 {% endblock %}

@@ -1,14 +1,5 @@
-Use the superuser credentials to log in (email: admin@example.com, password: admin123)
+when i sign up as a new user its not giving me choice to select whether i want to customer,press staff, delivery partner @ 
 
-
-
-
-now order must be able to see on staff dashboard and if staff accept it then a pickup should be sheduled which request must be able to render on dilvery partner dashboard  i mean make complete ecosystem using your intelligence 
-
-Create the remaining role-specific dashboard templates (press_dashboard.html, delivery_dashboard.html, admin_dashboard.html)
-Add more features to each dashboard based on the specific needs of each role
-Implement the order management system with role-based permissions
-Add more styling and polish to the UI
 
 
 ## How to start server

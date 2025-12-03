@@ -24,6 +24,9 @@ from allauth.account.views import (
     PasswordSetView as AllauthPasswordSetView,
     EmailView as AllauthEmailView,
 )
+
+from .forms import UserRegistrationForm
+
 from allauth.account.internal.flows.email_verification import send_verification_email_for_user
 from allauth.account.models import EmailAddress
 
@@ -41,7 +44,8 @@ User = get_user_model()
 
 class CustomSignupView(AllauthSignupView):
     """Custom signup view that extends Allauth's SignupView."""
-    template_name = 'accounts/register.html'
+    template_name = 'account/signup.html'
+    form_class = UserRegistrationForm
     success_url = reverse_lazy('dashboard:home')
     
     def get_context_data(self, **kwargs):
@@ -50,22 +54,10 @@ class CustomSignupView(AllauthSignupView):
         return context
     
     def form_valid(self, form):
-        """
-        Override form_valid to add custom logic after user is created.
-        """
-        # Call the parent's form_valid method which creates the user
-        response = super().form_valid(form)
-        
-        # Add welcome message
-        messages.success(
-            self.request,
-            _('Registration successful! Welcome to Ironyy.')
-        )
-        
-        # Create user profile
-        UserProfile.objects.get_or_create(user=self.user)
-        
-        return response
+        # This will save the user and set the password
+        self.user = form.save(self.request)
+        return super().form_valid(form)
+    
 
 
 class ProfileView(LoginRequiredMixin, DetailView):

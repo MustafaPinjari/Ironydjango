@@ -88,29 +88,54 @@ class DeliveryDashboardView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         # Show orders relevant to delivery partners
-        # 1. Orders available for pickup (SCHEDULED_FOR_PICKUP) - Show to all or just assigned? 
-        #    Let's assume initially show to all, or if assigned show to assigned.
+        # 1. Orders available for pickup (SCHEDULED_FOR_PICKUP) - Show to all delivery partners
         # 2. Orders ready for delivery (READY)
         # 3. My active tasks (OUT_FOR_PICKUP, OUT_FOR_DELIVERY)
         
         user = self.request.user
         return Order.objects.filter(
-            Q(status=Order.Status.SCHEDULED_FOR_PICKUP) |  # Available for pickup
+            Q(status=Order.Status.SCHEDULED_FOR_PICKUP) |  # Available for pickup by any delivery partner
             Q(status=Order.Status.READY) |                 # Available for delivery
             Q(delivery_person=user, status__in=[          # My active tasks
                 Order.Status.OUT_FOR_PICKUP,
                 Order.Status.OUT_FOR_DELIVERY
             ])
-        ).order_by('status', 'created_at')
+        ).distinct().order_by('status', 'created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         
-        context['available_pickups_count'] = Order.objects.filter(status=Order.Status.SCHEDULED_FOR_PICKUP).count()
-        context['active_pickups_count'] = Order.objects.filter(delivery_person=user, status=Order.Status.OUT_FOR_PICKUP).count()
-        context['available_deliveries_count'] = Order.objects.filter(status=Order.Status.READY).count()
-        context['active_deliveries_count'] = Order.objects.filter(delivery_person=user, status=Order.Status.OUT_FOR_DELIVERY).count()
+        # Get counts for the dashboard cards
+        context.update({
+            'available_pickups_count': Order.objects.filter(status=Order.Status.SCHEDULED_FOR_PICKUP).count(),
+            'active_pickups_count': Order.objects.filter(
+                delivery_person=user, 
+                status=Order.Status.OUT_FOR_PICKUP
+            ).count(),
+            'available_deliveries_count': Order.objects.filter(
+                status=Order.Status.READY,
+                delivery_person__isnull=True  # Only show unassigned ready orders
+            ).count(),
+            'active_deliveries_count': Order.objects.filter(
+                delivery_person=user, 
+                status=Order.Status.OUT_FOR_DELIVERY
+            ).count(),
+            'available_pickups': Order.objects.filter(
+                status=Order.Status.SCHEDULED_FOR_PICKUP
+            ).order_by('created_at'),
+            'available_deliveries': Order.objects.filter(
+                status=Order.Status.READY,
+                delivery_person__isnull=True
+            ).order_by('created_at'),
+            'my_active_tasks': Order.objects.filter(
+                delivery_person=user,
+                status__in=[
+                    Order.Status.OUT_FOR_PICKUP,
+                    Order.Status.OUT_FOR_DELIVERY
+                ]
+            ).order_by('status', 'created_at')
+        })
         
         return context
 
