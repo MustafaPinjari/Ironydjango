@@ -167,7 +167,11 @@ function initSelect2() {
             });
         }
     });
-    
+    // Debug: Log when service select changes
+$(document).on('change', '.service-select', function() {
+    console.log('Service select changed, value:', $(this).val());
+    loadVariants($(this));
+});
     $('.variant-select').each(function() {
         if (!$(this).hasClass('select2-hidden-accessible')) {
             $(this).select2({
@@ -180,16 +184,62 @@ function initSelect2() {
     });
 }
 
+// Function to load all services
+function loadServices() {
+    return $.ajax({
+        url: '/api/services/',
+        dataType: 'json',
+        success: function(services) {
+            const serviceSelects = $('.service-select');
+            serviceSelects.each(function() {
+                const $select = $(this);
+                // Clear existing options except the first one
+                $select.find('option:not(:first)').remove();
+                
+                // Add services to the select
+                services.forEach(function(service) {
+                    $select.append($('<option>', {
+                        value: service.id,
+                        text: `${service.name} - $${parseFloat(service.base_price).toFixed(2)}`,
+                        'data-price': service.base_price
+                    }));
+                });
+                
+                // Initialize Select2 if not already initialized
+                if (!$select.hasClass('select2-hidden-accessible')) {
+                    $select.select2({
+                        theme: 'bootstrap-5',
+                        width: '100%',
+                        placeholder: 'Select a service',
+                        allowClear: true
+                    });
+                }
+                
+                // Trigger change to load variants if a service is already selected
+                if ($select.val()) {
+                    loadVariants($select);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading services:', error);
+        }
+    });
+}
+
 // Function to load variants for a service
 function loadVariants(serviceSelect) {
     const itemDiv = serviceSelect.closest('.order-item');
     const variantSelect = itemDiv.find('.variant-select');
     const serviceId = serviceSelect.val();
     
+    console.log('Loading variants for service ID:', serviceId);
+    
     // Clear and disable variant select while loading
     variantSelect.empty().prop('disabled', true);
     
     if (!serviceId) {
+        console.log('No service ID selected');
         variantSelect.trigger('change');
         return;
     }
@@ -197,12 +247,19 @@ function loadVariants(serviceSelect) {
     // Show loading state
     variantSelect.html('<option value="">Loading variants...</option>');
     
+    // Destroy Select2 if already initialized
+    if (variantSelect.hasClass('select2-hidden-accessible')) {
+        variantSelect.select2('destroy');
+    }
+    
     // Fetch variants for the selected service
     $.ajax({
         url: '/api/services/variants/',
         data: { service_id: serviceId },
         dataType: 'json',
         success: function(data) {
+            console.log('API Response:', data);
+            
             // Clear the loading message
             variantSelect.empty();
             
@@ -216,10 +273,12 @@ function loadVariants(serviceSelect) {
             
             // Add each variant as an option
             if (data && data.length > 0) {
+                console.log('Processing variants:', data);
                 data.forEach(function(variant) {
+                    console.log('Adding variant:', variant);
                     variantSelect.append($('<option>', {
                         value: variant.id,
-                        text: `${variant.name} - $${variant.final_price.toFixed(2)}`,
+                        text: `${variant.name} - $${parseFloat(variant.final_price).toFixed(2)}`,
                         'data-price': variant.final_price
                     }));
                 });
@@ -227,16 +286,21 @@ function loadVariants(serviceSelect) {
                 // Enable the select and trigger change
                 variantSelect.prop('disabled', false);
                 
-                // Initialize Select2 on the variant select if not already initialized
-                if (!variantSelect.hasClass('select2-hidden-accessible')) {
-                    variantSelect.select2({
-                        theme: 'bootstrap-5',
-                        width: '100%',
-                        placeholder: 'Select a variant',
-                        allowClear: true
-                    });
-                }
+                // Initialize Select2 on the variant select
+                variantSelect.select2({
+                    theme: 'bootstrap-5',
+                    width: '100%',
+                    placeholder: 'Select a variant',
+                    allowClear: true,
+                    dropdownParent: variantSelect.parent()
+                });
+                
+                // Force open the dropdown
+                setTimeout(function() {
+                    variantSelect.select2('open');
+                }, 100);
             } else {
+                console.log('No variants available for this service');
                 variantSelect.append($('<option>', {
                     value: '',
                     text: 'No variants available',
@@ -248,6 +312,7 @@ function loadVariants(serviceSelect) {
         },
         error: function(xhr, status, error) {
             console.error('Error loading variants:', error);
+            console.error('Response:', xhr.responseText);
             variantSelect.empty().append($('<option>', {
                 value: '',
                 text: 'Error loading variants',
@@ -260,6 +325,9 @@ function loadVariants(serviceSelect) {
 $(document).ready(function() {
     // Initialize all select2 elements
     initSelect2();
+    
+    // Load services when the page loads
+    loadServices();
 
     // Toggle delivery address fields
     function toggleDeliveryFields() {
@@ -300,25 +368,28 @@ $(document).ready(function() {
         }, 500);
     });
 
-    // Handle service change to load variants
+    // Handle service change
     $(document).on('change', '.service-select', function() {
-        const $this = $(this);
-        const serviceId = $this.val();
-        const $variantSelect = $this.closest('.order-item').find('.variant-select');
+        loadVariants($(this));
         
-        if (serviceId) {
-            $.ajax({
-                url: $this.data('url') + '?service_id=' + serviceId,
-                success: function(data) {
-                    let options = '<option value="">---------</option>';
-                    data.forEach(function(variant) {
-                        options += `<option value="${variant.id}">${variant.name} - $${variant.price}</option>`;
-                    });
-                    $variantSelect.html(options).trigger('change');
-                }
-            });
-        } else {
-            $variantSelect.html('<option value="">---------</option>').trigger('change');
+        // Update price if available
+        const selectedOption = $(this).find('option:selected');
+        if (selectedOption.length && selectedOption.data('price') !== undefined) {
+            const priceField = $(this).closest('.order-item').find('.price-input');
+            if (priceField.length) {
+                priceField.val(parseFloat(selectedOption.data('price')).toFixed(2));
+            }
+        }
+    });
+    
+    // Handle variant change to update price if needed
+    $(document).on('change', '.variant-select', function() {
+        const selectedOption = $(this).find('option:selected');
+        if (selectedOption.length && selectedOption.data('price') !== undefined) {
+            const priceField = $(this).closest('.order-item').find('.price-input');
+            if (priceField.length) {
+                priceField.val(parseFloat(selectedOption.data('price')).toFixed(2));
+            }
         }
     });
 

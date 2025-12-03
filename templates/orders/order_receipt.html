@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% load static humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt #{{ order.id }} - Ironyy Laundry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+            body {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .receipt-header, .receipt-footer {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .receipt-header h1 {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+            .receipt-header p {
+                margin: 0;
+                color: #666;
+            }
+            .receipt-details {
+                margin: 20px 0;
+                padding: 15px;
+                border: 1px solid #eee;
+                border-radius: 5px;
+            }
+            .receipt-table {
+                width: 100%;
+                margin: 20px 0;
+                border-collapse: collapse;
+            }
+            .receipt-table th, .receipt-table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+            .receipt-table th {
+                background-color: #f8f9fa;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .receipt-totals {
+                margin-left: auto;
+                width: 300px;
+            }
+            .receipt-totals table {
+                width: 100%;
+            }
+            .receipt-totals td {
+                padding: 5px 0;
+                border: none;
+            }
+            .receipt-totals tr:last-child td {
+                border-top: 1px solid #ddd;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+            .receipt-footer {
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                font-size: 11px;
+                color: #777;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="receipt-header">
+            <h1>Ironyy Laundry</h1>
+            <p>123 Laundry Street, City, Country</p>
+            <p>Phone: +1234567890 | Email: info@ironyylaundry.com</p>
+        </div>
+
+        <div class="receipt-details">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Order #{{ order.id }}</h5>
+                    <p>Date: {{ order.created_at|date:"F d, Y H:i" }}</p>
+                    <p>Status: <span class="badge bg-{{ order.get_status_display|lower }}">{{ order.get_status_display }}</span></p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h5>Customer</h5>
+                    <p>{{ order.customer.get_full_name|default:order.customer.username }}</p>
+                    <p>{{ order.customer.phone_number|default:"No phone number" }}</p>
+                    <p>{{ order.customer.email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <h5>Order Items</h5>
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>
+                        {{ item.cloth_type.name }}
+                        {% if item.special_instructions %}
+                        <div class="text-muted small">{{ item.special_instructions }}</div>
+                        {% endif %}
+                    </td>
+                    <td>₹{{ item.unit_price|intcomma }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.total_price|intcomma }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="receipt-totals">
+            <table>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="text-right">₹{{ order.total_amount|intcomma }}</td>
+                </tr>
+                <tr>
+                    <td>Tax ({{ order.tax_percentage }}%):</td>
+                    <td class="text-right">₹{{ order.tax_amount|default:0|floatformat:2|intcomma }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Total:</strong></td>
+                    <td class="text-right"><strong>₹{{ order.total_amount_with_tax|floatformat:2|intcomma }}</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        {% if order.notes %}
+        <div class="mt-4">
+            <h5>Special Instructions:</h5>
+            <p>{{ order.notes|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        <div class="receipt-footer">
+            <p>Thank you for choosing Ironyy Laundry!</p>
+            <p>For any inquiries, please contact us at +1234567890</p>
+            <p class="text-muted">This is a computer-generated receipt. No signature required.</p>
+        </div>
+
+        <div class="no-print mt-4 text-center">
+            <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+            <button onclick="window.close()" class="btn btn-secondary ms-2">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Auto-print when the page loads
+        window.onload = function() {
+            window.print();
+        };
+    </script>
+</body>
+</html>

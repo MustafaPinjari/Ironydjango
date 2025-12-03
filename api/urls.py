@@ -15,6 +15,7 @@ router = DefaultRouter()
 urlpatterns = [
     # Service related endpoints
     path('services/', include([
+        path('', ServiceViewSet.as_view({'get': 'list_services'}), name='service-list'),
         path('variants/', ServiceViewSet.as_view({'get': 'variants'}), name='service-variants'),
         path('options/', ServiceViewSet.as_view({'get': 'options'}), name='service-options'),
     ])),

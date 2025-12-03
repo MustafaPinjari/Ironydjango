@@ -1,18 +1,24 @@
 {% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
 
 {% block dashboard_content %}
-<div class="dashboard-header">
-    <h2>Update Order Status</h2>
-    <p class="text-muted mb-0">Update the status of Order #{{ order.id }}</p>
+<div class="dashboard-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2>Update Order Status</h2>
+        <p class="text-muted mb-0">Update the status of Order #{{ order.id }}</p>
+    </div>
+    <a href="{% url 'dashboard:press_dashboard' %}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+    </a>
 </div>
 
 <div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="dashboard-card">
-            <div class="card-header">
+    <div class="col-lg-10 col-xl-8">
+        <div class="dashboard-card mb-4">
+            <div class="card-header bg-white">
                 <i class="fas fa-exchange-alt me-2"></i>Status Update
             </div>
-            <div class="card-body">
+            <div class="card-body p-4">
                 <form method="post">
                     {% csrf_token %}
 
@@ -23,7 +29,7 @@
                             </span>
                         </h5>
 
-                        <div class="status-timeline mt-4">
+                        <div class="status-timeline mt-4 mb-4" style="padding: 0 1rem;">
                             {% for status_choice in status_choices %}
                             <div class="status-step {% if status_choice.0 == order.status %}active{% endif %}">
                                 <div class="status-indicator">
@@ -63,7 +69,7 @@
                             <strong>Update Status To</strong>
                             <span class="text-danger">*</span>
                         </label>
-                        <select name="status" class="form-select" id="id_status" required>
+                        <select name="status" class="form-select form-select-lg" id="id_status" required>
                             <option value="">Select new status...</option>
                             {% for value, label in status_choices %}
                             <option value="{{ value }}">{{ label }}</option>
@@ -167,12 +173,14 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{% url 'dashboard:order_detail' order.pk %}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Order
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i> Update Status
-                        </button>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Update Status
+                            </button>
+                            <a href="{% url 'dashboard:order_detail' order.pk %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-1"></i>Cancel
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -182,7 +190,102 @@
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
 <style>
+    /* Status Timeline Styling */
+    .status-timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .status-step {
+        display: flex;
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    
+    .status-indicator {
+        position: relative;
+        margin-right: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .status-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #e9ecef;
+        border: 3px solid #dee2e6;
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+    
+    .status-step.active .status-dot {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+    }
+    
+    .status-step.completed .status-dot {
+        background-color: #198754;
+        border-color: #198754;
+    }
+    
+    .status-line {
+        position: absolute;
+        top: 24px;
+        bottom: -1.5rem;
+        width: 2px;
+        background-color: #dee2e6;
+    }
+    
+    .status-info {
+        flex: 1;
+        padding-bottom: 1.5rem;
+    }
+    
+    .status-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .status-time {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    
+    /* Form Styling */
+    .form-select-lg {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .form-text {
+        margin-top: 0.5rem;
+        color: #6c757d;
+    }
+    
+    /* Status Badges */
+    .status-badge {
+        padding: 0.35rem 0.75rem;
+        border-radius: 50rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .status-pending { background-color: #fff3cd; color: #856404; }
+    .status-confirmed { background-color: #cce5ff; color: #004085; }
+    .status-in_progress { background-color: #e2e3e5; color: #383d41; }
+    .status-ready { background-color: #d4edda; color: #155724; }
+    .status-picked_up { background-color: #d1ecf1; color: #0c5460; }
+    .status-delivered { background-color: #d4edda; color: #155724; }
+    .status-cancelled { background-color: #f8d7da; color: #721c24; }
+    .status-rejected { background-color: #f8d7da; color: #721c24; }
     .status-timeline {
         position: relative;
         padding-left: 20px;

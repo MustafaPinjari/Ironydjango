@@ -15,8 +15,12 @@ class OrderItemForm(forms.ModelForm):
         self.fields['service'].empty_label = "Select a service"
         self.fields['service'].widget.attrs.update({
             'class': 'form-select service-select',
-            'data-url': '/api/services/',
-            'required': 'required'
+            'data-url': '/api/services/variants/',
+            'required': 'required',
+            'hx-get': '/api/services/variants/',
+            'hx-trigger': 'change',
+            'hx-target': '#id_variant',
+            'hx-swap': 'innerHTML'
         })
         
         # Set up variant field - will be populated via AJAX
@@ -24,7 +28,7 @@ class OrderItemForm(forms.ModelForm):
         self.fields['variant'].empty_label = "Select a variant"
         self.fields['variant'].widget.attrs.update({
             'class': 'form-select variant-select',
-            'data-url': '/api/variants/'
+            'required': 'required'
         })
         
         # Set up quantity field
@@ -38,8 +42,9 @@ class OrderItemForm(forms.ModelForm):
         # Set up options field - only active options
         self.fields['options'].queryset = ServiceOption.objects.filter(is_active=True).distinct()
         self.fields['options'].required = False
+        self.fields['options'].widget = forms.CheckboxSelectMultiple()
         self.fields['options'].widget.attrs.update({
-            'class': 'form-check-input option-select',
+            'class': 'form-check-input',
             'data-url': '/api/options/'
         })
         
@@ -61,6 +66,14 @@ class OrderItemForm(forms.ModelForm):
             # Set initial values for options
             if hasattr(self.instance, 'options'):
                 self.fields['options'].initial = self.instance.options.all()
+        
+        # Handle GET request with service_id
+        if 'service' in self.data:
+            try:
+                service_id = int(self.data.get('service'))
+                self.fields['variant'].queryset = ServiceVariant.objects.filter(service_id=service_id, is_active=True)
+            except (ValueError, TypeError):
+                pass
     
     class Meta:
         model = OrderItem
@@ -72,32 +85,19 @@ class OrderItemForm(forms.ModelForm):
             'options': 'Select any additional options',
             'description': 'Add any special instructions for this item'
         }
-
-    def __init__(self, *args, **kwargs):
-        # Remove user from kwargs to prevent passing it to parent's __init__
-        self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs)
-        
-        # Set up the querysets
-        self.fields['service'].queryset = Service.objects.filter(is_active=True)
-        self.fields['variant'].queryset = ServiceVariant.objects.none()
-        self.fields['options'].queryset = ServiceOption.objects.filter(is_active=True)
-        
-        # If we're editing an existing item
-        if self.instance and self.instance.pk:
-            if self.instance.service:
-                self.fields['variant'].queryset = self.instance.service.variants.filter(is_active=True)
-        
-        # Add data attributes for dynamic loading
-        if 'service' in self.data:
-            try:
-                service_id = int(self.data.get('service'))
-                self.fields['variant'].queryset = ServiceVariant.objects.filter(service_id=service_id, is_active=True)
-            except (ValueError, TypeError):
-                pass
+    
 
 
 class BaseOrderItemFormSet(BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+    
+    def _construct_form(self, i, **kwargs):
+        if self.user:
+            kwargs['user'] = self.user
+        return super()._construct_form(i, **kwargs)
+    
     def clean(self):
         super().clean()
         # Ensure at least one item is provided

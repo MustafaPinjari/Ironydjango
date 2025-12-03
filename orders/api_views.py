@@ -13,6 +13,14 @@ class ServiceViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]  # Allow unauthenticated access by default
 
     @action(detail=False, methods=['get'])
+    def list_services(self, request):
+        """
+        List all active services
+        """
+        services = Service.objects.filter(is_active=True).values('id', 'name', 'base_price')
+        return Response(list(services))
+
+    @action(detail=False, methods=['get'])
     def variants(self, request):
         """
         Get variants for a specific service

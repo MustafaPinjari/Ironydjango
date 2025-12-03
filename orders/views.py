@@ -39,6 +39,11 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
         if self.request.user.role == 'CUSTOMER':
             return Order.objects.filter(customer=self.request.user)
         return Order.objects.all()
+        
+    def get_template_names(self):
+        if 'print' in self.request.GET:
+            return ['orders/order_receipt.html']
+        return super().get_template_names()
 
 import logging
 from django import forms
@@ -65,12 +70,12 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
                 self.request.POST, 
                 self.request.FILES, 
                 instance=self.object,
-                form_kwargs={'user': self.request.user}
+                user=self.request.user
             )
         else:
             context['formset'] = OrderItemFormSet(
                 instance=self.object,
-                form_kwargs={'user': self.request.user}
+                user=self.request.user
             )
         return context
     
