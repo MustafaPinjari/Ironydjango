@@ -1,0 +1,35 @@
+{% load crispy_forms_tags %}
+
+<!-- Delivery Type -->
+<div class="col-12 mb-3">
+    {{ form.delivery_type|as_crispy_field }}
+</div>
+
+<!-- Pickup Fields -->
+<div class="col-md-6 mb-3">
+    {{ form.pickup_address|as_crispy_field }}
+</div>
+
+<!-- Delivery Fields -->
+<div class="delivery-fields">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form.delivery_address|as_crispy_field }}
+        </div>
+    </div>
+</div>
+
+<!-- Date Fields -->
+<div class="row">
+    <div class="col-md-6 mb-3">
+        {{ form.preferred_pickup_date|as_crispy_field }}
+    </div>
+    <div class="col-md-6 mb-3">
+        {{ form.preferred_delivery_date|as_crispy_field }}
+    </div>
+</div>
+
+<!-- Special Instructions -->
+<div class="mb-4">
+    {{ form.special_instructions|as_crispy_field }}
+</div>

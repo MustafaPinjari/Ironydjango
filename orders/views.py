@@ -8,11 +8,19 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.template.loader import render_to_string
 import random
 import string
+
+class OrderFormFieldsView(View):
+    """HTMX view to return just the form fields based on delivery type"""
+    def get(self, request, *args, **kwargs):
+        form = OrderForm(user=request.user, data=request.GET or None)
+        context = {'form': form}
+        return HttpResponse(render_to_string('orders/partials/order_form_fields.html', context, request=request))
 
 from .models import Order, OrderItem, OrderStatusUpdate
 from .forms import OrderForm, OrderItemForm, OrderItemFormSet
@@ -66,24 +74,31 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.POST:
-            context['formset'] = OrderItemFormSet(
+            formset = OrderItemFormSet(
                 self.request.POST, 
                 self.request.FILES, 
                 instance=self.object,
                 user=self.request.user
             )
         else:
-            context['formset'] = OrderItemFormSet(
+            formset = OrderItemFormSet(
                 instance=self.object,
                 user=self.request.user
             )
+        
+        # Make sure the form is properly initialized with the user
+        if 'form' not in context:
+            context['form'] = self.get_form()
+            
+        context['formset'] = formset
         return context
     
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
         
-        if formset.is_valid():
+        # Check if both form and formset are valid
+        if form.is_valid() and formset.is_valid():
             with transaction.atomic():
                 # Set the customer before saving
                 self.object = form.save(commit=False)
@@ -105,9 +120,12 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
                 return super().form_valid(form)
         else:
             # Log formset errors for debugging
-            for form in formset:
-                if form.errors:
-                    logger.warning(f"Formset errors: {form.errors}")
+            if not form.is_valid():
+                logger.warning(f"Order form errors: {form.errors}")
+            if not formset.is_valid():
+                for i, form_item in enumerate(formset):
+                    if form_item.errors:
+                        logger.warning(f"Formset item {i} errors: {form_item.errors}")
             return self.render_to_response(self.get_context_data(form=form))
     
     def get_success_url(self):
@@ -118,7 +136,9 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 
     def form_invalid(self, form):
         logger.warning(f"Form is invalid. Errors: {form.errors}")
-        return super().form_invalid(form)
+        context = self.get_context_data()
+        context['form'] = form
+        return self.render_to_response(context)
 
 class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Order

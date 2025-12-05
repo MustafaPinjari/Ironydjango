@@ -62,11 +62,17 @@
                     {% csrf_token %}
                     
                     <!-- Order Items -->
-                    <h4 class="mb-3">Order Items</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Order Items</h4>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="add-item">
+                            <i class="fas fa-plus me-1"></i> Add Item
+                        </button>
+                    </div>
                     {{ formset.management_form }}
                     <div id="order-items">
-                        {% for form in formset %}
-                        <div class="order-item" id="item-{{ forloop.counter0 }}">
+                        <!-- First item is always visible -->
+                        <div class="order-item mb-4 p-3 border rounded" id="item-0">
+                            {% with form=formset.forms.0 %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     {{ form.service|as_crispy_field }}
@@ -86,52 +92,61 @@
                             <div class="mb-3">
                                 {{ form.description|as_crispy_field }}
                             </div>
-                            {% if form.DELETE %}
-                            <div class="form-check mb-3">
-                                {{ form.DELETE|as_crispy_field }}
-                                <label class="form-check-label" for="{{ form.DELETE.id_for_label }}">
-                                    Remove this item
-                                </label>
+                            <div class="d-none">
+                                {{ form.DELETE }}
                             </div>
-                            {% endif %}
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-item" style="display: none;">
+                                <i class="fas fa-trash me-1"></i> Remove Item
+                            </button>
+                            {% endwith %}
                         </div>
-                        {% endfor %}
+                        <!-- Additional items will be added here by JavaScript -->
                     </div>
+                    
+                    <!-- Template for new items (hidden) -->
+                    <template id="item-template">
+                        <div class="order-item mb-4 p-3 border rounded" id="item-__prefix__">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ formset.empty_form.service|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ formset.empty_form.variant|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ formset.empty_form.quantity|as_crispy_field }}
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    {{ formset.empty_form.options|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                {{ formset.empty_form.description|as_crispy_field }}
+                            </div>
+                            <div class="d-none">
+                                {{ formset.empty_form.DELETE }}
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-item">
+                                <i class="fas fa-trash me-1"></i> Remove Item
+                            </button>
+                        </div>
+                    </template>
 
                     <button type="button" class="btn btn-outline-primary add-item-btn" id="add-item">
                         <i class="fas fa-plus me-1"></i> Add Another Item
                     </button>
 
-                    <!-- Order Details -->
-                    <h4 class="mt-5 mb-3">Order Details</h4>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            {{ form.delivery_type|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form.pickup_address|as_crispy_field }}
-                        </div>
-                    </div>
-                    
-                    <div class="delivery-fields">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                {{ form.delivery_address|as_crispy_field }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            {{ form.preferred_pickup_date|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            {{ form.preferred_delivery_date|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form.special_instructions|as_crispy_field }}
+                    <!-- Order Information -->
+                    <h5 class="mb-3">Order Information</h5>
+                    <div id="order-fields" 
+                         hx-get="{% url 'orders:update_form_fields' %}" 
+                         hx-trigger="load, delivery_type from:body"
+                         hx-target="this"
+                         hx-swap="innerHTML">
+                        <!-- This will be replaced by HTMX -->
+                        {{ form|crispy }}
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -152,6 +167,7 @@
 {% block extra_js %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
 <script>
 // Function to initialize all select2 elements
 function initSelect2() {
@@ -167,11 +183,7 @@ function initSelect2() {
             });
         }
     });
-    // Debug: Log when service select changes
-$(document).on('change', '.service-select', function() {
-    console.log('Service select changed, value:', $(this).val());
-    loadVariants($(this));
-});
+    
     $('.variant-select').each(function() {
         if (!$(this).hasClass('select2-hidden-accessible')) {
             $(this).select2({
@@ -294,11 +306,6 @@ function loadVariants(serviceSelect) {
                     allowClear: true,
                     dropdownParent: variantSelect.parent()
                 });
-                
-                // Force open the dropdown
-                setTimeout(function() {
-                    variantSelect.select2('open');
-                }, 100);
             } else {
                 console.log('No variants available for this service');
                 variantSelect.append($('<option>', {
@@ -329,43 +336,26 @@ $(document).ready(function() {
     // Load services when the page loads
     loadServices();
 
-    // Toggle delivery address fields
-    function toggleDeliveryFields() {
-        if ($('#id_delivery_type_1').is(':checked')) {
-            $('.delivery-fields').slideDown();
-        } else {
-            $('.delivery-fields').slideUp();
+    // Handle HTMX after swap to reinitialize select2 and datepickers
+    document.body.addEventListener('htmx:afterSwap', function(evt) {
+        if (evt.detail.target.id === 'order-fields') {
+            // Reinitialize select2
+            initSelect2();
+            
+            // Reinitialize datepickers if needed
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                startDate: 'today'
+            });
+            
+            // Update delivery type in the form data when changed
+            $('input[name="delivery_type"]').on('change', function() {
+                // HTMX will handle the form update automatically
+                // as we have hx-trigger="delivery_type from:body"
+            });
         }
-    }
-    
-    // Initial toggle
-    toggleDeliveryFields();
-    
-    // Toggle on change
-    $('input[name="delivery_type"]').change(toggleDeliveryFields);
-
-    // Add new item form
-    $('#add-item').click(function() {
-        const formCount = $('#id_form-TOTAL_FORMS').val();
-        const formPrefix = `form-${formCount}`;
-        const newForm = $($('#empty-form').html().replace(/__prefix__/g, formCount));
-        
-        // Update management form
-        $('#id_form-TOTAL_FORMS').val(parseInt(formCount) + 1);
-        
-        // Add the new form
-        $('#order-items').append(newForm);
-        
-        // Initialize Select2 on new selects
-        newForm.find('.select2').select2({
-            theme: 'bootstrap-5',
-            width: '100%'
-        });
-        
-        // Scroll to the new form
-        $('html, body').animate({
-            scrollTop: newForm.offset().top - 100
-        }, 500);
     });
 
     // Handle service change
@@ -382,87 +372,10 @@ $(document).ready(function() {
         }
     });
     
-    // Function to load options for a service and variant
-    function loadOptions(serviceId, variantId, itemDiv) {
-        // Find the options container - it's the parent of the options field
-        const optionsContainer = itemDiv.find('.form-group:has(.form-check-input[type="checkbox"])').first();
-        
-        if (!optionsContainer.length) {
-            console.error('Options container not found');
-            return;
-        }
-        
-        // Show loading state
-        optionsContainer.html('<div class="alert alert-info">Loading options...</div>');
-        
-        // Fetch options for the selected service and variant
-        $.ajax({
-            url: '/api/services/options/',
-            data: {
-                service_id: serviceId,
-                variant_id: variantId
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log('Options API Response:', data);
-                
-                // Clear the loading message
-                optionsContainer.empty();
-                
-                if (data && data.length > 0) {
-                    // Create a form group for each option
-                    data.forEach(function(option) {
-                        const optionGroup = $('<div class="form-group mb-3"></div>');
-                        const label = $(`<label class="form-label">${option.name}</label>`);
-                        
-                        if (option.description) {
-                            label.append(`<small class="form-text text-muted">${option.description}</small>`);
-                        }
-                        
-                        optionGroup.append(label);
-                        
-                        // Create different input types based on option_type
-                        if (option.option_type === 'checkbox') {
-                            const checkbox = $(`
-                                <div class="form-check">
-                                    <input class="form-check-input option-checkbox" 
-                                           type="checkbox" 
-                                           name="options[]" 
-                                           value="${option.id}" 
-                                           id="option-${option.id}"
-                                           ${option.is_required ? 'required' : ''}
-                                           data-price="${option.price_adjustment}">
-                                    <label class="form-check-label" for="option-${option.id}">
-                                        Add for $${parseFloat(option.price_adjustment).toFixed(2)}
-                                    </label>
-                                </div>
-                            `);
-                            optionGroup.append(checkbox);
-                        } 
-                        // Add support for other option types (select, radio) if needed
-                        
-                        optionsContainer.append(optionGroup);
-                    });
-                } else {
-                    optionsContainer.html('<div class="alert alert-info">No additional options available for this variant.</div>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error loading options:', error);
-                console.error('Response:', xhr.responseText);
-                optionsContainer.html('<div class="alert alert-danger">Error loading options. Please try again.</div>');
-            }
-        });
-    }
-    
-    // Handle variant change to update price and load options
+    // Handle variant change to update price
     $(document).on('change', '.variant-select', function() {
         const selectedOption = $(this).find('option:selected');
         const itemDiv = $(this).closest('.order-item');
-        const serviceId = itemDiv.find('.service-select').val();
-        const variantId = $(this).val();
-        
-        console.log('Variant changed - Service ID:', serviceId, 'Variant ID:', variantId);
         
         // Update price if available
         if (selectedOption.length && selectedOption.data('price') !== undefined) {
@@ -471,79 +384,127 @@ $(document).ready(function() {
                 priceField.val(parseFloat(selectedOption.data('price')).toFixed(2));
             }
         }
+    });
+
+    // Handle adding new order items
+    let formCount = parseInt($('#id_form-TOTAL_FORMS').val()) || 1;
+    const addButton = $('#add-item');
+    const itemsContainer = $('#order-items');
+    const totalForms = $('#id_form-TOTAL_FORMS');
+    const itemTemplate = $('#item-template').html();
+
+    // Add new item
+    addButton.on('click', function() {
+        const newFormHtml = itemTemplate
+            .replace(/__prefix__/g, formCount)
+            .replace(/__prefix__/g, formCount); // Double replacement to catch all instances
         
-        // Load options for the selected variant
-        if (serviceId && variantId) {
-            console.log('Loading options for service:', serviceId, 'variant:', variantId);
-            loadOptions(serviceId, variantId, itemDiv);
-        } else {
-            console.log('Missing service ID or variant ID');
-            const optionsContainer = itemDiv.find('.form-group:has(.form-check-input[type="checkbox"])').first();
-            if (optionsContainer.length) {
-                optionsContainer.html('<div class="alert alert-warning">Please select a service and variant to see available options.</div>');
+        const newFormElement = $(newFormHtml);
+        itemsContainer.append(newFormElement);
+        
+        // Update form count
+        formCount++;
+        totalForms.val(formCount);
+        
+        // Update the form field IDs and names
+        const newFormId = formCount - 1;
+        newFormElement.find('input, select, textarea').each(function() {
+            const $this = $(this);
+            const name = $this.attr('name');
+            const id = $this.attr('id');
+            
+            if (name) {
+                const newName = name.replace(/__prefix__/g, newFormId);
+                $this.attr('name', newName);
             }
+            
+            if (id) {
+                const newId = id.replace(/__prefix__/g, newFormId);
+                $this.attr('id', newId);
+                
+                // Update labels
+                $('label[for="' + id + '"]').attr('for', newId);
+            }
+        });
+        
+        // Initialize Select2 for the new form fields
+        newFormElement.find('.service-select').select2({
+            theme: 'bootstrap-5',
+            width: '100%',
+            placeholder: 'Select a service',
+            allowClear: true
+        }).on('change', function() {
+            loadVariants($(this));
+        });
+        
+        newFormElement.find('.variant-select').select2({
+            theme: 'bootstrap-5',
+            width: '100%',
+            placeholder: 'Select a variant',
+            allowClear: true
+        });
+        
+        // Set default quantity to 1
+        newFormElement.find('.quantity').val(1);
+        
+        // Scroll to the new form
+        $('html, body').animate({
+            scrollTop: newFormElement.offset().top - 100
+        }, 500);
+    });
+
+    // Handle removing items
+    $(document).on('click', '.remove-item', function() {
+        const item = $(this).closest('.order-item');
+        const deleteInput = item.find('input[name$="-DELETE"]');
+        
+        if (deleteInput.length) {
+            // If this is an existing item (has a DELETE field), mark it for deletion
+            deleteInput.val('on');
+            item.hide();
+        } else {
+            // If this is a new item, just remove it
+            item.remove();
         }
     });
-
-    // Calculate total when quantity or price changes
-    $(document).on('change', '.quantity, .unit-price', function() {
-        calculateTotal();
-    });
-
+    
     // Form validation
     $('#order-form').on('submit', function(e) {
-        if (!this.checkValidity()) {
+        let isValid = true;
+        let errorMessage = '';
+        
+        // Check that each visible item has a service and variant selected
+        $('.order-item:visible').each(function(index) {
+            const serviceSelect = $(this).find('.service-select');
+            const variantSelect = $(this).find('.variant-select');
+            const quantityInput = $(this).find('.quantity');
+            
+            if (!serviceSelect.val()) {
+                isValid = false;
+                errorMessage += `Please select a service for item ${index + 1}.\n`;
+            }
+            
+            if (!variantSelect.val()) {
+                isValid = false;
+                errorMessage += `Please select a variant for item ${index + 1}.\n`;
+            }
+            
+            const quantity = parseInt(quantityInput.val());
+            if (isNaN(quantity) || quantity <= 0) {
+                isValid = false;
+                errorMessage += `Please enter a valid quantity for item ${index + 1}.\n`;
+            }
+        });
+        
+        if (!isValid) {
             e.preventDefault();
-            e.stopPropagation();
+            alert(errorMessage);
+            return false;
         }
-        $(this).addClass('was-validated');
+        
+        // If form is valid, submit normally
+        return true;
     });
 });
-
-// Hidden template for new items
-const emptyForm = `
-<div class="order-item" id="item-__prefix__">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="mb-0">Item #<span class="item-number">__number__</span></h5>
-        <button type="button" class="btn btn-sm btn-outline-danger remove-item">
-            <i class="fas fa-trash"></i> Remove
-        </button>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <select name="form-__prefix__-service" class="form-select service-select" data-url="/api/services/" id="id_form-__prefix__-service">
-                <option value="" selected>---------</option>
-                {% for service in services %}
-                <option value="{{ service.id }}">{{ service.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-md-6 mb-3">
-            <select name="form-__prefix__-variant" class="form-select variant-select" id="id_form-__prefix__-variant">
-                <option value="" selected>---------</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <input type="number" name="form-__prefix__-quantity" min="1" value="1" class="form-control quantity" required id="id_form-__prefix__-quantity">
-        </div>
-        <div class="col-md-8 mb-3">
-            <div class="form-check">
-                <input type="checkbox" name="form-__prefix__-options" class="form-check-input" id="id_form-__prefix__-options_0">
-                <label class="form-check-label" for="id_form-__prefix__-options_0">Options will appear here</label>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3">
-        <textarea name="form-__prefix__-special_instructions" class="form-control" rows="2" placeholder="Any special instructions for this item..." id="id_form-__prefix__-special_instructions"></textarea>
-    </div>
-    <input type="hidden" name="form-__prefix__-id" id="id_form-__prefix__-id">
-    <input type="hidden" name="form-__prefix__-order" id="id_form-__prefix__-order">
-</div>
-`;
-
-// Store the empty form template
-$('body').append(`<div id="empty-form" style="display: none;">${emptyForm}</div>`);
 </script>
 {% endblock %}

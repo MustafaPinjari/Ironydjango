@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from . import views
 from .views_dashboards import CustomerDashboardView, PressDashboardView, DeliveryDashboardView, AdminDashboardView
 from .views_status import UpdateOrderStatusView
-from .views import AcceptOrderView, SchedulePickupView
+from .views import AcceptOrderView, SchedulePickupView, OrderFormFieldsView
 
 app_name = 'orders'  # This sets the application namespace
 
@@ -42,4 +42,7 @@ urlpatterns = [
     path('assigned/', views.AssignedOrdersView.as_view(), name='assigned'),
     path('press/', views.PressOrderListView.as_view(), name='press_list'),
     path('delivery/', views.DeliveryOrderListView.as_view(), name='delivery_list'),
+    
+    # HTMX endpoints
+    path('update-form-fields/', OrderFormFieldsView.as_view(), name='update_form_fields'),
 ]
